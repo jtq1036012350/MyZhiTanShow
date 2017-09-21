@@ -115,10 +115,10 @@ public class StudyPlatformFragment extends BaseFragment {
         binding.fragStudyLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (!"".equals(urls.get(i))) {
+                if (!"".equals(studyJavaBeanArrayList.get(i).getUrl())) {
                     Bundle bundle = new Bundle();
-                    bundle.putString("url", urls.get(i));
-                    bundle.putString("title", title.get(i));
+                    bundle.putString("url", studyJavaBeanArrayList.get(i).getUrl());
+                    bundle.putString("title", studyJavaBeanArrayList.get(i).getTitle());
                     startMyActivity(MyWebViewActivity.class, bundle);
                 }
             }
@@ -172,15 +172,16 @@ public class StudyPlatformFragment extends BaseFragment {
         isMore.add(1);
         isMore.add(1);
         isMore.add(1);
-        isMore.add(0);
-        isMore.add(0);
-        isMore.add(0);
-        isMore.add(0);
+        isMore.add(1);
+        isMore.add(1);
+        isMore.add(1);
+        isMore.add(1);
 
         for (int i = 0; i < 7; i++) {
             StudyJavaBean temp = new StudyJavaBean();
             temp.setTitle(title.get(i));
             temp.setDescription(description.get(i));
+            temp.setUrl(urls.get(i));
             temp.setIsMore(isMore.get(i));
             temp.setImage(images.get(i));
             studyJavaBeanArrayList.add(temp);
@@ -217,7 +218,7 @@ public class StudyPlatformFragment extends BaseFragment {
             @Override
             public void onFailure(Call<List<StudyJavaBean>> call, Throwable t) {
                 binding.mRefreshView.stopRefresh();
-                CommonUtil.showTopToast(mActivity,"获取学习模块数据失败！");
+                CommonUtil.showTopToast(mActivity, "获取学习模块数据失败！");
                 LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
             }
         });
