@@ -19,6 +19,7 @@ import com.iguitar.xiaoxiaozhitan.model.StudyJavaBean;
 import com.iguitar.xiaoxiaozhitan.ui.activity.MyWebViewActivity;
 import com.iguitar.xiaoxiaozhitan.ui.adapter.FragmentStudyAdapter;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseFragment;
+import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
 import com.iguitar.xiaoxiaozhitan.utils.LogUtil;
 
@@ -216,6 +217,7 @@ public class StudyPlatformFragment extends BaseFragment {
             @Override
             public void onFailure(Call<List<StudyJavaBean>> call, Throwable t) {
                 binding.mRefreshView.stopRefresh();
+                CommonUtil.showTopToast(mActivity,"获取学习模块数据失败！");
                 LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
             }
         });

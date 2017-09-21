@@ -13,6 +13,16 @@ public class MainListJavaBean implements Serializable {
 
     private ArrayList<PlayListMainJavaBean> mainJavaBeanArrayList ;
 
+    private int imageUrl;
+
+    public int getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(int imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public String getCoverName() {
         return coverName;
     }

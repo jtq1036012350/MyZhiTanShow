@@ -1,7 +1,9 @@
 package com.iguitar.xiaoxiaozhitan.api;
 
+import com.iguitar.xiaoxiaozhitan.model.MainListJavaBean;
 import com.iguitar.xiaoxiaozhitan.model.StudyJavaBean;
 import com.iguitar.xiaoxiaozhitan.model.UserReturnBean;
+import com.iguitar.xiaoxiaozhitan.model.VideoBottomBean;
 
 import java.util.List;
 
@@ -21,4 +23,10 @@ public interface ApiInerface {
 
     @GET("Server/Study.txt")
     Call<List<StudyJavaBean>> getStudyInfo();
+
+    @GET("Server/VideoTop.txt")
+    Call<List<MainListJavaBean>> getVideoTopInfo();
+
+    @GET("Server/VideoBottom.txt")
+    Call<List<VideoBottomBean>> getVideoBottomInfo();
 }

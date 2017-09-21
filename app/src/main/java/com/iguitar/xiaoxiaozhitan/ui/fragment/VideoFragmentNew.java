@@ -2,7 +2,6 @@ package com.iguitar.xiaoxiaozhitan.ui.fragment;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -23,6 +22,7 @@ import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.google.gson.Gson;
 import com.iguitar.xiaoxiaozhitan.MyApplication;
 import com.iguitar.xiaoxiaozhitan.R;
+import com.iguitar.xiaoxiaozhitan.api.ApiInerface;
 import com.iguitar.xiaoxiaozhitan.databinding.FragmentVideoNewBinding;
 import com.iguitar.xiaoxiaozhitan.model.MainListJavaBean;
 import com.iguitar.xiaoxiaozhitan.model.PlayListMainJavaBean;
@@ -32,11 +32,17 @@ import com.iguitar.xiaoxiaozhitan.ui.activity.PlayListActivity;
 import com.iguitar.xiaoxiaozhitan.ui.activity.VideoActivity;
 import com.iguitar.xiaoxiaozhitan.ui.adapter.MyVideoRecyclerViewAdapter;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseFragment;
+import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
+import com.iguitar.xiaoxiaozhitan.utils.LogUtil;
 import com.iguitar.xiaoxiaozhitan.utils.PrompUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * 视频Fragment
@@ -53,7 +59,7 @@ public class VideoFragmentNew extends BaseFragment {
 
     private MyVideoRecyclerViewAdapter myVideoRecyclerViewAdapter;
     //上半部分主要的条目信息集合
-    private ArrayList<MainListJavaBean> mainListJavaBeenList;
+    private List<MainListJavaBean> mainListJavaBeenList;
     //底部主要的条目信息集合
     private List<VideoBottomBean> bottomListJavaBeanList;
 
@@ -204,6 +210,7 @@ public class VideoFragmentNew extends BaseFragment {
             MainListJavaBean mainListJavaBeenACG = new MainListJavaBean();
             mainListJavaBeenACG.setMainJavaBeanArrayList(playListMainJavaBeanArrayListACG);
             mainListJavaBeenACG.setCoverName("ACG教程合集");
+            mainListJavaBeenACG.setImageUrl(videoCover.get(0));
             mainListJavaBeenList.add(mainListJavaBeenACG);
 
             //陈亮的集合
@@ -224,6 +231,7 @@ public class VideoFragmentNew extends BaseFragment {
             MainListJavaBean mainListJavaBeenChenLiang = new MainListJavaBean();
             mainListJavaBeenChenLiang.setMainJavaBeanArrayList(playListMainJavaBeanArrayListChenLiang);
             mainListJavaBeenChenLiang.setCoverName("陈亮");
+            mainListJavaBeenChenLiang.setImageUrl(videoCover.get(1));
             mainListJavaBeenList.add(mainListJavaBeenChenLiang);
 
             //岸部真明的集合
@@ -267,6 +275,7 @@ public class VideoFragmentNew extends BaseFragment {
             MainListJavaBean mainListJavaBeenAnBu = new MainListJavaBean();
             mainListJavaBeenAnBu.setMainJavaBeanArrayList(playListMainJavaBeanArrayListAnBu);
             mainListJavaBeenAnBu.setCoverName("岸部真明教程合集");
+            mainListJavaBeenAnBu.setImageUrl(videoCover.get(2));
             mainListJavaBeenList.add(mainListJavaBeenAnBu);
 
             //押尾桑教程集合
@@ -441,6 +450,7 @@ public class VideoFragmentNew extends BaseFragment {
             MainListJavaBean mainListJavaBeenYWS = new MainListJavaBean();
             mainListJavaBeenYWS.setMainJavaBeanArrayList(playListMainJavaBeanArrayListYWS);
             mainListJavaBeenYWS.setCoverName("押尾桑教程合集");
+            mainListJavaBeenYWS.setImageUrl(videoCover.get(3));
             mainListJavaBeenList.add(mainListJavaBeenYWS);
 
             //郑成河教程集合
@@ -518,6 +528,7 @@ public class VideoFragmentNew extends BaseFragment {
             MainListJavaBean mainListJavaBeenZCH = new MainListJavaBean();
             mainListJavaBeenZCH.setMainJavaBeanArrayList(playListMainJavaBeanArrayListZCH);
             mainListJavaBeenZCH.setCoverName("郑成河教程合集");
+            mainListJavaBeenZCH.setImageUrl(videoCover.get(4));
             mainListJavaBeenList.add(mainListJavaBeenZCH);
 
         }
@@ -575,12 +586,7 @@ public class VideoFragmentNew extends BaseFragment {
         binding.mRefreshView.setXRefreshViewListener(new XRefreshView.XRefreshViewListener() {
             @Override
             public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        binding.mRefreshView.stopRefresh();
-                    }
-                }, 1000);
+                getDataFromServer();
             }
 
             @Override
@@ -636,12 +642,12 @@ public class VideoFragmentNew extends BaseFragment {
 
         sliderView.removeAllSliders();
 
-        for (int i = 0; i < videoList.size(); i++) {
+        for (int i = 0; i < mainListJavaBeenList.size(); i++) {
 //            DefaultSliderView：只有图片，没有文字描述
 //            TextSliderView：有图片，有文字描述
             TextSliderView textSliderView = new TextSliderView(MyApplication.getContext());
-            textSliderView.image(videoCover.get(i));
-            textSliderView.description(videoList.get(i));
+            textSliderView.description(mainListJavaBeenList.get(i).getCoverName());
+            textSliderView.image(mainListJavaBeenList.get(i).getImageUrl());
             textSliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
                 @Override
                 public void onSliderClick(BaseSliderView slider) {
@@ -731,7 +737,62 @@ public class VideoFragmentNew extends BaseFragment {
 
     @Override
     protected void lazyLoad() {
-        initDatas();
-        initView();
+//        initDatas();
+//        initView();
+        getDataFromServer();
+    }
+
+    /**
+     * 从服务端获取数据
+     */
+    public void getDataFromServer() {
+        binding.mRefreshView.startRefresh();
+        ApiInerface studyInfo = retrofit.create(ApiInerface.class);
+        Call<List<MainListJavaBean>> call = studyInfo.getVideoTopInfo();
+        call.enqueue(new Callback<List<MainListJavaBean>>() {
+            @Override
+            public void onResponse(Call<List<MainListJavaBean>> call, Response<List<MainListJavaBean>> response) {
+                if (response.isSuccessful()) {
+                    binding.mRefreshView.stopRefresh();
+                    mainListJavaBeenList = response.body();
+                    getBottomDataFromServer();
+                    LogUtil.e("infoooo", "normalGet:" + response.body() + "");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<MainListJavaBean>> call, Throwable t) {
+                binding.mRefreshView.stopRefresh();
+                CommonUtil.showTopToast(mActivity,"获取视频页面顶部数据失败！");
+                LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
+            }
+        });
+    }
+
+    /**
+     * 获取视频页面底部数据
+     */
+    public void getBottomDataFromServer() {
+        binding.mRefreshView.startRefresh();
+        ApiInerface studyInfo = retrofit.create(ApiInerface.class);
+        Call<List<VideoBottomBean>> call = studyInfo.getVideoBottomInfo();
+        call.enqueue(new Callback<List<VideoBottomBean>>() {
+            @Override
+            public void onResponse(Call<List<VideoBottomBean>> call, Response<List<VideoBottomBean>> response) {
+                if (response.isSuccessful()) {
+                    binding.mRefreshView.stopRefresh();
+                    bottomListJavaBeanList = response.body();
+                    initView();
+                    LogUtil.e("infoooo", "normalGet:" + response.body() + "");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<VideoBottomBean>> call, Throwable t) {
+                binding.mRefreshView.stopRefresh();
+                CommonUtil.showTopToast(mActivity,"获取视频页面底部数据失败！");
+                LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
+            }
+        });
     }
 }
