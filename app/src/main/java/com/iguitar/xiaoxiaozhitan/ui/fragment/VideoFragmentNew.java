@@ -23,6 +23,7 @@ import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.databinding.FragmentVideoNewBinding;
 import com.iguitar.xiaoxiaozhitan.model.MainListJavaBean;
 import com.iguitar.xiaoxiaozhitan.model.PlayListMainJavaBean;
+import com.iguitar.xiaoxiaozhitan.model.VideoBottomBean;
 import com.iguitar.xiaoxiaozhitan.model.VideoListJavaBean;
 import com.iguitar.xiaoxiaozhitan.ui.activity.PlayListActivity;
 import com.iguitar.xiaoxiaozhitan.ui.activity.VideoActivity;
@@ -32,6 +33,7 @@ import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
 import com.iguitar.xiaoxiaozhitan.utils.PrompUtil;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 视频Fragment
@@ -47,8 +49,12 @@ public class VideoFragmentNew extends BaseFragment {
     private SliderLayout sliderView;
 
     private MyVideoRecyclerViewAdapter myVideoRecyclerViewAdapter;
-
+    //上半部分主要的条目信息集合
     private ArrayList<MainListJavaBean> mainListJavaBeenList;
+    //底部主要的条目信息集合
+    private List<VideoBottomBean> bottomListJavaBeanList;
+
+    private ArrayList<Integer> bottomImageUrls;
 
     @Nullable
     @Override
@@ -512,6 +518,20 @@ public class VideoFragmentNew extends BaseFragment {
             mainListJavaBeenList.add(mainListJavaBeenZCH);
 
         }
+
+        bottomListJavaBeanList = new ArrayList<>();
+        bottomImageUrls = new ArrayList<>();
+        bottomImageUrls.add(R.mipmap.rumen);
+        bottomImageUrls.add(R.mipmap.xiaobai);
+        bottomImageUrls.add(R.mipmap.jinjie);
+        bottomImageUrls.add(R.mipmap.dashen);
+
+        for (int i = 0; i < bottomImageUrls.size(); i++) {
+            VideoBottomBean temp = new VideoBottomBean();
+            temp.setImageUrl(bottomImageUrls.get(i));
+            bottomListJavaBeanList.add(temp);
+        }
+
         PrompUtil.stopProgressDialog("加载中...");
     }
 
@@ -526,7 +546,7 @@ public class VideoFragmentNew extends BaseFragment {
         button.setVisibility(View.GONE);
 
 //        initLoopRotarySwitchView();
-        myVideoRecyclerViewAdapter = new MyVideoRecyclerViewAdapter(mActivity, mainListJavaBeenList);
+        myVideoRecyclerViewAdapter = new MyVideoRecyclerViewAdapter(mActivity, mainListJavaBeenList, bottomListJavaBeanList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         binding.recyclerView.setLayoutManager(linearLayoutManager);

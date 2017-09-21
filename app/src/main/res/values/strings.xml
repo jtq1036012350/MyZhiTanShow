@@ -16,4 +16,5 @@
     <string name="pass_filter">0123456789abcdefghijklmnopqrstuvwxyz</string>
     <string name="input_hint">请输入密码</string>
     <string name="qq_login">qq登录</string>
+    <string name="best_select_class">精选好课</string>
 </resources>

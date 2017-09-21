@@ -31,6 +31,19 @@ import java.util.TimerTask;
 public class CommonUtil {
 
     /**
+     * 获取屏幕高度
+     *
+     * @param activity
+     * @return
+     */
+    public static int getDisplayHeight(Activity activity) {
+        WindowManager windowManager = activity.getWindowManager();
+        Display display = windowManager.getDefaultDisplay();
+        int screenHeight = display.getHeight();
+        return screenHeight;
+    }
+
+    /**
      * 获取屏幕宽度
      *
      * @param activity
