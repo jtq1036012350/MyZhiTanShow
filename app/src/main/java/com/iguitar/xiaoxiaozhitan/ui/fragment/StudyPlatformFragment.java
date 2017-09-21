@@ -66,11 +66,6 @@ public class StudyPlatformFragment extends BaseFragment {
      * 初始化页面
      */
     private void initView() {
-        tv_tittle = (TextView) mActivity.findViewById(R.id.tv_top_title);
-        tv_tittle.setText("学习平台");
-
-        button = (ImageButton) mActivity.findViewById(R.id.btn_back);
-        button.setVisibility(View.GONE);
         //相关下拉刷新的设置
         binding.mRefreshView.setPullLoadEnable(false);
         binding.mRefreshView.setAutoLoadMore(false);
@@ -123,6 +118,14 @@ public class StudyPlatformFragment extends BaseFragment {
                 }
             }
         });
+    }
+
+    private void initTitle() {
+        tv_tittle = (TextView) mActivity.findViewById(R.id.tv_top_title);
+        tv_tittle.setText("学习平台");
+
+        button = (ImageButton) mActivity.findViewById(R.id.btn_back);
+        button.setVisibility(View.GONE);
     }
 
     /**
@@ -194,8 +197,9 @@ public class StudyPlatformFragment extends BaseFragment {
 
     @Override
     protected void lazyLoad() {
-//        initDatas();
+        initTitle();
         getDataFromServer();
+//        initDatas();
 //        initView();
     }
 

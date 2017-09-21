@@ -99,14 +99,14 @@ public class VideoFragmentNew extends BaseFragment {
         if (videoCover == null) {
             videoCover = new ArrayList<>();
 
-            videoCover.add(R.mipmap.acgwork);
+            videoCover.add(R.mipmap.acg_new);
             videoCover.add(R.mipmap.chen_liang);
             //--------------------------------------------------------------------------------------------------修改需求专辑图标--------------------------------------//
-            videoCover.add(R.mipmap.anbuzhengming_new);
+            videoCover.add(R.mipmap.anbuzhenming_new_new);
 //            videoCover.add(R.mipmap.anbuzhenming);
-            videoCover.add(R.mipmap.yaweisan_new);
+            videoCover.add(R.mipmap.yaweisann_new);
 //            videoCover.add(R.mipmap.yawei);
-            videoCover.add(R.mipmap.zhengchenghe_new);
+            videoCover.add(R.mipmap.zhengchenghe_new_new);
 //            videoCover.add(R.mipmap.zhengchenghe);
         }
 
@@ -558,11 +558,6 @@ public class VideoFragmentNew extends BaseFragment {
      * 初始化页面
      */
     private void initView() {
-        tv_tittle = (TextView) mActivity.findViewById(R.id.tv_top_title);
-        tv_tittle.setText("视频");
-
-        button = (ImageButton) mActivity.findViewById(R.id.btn_back);
-        button.setVisibility(View.GONE);
 
 //        initLoopRotarySwitchView();
         myVideoRecyclerViewAdapter = new MyVideoRecyclerViewAdapter(mActivity, mainListJavaBeenList, bottomListJavaBeanList);
@@ -610,6 +605,14 @@ public class VideoFragmentNew extends BaseFragment {
             }
         });
 
+    }
+
+    private void initTitle() {
+        tv_tittle = (TextView) mActivity.findViewById(R.id.tv_top_title);
+        tv_tittle.setText("视频");
+
+        button = (ImageButton) mActivity.findViewById(R.id.btn_back);
+        button.setVisibility(View.GONE);
     }
 
     /**
@@ -732,14 +735,17 @@ public class VideoFragmentNew extends BaseFragment {
     public void onStop() {
         super.onStop();
 //        binding.mLoopRotarySwitchView.clearDisappearingChildren();
-        sliderView.stopAutoCycle();
+        if(sliderView!=null){
+            sliderView.stopAutoCycle();
+        }
     }
 
     @Override
     protected void lazyLoad() {
+        initTitle();
+        getDataFromServer();
 //        initDatas();
 //        initView();
-        getDataFromServer();
     }
 
     /**
