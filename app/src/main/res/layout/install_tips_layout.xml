@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorTitleWhite">
+
+    <TextView
+        android:id="@+id/ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:scrollbars="vertical"
+        android:text="安装提示"
+        android:textColor="@color/colorTitleBlack"
+        android:textSize="25sp"/>
+
+    <View
+        android:id="@+id/top_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/ll_title"
+        android:background="@color/colorGrayLine"/>
+
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@id/top_line"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:maxLines="100"
+        android:scrollbars="vertical"
+        android:textColor="@color/colorTitleBlack"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/tv_install"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_message"
+        android:gravity="center"
+        android:text="是否安装?"
+        android:textColor="@color/colorTitleBlack"
+        android:textSize="18sp"/>
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tv_install"
+        android:background="@color/colorGrayLine"/>
+
+    <Button
+        android:id="@+id/btn_install"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/view_line"
+        android:layout_centerHorizontal="true"
+        android:background="@null"
+        android:text="确定"
+        android:textColor="@color/colorBlue"
+        android:textSize="25sp"/>
+
+</RelativeLayout>

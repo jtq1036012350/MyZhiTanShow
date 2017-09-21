@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorTitleWhite">#ffffff</color>
+    <color name="colorCell1">#d5feff</color>
+    <color name="colorCell2">#fffeda</color>
+    <color name="colorTitleBlack">#000000</color>
+    <color name="colorMainButton">#4E8BDA</color>
+    <color name="darker_gray">#aaa</color>
+    <color name="colorGray">#ECECEC</color>
+    <color name="colorLineGray">#EFEFEF</color>
+    <color name="colorYellow">#FFF000</color>
+    <color name="colorGrayLine">#808081</color>
+    <color name="colorBlue">#3171B9</color>
+    <color name="colorLightGrey">#6B6B6B</color>
+    <color name="colorBlueFont">#4375B5</color>
+    <color name="pop_select">#77000000</color>
+    <color name="colorLightGray">#f0f0f0</color>
+    <color name="colorSelectRadio">#BFBFBF</color>
+    <color name="colorRed">#FF0000</color>
+    <color name="colorSelectItem">#86CEC9</color>
+    <color name="colorGray_fb">#fbfbeb</color>
+    <color name="colorMainRbY">#4ABDD9</color>
+    <color name="colorMainRbN">#80FFFF</color>
+    <color name="colorBackgroud">#f5f5f5</color>
+    <color name="colorTicketFinish">#dfebf7</color>
+    <color name="colorLightBlack">#333333</color>
+
+</resources>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+
+        <variable
+            name="title"
+            type="String"/>
+
+        <variable
+            name="backClick"
+            type="android.view.View.OnClickListener"/>
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/view_headlayout"
+            bind:backClick="@{backClick}"
+            bind:title="@{title}"/>
+
+        <ImageView
+            android:id="@+id/img_icon"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:gravity="center"
+            android:text="@string/app_network"
+            android:textColor="#333333"
+            android:textSize="24sp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:text="网络地址:"
+                android:textColor="#606060"
+                android:textSize="20sp"/>
+
+            <com.iguitar.xiaoxiaozhitan.ui.view.ClearEditText
+                android:id="@+id/edit_ip"
+                style="@style/myClearEditTextStyle"
+                android:digits="@string/ip_filter"
+                android:hint="请输入IP地址"
+                android:inputType="numberDecimal"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:text="    端口号:"
+                android:textColor="#606060"
+                android:textSize="20sp"/>
+
+            <com.iguitar.xiaoxiaozhitan.ui.view.ClearEditText
+                android:id="@+id/edit_port"
+                style="@style/myClearEditTextStyle"
+                android:hint="请输入端口号"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="服务地址"
+                android:textColor="@color/colorTitleBlack"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/edit_address"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="@null"
+                android:hint="请输入服务地址"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColor="#b3b3b3"
+                android:textSize="18sp"/>
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="50dp">
+
+            <Button
+                android:id="@+id/btn_save"
+                style="@style/myBottomNetWork"
+                android:layout_alignParentRight="true"
+                android:text="@string/save_setting"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>
+
+

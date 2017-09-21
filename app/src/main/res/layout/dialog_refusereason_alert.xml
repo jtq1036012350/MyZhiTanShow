@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@drawable/circle_shape_dialog"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_bindcard_msg"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="15dp"
+        android:text="请输入拒收原因"
+        style="@style/myialogtext"/>
+
+    <EditText
+        android:id="@+id/et_bindcard"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:numeric="decimal"
+        android:background="@android:color/white"
+
+        style="@style/myialogtextdetail"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_bindcard_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp">
+
+        <Button
+            android:id="@+id/btn_bindcard_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="11dp"
+            android:layout_weight="1"
+            android:background="@drawable/circle_shape_button"
+            android:textColor="@color/colorTitleWhite"
+            android:text="确定"
+            />
+
+        <Button
+            android:id="@+id/btn_bindcard_submit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/circle_shape_button"
+            android:textColor="@color/colorTitleWhite"
+            android:text="取消"/>
+
+    </LinearLayout>
+
+</LinearLayout>

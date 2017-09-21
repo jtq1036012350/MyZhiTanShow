@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data></data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.andview.refreshview.XRefreshView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/mRefreshView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fff">
+
+                <WebView
+                    android:id="@+id/wv_store"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </com.andview.refreshview.XRefreshView>
+
+                <ImageButton
+                    android:id="@+id/iv_btn"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/taobao"
+                    android:visibility="invisible"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>

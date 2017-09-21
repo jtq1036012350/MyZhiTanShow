@@ -1,0 +1,174 @@
+[33m13d7fad[m HEAD@{0}: checkout: moving from MyTest to 13d7fada50d59acec6882d259bfc59be65efa1dd
+[33m13d7fad[m HEAD@{1}: reset: moving to 13d7fada50d59acec6882d259bfc59be65efa1dd
+[33mb4acf32[m HEAD@{2}: commit: 1.修复标题
+[33me392995[m HEAD@{3}: commit: 1.语音缓存
+[33mcdea952[m HEAD@{4}: commit: 1.语音完成
+[33m9416e1a[m HEAD@{5}: commit: 1.学习中心改造
+[33md30148c[m HEAD@{6}: commit: 1.QQ头像
+[33m13d7fad[m HEAD@{7}: commit: 1.登录逻辑修改
+[33mfbef8b7[m HEAD@{8}: commit (amend): 1.登录逻辑修改
+[33mb18a0e2[m HEAD@{9}: commit: 1.登录逻辑修改
+[33m8c0f832[m HEAD@{10}: commit: 1.登录逻辑修改
+[33m31a0fda[m HEAD@{11}: commit (amend): 1.登录逻辑修改
+[33m812bb57[m HEAD@{12}: commit (amend): 1.登录逻辑修改
+[33m15d2bab[m HEAD@{13}: commit (amend): 1.登录逻辑修改
+[33mb760a3e[m HEAD@{14}: commit (amend): 1.登录逻辑修改
+[33mc8313a4[m HEAD@{15}: commit (amend): 1.登录逻辑修改
+[33m9dcd98e[m HEAD@{16}: commit (amend): 1.登录逻辑修改
+[33m219da71[m HEAD@{17}: commit (amend): 1.登录逻辑修改
+[33m4fc0d69[m HEAD@{18}: commit (amend): 1.登录逻辑修改
+[33m2bf5089[m HEAD@{19}: commit (amend): 1.登录逻辑修改
+[33m85dfecb[m HEAD@{20}: commit (amend): 1.登录逻辑修改
+[33mde5a1e2[m HEAD@{21}: commit (amend): 1.登录逻辑修改
+[33m8628865[m HEAD@{22}: commit (amend): 1.登录逻辑修改
+[33md2ee46e[m HEAD@{23}: commit (amend): 1.登录逻辑修改
+[33m3a6d726[m HEAD@{24}: commit (amend): 1.登录逻辑修改
+[33m3f7a5f1[m HEAD@{25}: commit (amend): 1.登录逻辑修改
+[33ma2dc6e3[m HEAD@{26}: commit: 1.登录逻辑修改
+[33m795a3a0[m HEAD@{27}: reset: moving to 795a3a0a7e8d6b9a9d721d10a0c292e57301c389
+[33ma91a38c[m HEAD@{28}: reset: moving to a91a38caf185cf8ecfb2e5586a775253a31b0bec
+[33m795a3a0[m HEAD@{29}: commit (amend): 1.语音
+[33m449db2f[m HEAD@{30}: commit (amend): 1.语音
+[33m81b3d7f[m HEAD@{31}: commit (amend): 1.语音
+[33m5860977[m HEAD@{32}: commit (amend): 1.语音
+[33mde5a708[m HEAD@{33}: commit (amend): 1.语音
+[33m451ad7b[m HEAD@{34}: commit (amend): 1.语音
+[33m07e6c1b[m HEAD@{35}: commit (amend): 1.语音
+[33m6d9846b[m HEAD@{36}: commit (amend): 1.语音
+[33m9c37170[m HEAD@{37}: commit (amend): 1.语音
+[33m275ea8f[m HEAD@{38}: commit (amend): 1.语音
+[33md008c1f[m HEAD@{39}: commit (amend): 1.语音
+[33m349754d[m HEAD@{40}: commit (amend): 1.语音
+[33m2f6d833[m HEAD@{41}: commit (amend): 1.语音
+[33mf22f174[m HEAD@{42}: commit (amend): 1.语音
+[33m5bd9d99[m HEAD@{43}: commit (amend): 1.语音
+[33mecd5571[m HEAD@{44}: commit: 1.语音
+[33me3f9231[m HEAD@{45}: commit: 1.友盟
+[33mb8bb308[m HEAD@{46}: commit: 1.升级安装Dialog
+[33m90418e9[m HEAD@{47}: commit: 1.动态权限申请
+[33m41b6f3e[m HEAD@{48}: commit: 1.下载搞定
+[33mfb37acb[m HEAD@{49}: commit: 1.下载搞定
+[33mdca80e6[m HEAD@{50}: commit: 1.网络连接搞定
+[33m3a986ed[m HEAD@{51}: commit: 1.服务端版本比对基本搞定
+[33m6cfd623[m HEAD@{52}: reset: moving to 6cfd623674920ea60e1e2d295eaae48c4e94aa3d
+[33ma91a38c[m HEAD@{53}: reset: moving to a91a38caf185cf8ecfb2e5586a775253a31b0bec
+[33meb9f800[m HEAD@{54}: reset: moving to eb9f800c5404e3a66278e044d0fc621ef0322ca1
+[33m85790e9[m HEAD@{55}: reset: moving to 85790e91f06f6956590f6dcba2ac61b8c2199ac1
+[33m6cfd623[m HEAD@{56}: commit: 1.极光推送
+[33m0f23b91[m HEAD@{57}: commit: 1.友盟
+[33ma91a38c[m HEAD@{58}: commit: 1.添加沉浸式状态栏
+[33meb9f800[m HEAD@{59}: commit: 1.只有我一个了
+[33mb07a49d[m HEAD@{60}: checkout: moving from master to MyTest
+[33m5f95e8b[m HEAD@{61}: commit: 1.主要
+[33m01082c6[m HEAD@{62}: checkout: moving from MyTest to master
+[33mb07a49d[m HEAD@{63}: commit: 1.主要
+[33m577fac6[m HEAD@{64}: checkout: moving from master to MyTest
+[33m01082c6[m HEAD@{65}: commit: 1.主要
+[33me825315[m HEAD@{66}: commit: 1.主要
+[33mcbf8afa[m HEAD@{67}: checkout: moving from MyTestLocal to master
+[33mc7d6021[m HEAD@{68}: commit (merge): Merge remote-tracking branch 'origin/MyTest' into MyTestLocal
+[33me3743ab[m HEAD@{69}: commit: 1.主要
+[33mc037088[m HEAD@{70}: checkout: moving from master to MyTestLocal
+[33mcbf8afa[m HEAD@{71}: commit: 1.主要
+[33maebc5a0[m HEAD@{72}: checkout: moving from MyTest to master
+[33m577fac6[m HEAD@{73}: checkout: moving from MyTestLocal to MyTest
+[33mc037088[m HEAD@{74}: checkout: moving from master to MyTestLocal
+[33maebc5a0[m HEAD@{75}: commit: 1.添加AndroidImageSlider描述
+[33mc0d7ef9[m HEAD@{76}: checkout: moving from MyTest to master
+[33m577fac6[m HEAD@{77}: commit: 1.添加AndroidImageSlider描述
+[33mbdb2efa[m HEAD@{78}: checkout: moving from master to MyTest
+[33mc0d7ef9[m HEAD@{79}: commit: 1.添加AndroidImageSlider描述
+[33m7b3011a[m HEAD@{80}: checkout: moving from MyTestLocal to master
+[33mc037088[m HEAD@{81}: checkout: moving from master to MyTestLocal
+[33m7b3011a[m HEAD@{82}: checkout: moving from MyTest to master
+[33mbdb2efa[m HEAD@{83}: checkout: moving from MyTestLocal to MyTest
+[33mc037088[m HEAD@{84}: checkout: moving from MyTest to MyTestLocal
+[33mbdb2efa[m HEAD@{85}: commit: 1.添加AndroidImageSlider描述
+[33m9898a26[m HEAD@{86}: checkout: moving from master to MyTest
+[33m7b3011a[m HEAD@{87}: commit: 1.添加AndroidImageSlider描述
+[33m19a43d3[m HEAD@{88}: merge MyTestLocal: Merge made by the 'recursive' strategy.
+[33m937542a[m HEAD@{89}: checkout: moving from MyTestLocal to master
+[33mc037088[m HEAD@{90}: checkout: moving from master to MyTestLocal
+[33m937542a[m HEAD@{91}: checkout: moving from MyTest to master
+[33m9898a26[m HEAD@{92}: checkout: moving from master to MyTest
+[33m937542a[m HEAD@{93}: checkout: moving from MyTest to master
+[33m9898a26[m HEAD@{94}: checkout: moving from master to MyTest
+[33m937542a[m HEAD@{95}: commit: 1.添加AndroidImageSlider描述
+[33m85790e9[m HEAD@{96}: checkout: moving from MyTest to master
+[33m9898a26[m HEAD@{97}: commit: 1.添加AndroidImageSlider描述
+[33m45a48f6[m HEAD@{98}: checkout: moving from master to MyTest
+[33m85790e9[m HEAD@{99}: checkout: moving from MyTest to master
+[33m45a48f6[m HEAD@{100}: checkout: moving from master to MyTest
+[33m85790e9[m HEAD@{101}: checkout: moving from MyTestLocal to master
+[33mc037088[m HEAD@{102}: checkout: moving from MyTest to MyTestLocal
+[33m45a48f6[m HEAD@{103}: checkout: moving from master to MyTest
+[33m85790e9[m HEAD@{104}: checkout: moving from MyTest to master
+[33m45a48f6[m HEAD@{105}: commit: 1.添加AndroidImageSlider描述
+[33mc037088[m HEAD@{106}: checkout: moving from MyTestLocal to MyTest
+[33mc037088[m HEAD@{107}: checkout: moving from MyTest to MyTestLocal
+[33mc037088[m HEAD@{108}: commit: 1.添加AndroidImageSlider描述
+[33m85790e9[m HEAD@{109}: checkout: moving from master to MyTest
+[33m85790e9[m HEAD@{110}: commit: 1.添加AndroidImageSlider描述
+[33mf0e62c8[m HEAD@{111}: commit: 1.修改了图片加载可能引起的BUG
+[33ma6ac5b6[m HEAD@{112}: commit: 1.修改了权限获取时候的空指针异常
+[33mb3fdc6f[m HEAD@{113}: commit: 1.修改了首页布局底部导航栏的注释
+[33m634c5d9[m HEAD@{114}: commit: 1.修改了首页布局
+[33meeb875a[m HEAD@{115}: commit: 1.格式化代码
+[33maa3771e[m HEAD@{116}: commit: 1.修复了WebView的跳转
+[33m4f0b9c9[m HEAD@{117}: commit: 1.更新了CircleImageView
+[33m8b86f0e[m HEAD@{118}: commit: 1.修改了个人中心的布局为可以拉伸的状态
+[33m3acd098[m HEAD@{119}: commit: 1.修改了个人中心的布局
+[33m46db5dd[m HEAD@{120}: commit: 1.修改了封面以及几个对应关系
+[33m63221c2[m HEAD@{121}: commit: 1.添加了首页的黑点指示
+[33m43bdb64[m HEAD@{122}: commit: 1.视频播放页面添加了下拉刷新
+[33mbad9682[m HEAD@{123}: commit: 1.押尾桑完成
+[33m309b9e3[m HEAD@{124}: commit: 1.郑成河完成
+[33mb873568[m HEAD@{125}: commit: 1.岸部真明完成
+[33m24df092[m HEAD@{126}: commit: 1.ACG教程完成
+[33m10f5a67[m HEAD@{127}: commit: 1.ACG教程完成
+[33mdced558[m HEAD@{128}: commit: 1.陈亮完成
+[33ma901a2b[m HEAD@{129}: commit: 1.初始化动画
+[33m69a7d8f[m HEAD@{130}: commit: 1.替换了地址
+[33m75b6765[m HEAD@{131}: commit: 1.添加了网址
+[33m2883bff[m HEAD@{132}: commit: 1.修改了快手以及熊猫的地址
+[33m9a8b070[m HEAD@{133}: commit: 1.增加了快手以及熊猫tvapp是否安装的判断
+[33m1de547e[m HEAD@{134}: commit: 1.暂且这么解决webView的问题了
+[33mecce64c[m HEAD@{135}: commit: 1.修改了学习平台的描述
+[33mb6a1a7e[m HEAD@{136}: commit: 1.主页基本完成
+[33m8826359[m HEAD@{137}: commit: 1.修改了权限确认弹框
+[33m566c0ef[m HEAD@{138}: commit: 1.修改了主页轮播图的显示时间
+[33mef97457[m HEAD@{139}: commit: 1.修改了图片选择控件
+[33mdde4ab0[m HEAD@{140}: commit: 1.修改了图片选择控件
+[33m6e75c8c[m HEAD@{141}: commit: 1.第三方图片选择库提交
+[33m6536476[m HEAD@{142}: commit: 1.完成了头像的保存
+[33mc271131[m HEAD@{143}: commit: 1.添加了图片的选择设定
+[33meab4a40[m HEAD@{144}: commit: 1.修改了地址
+[33m45135b1[m HEAD@{145}: commit: 1.添加了下拉刷新
+[33m784e8e2[m HEAD@{146}: commit: 1.修改了主页布局
+[33m0276dd9[m HEAD@{147}: commit: 1.首页引导图做完
+[33m8428596[m HEAD@{148}: commit: 1.Adapter布局完成
+[33mf08f89f[m HEAD@{149}: commit: 1.添加了播放列表以及播放页面
+[33m2b2c7bf[m HEAD@{150}: commit: 1.修改WebView
+[33m463ca78[m HEAD@{151}: commit: 1.首页底栏图标
+[33m7629774[m HEAD@{152}: commit: 1.直播地址
+[33m6897182[m HEAD@{153}: commit: 1.添加了对话框
+[33m70b9f61[m HEAD@{154}: commit: 1.首页底部栏目高度修改
+[33m15c4d7f[m HEAD@{155}: commit: 1.完成个人中心的跳转
+[33m7198569[m HEAD@{156}: commit: 1.完成学习中心
+[33m0eb5014[m HEAD@{157}: commit: 1.淘宝WebView解决
+[33m12aff5e[m HEAD@{158}: commit: 1.修改了主页布局
+[33m8fce50c[m HEAD@{159}: commit: 1.主页轮播完成
+[33m6eb10d4[m HEAD@{160}: commit: 1.主页轮播完成
+[33mb5f8e00[m HEAD@{161}: commit: 1.主页轮播完成
+[33m44f13f6[m HEAD@{162}: commit: 1.添加 自定义WebViewClient
+[33m6f27be0[m HEAD@{163}: commit: 1.添加了进度条
+[33m1402b14[m HEAD@{164}: commit: 1.添加了头布局
+[33m8c5250e[m HEAD@{165}: commit: 1.完成直播平台
+[33m6d64060[m HEAD@{166}: commit: 1.完成个人中心
+[33m4b2c8e6[m HEAD@{167}: commit: 修改了首页的默认展示
+[33m54b4b66[m HEAD@{168}: commit: 修改了首页的默认展示
+[33m38a788a[m HEAD@{169}: commit: 添加了倒影文字
+[33m27130c0[m HEAD@{170}: commit: 修改了首页布局
+[33m6dd278e[m HEAD@{171}: commit: 底部栏调整（第一方案）
+[33m2ce8a71[m HEAD@{172}: commit: 结束了当前页面
+[33m0e06a5f[m HEAD@{173}: commit (initial): Initial commit
