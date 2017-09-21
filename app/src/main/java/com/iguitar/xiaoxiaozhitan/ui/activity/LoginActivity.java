@@ -216,7 +216,7 @@ public class LoginActivity extends BaseActivity {
     private void onDownLoad(VersionInfo versionInfo) {
         DownloadUtil loadUtil = new DownloadUtil(this, versionInfo.getContent());
         String url;
-        url = "http://" + CommonUtil.getIP(this) + "/XiaoXiao/XiaoXiaoZhiTan.apk";
+        url = "http://" + CommonUtil.getIP(this) + "/XiaoXiao/Update/XiaoXiaoZhiTan.apk";
         LogUtil.d("urlInfo", url);
         loadUtil.StartDownload(url);
     }

@@ -10,9 +10,9 @@ import retrofit2.http.GET;
  */
 
 public interface ApiInerface {
-    @GET("AppVersion.txt")
+    @GET("Update/AppVersion.txt")
     Call<Object> getVersionReturn();
 
-    @GET("User.txt")
+    @GET("Server/User.txt")
     Call<UserReturnBean> getLoginInfo();
 }

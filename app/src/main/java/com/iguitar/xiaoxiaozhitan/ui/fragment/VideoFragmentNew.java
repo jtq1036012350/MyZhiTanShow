@@ -2,6 +2,7 @@ package com.iguitar.xiaoxiaozhitan.ui.fragment;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -12,12 +13,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.andview.refreshview.XRefreshView;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.google.gson.Gson;
 import com.iguitar.xiaoxiaozhitan.MyApplication;
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.databinding.FragmentVideoNewBinding;
@@ -30,6 +33,8 @@ import com.iguitar.xiaoxiaozhitan.ui.activity.VideoActivity;
 import com.iguitar.xiaoxiaozhitan.ui.adapter.MyVideoRecyclerViewAdapter;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseFragment;
 import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
+import com.iguitar.xiaoxiaozhitan.utils.LogUtil;
+import com.iguitar.xiaoxiaozhitan.utils.MyLogUtil;
 import com.iguitar.xiaoxiaozhitan.utils.PrompUtil;
 
 import java.util.ArrayList;
@@ -531,6 +536,11 @@ public class VideoFragmentNew extends BaseFragment {
             temp.setImageUrl(bottomImageUrls.get(i));
             bottomListJavaBeanList.add(temp);
         }
+        Gson gson = new Gson();
+        String a = gson.toJson(bottomListJavaBeanList);
+        LogUtil.d("logoo", a);
+        String b = gson.toJson(mainListJavaBeenList);
+        MyLogUtil.LogShitou("logoo", b);
 
         PrompUtil.stopProgressDialog("加载中...");
     }
@@ -559,6 +569,42 @@ public class VideoFragmentNew extends BaseFragment {
         });
         binding.recyclerView.setAdapter(myVideoRecyclerViewAdapter);
 
+        //相关下拉刷新的设置
+        binding.mRefreshView.setPullLoadEnable(false);
+        binding.mRefreshView.setAutoLoadMore(false);
+//        mRefreshView.setAutoRefresh(true);
+
+        binding.mRefreshView.setXRefreshViewListener(new XRefreshView.XRefreshViewListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        binding.mRefreshView.stopRefresh();
+                    }
+                }, 1000);
+            }
+
+            @Override
+            public void onRefresh(boolean isPullDown) {
+
+            }
+
+            @Override
+            public void onLoadMore(boolean isSilence) {
+
+            }
+
+            @Override
+            public void onRelease(float direction) {
+
+            }
+
+            @Override
+            public void onHeaderMove(double headerMovePercent, int offsetY) {
+
+            }
+        });
 
     }
 
