@@ -3,6 +3,7 @@ package com.iguitar.xiaoxiaozhitan.ui.fragment;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +20,13 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.iguitar.xiaoxiaozhitan.MyApplication;
 import com.iguitar.xiaoxiaozhitan.R;
-import com.iguitar.xiaoxiaozhitan.databinding.FragmentVideoBinding;
+import com.iguitar.xiaoxiaozhitan.databinding.FragmentVideoNewBinding;
 import com.iguitar.xiaoxiaozhitan.model.MainListJavaBean;
 import com.iguitar.xiaoxiaozhitan.model.PlayListMainJavaBean;
 import com.iguitar.xiaoxiaozhitan.model.VideoListJavaBean;
 import com.iguitar.xiaoxiaozhitan.ui.activity.PlayListActivity;
 import com.iguitar.xiaoxiaozhitan.ui.activity.VideoActivity;
+import com.iguitar.xiaoxiaozhitan.ui.adapter.MyVideoRecyclerViewAdapter;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseFragment;
 import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
 import com.iguitar.xiaoxiaozhitan.utils.PrompUtil;
@@ -36,19 +38,22 @@ import java.util.ArrayList;
  * Created by Jiang on 2017/4/13.
  */
 
-public class VideoFragment extends BaseFragment {
-    private FragmentVideoBinding binding;
+public class VideoFragmentNew extends BaseFragment {
+    private FragmentVideoNewBinding binding;
     private TextView tv_tittle;
     private ImageButton button;
     private ArrayList<String> videoList;
     private ArrayList<Integer> videoCover;
+    private SliderLayout sliderView;
+
+    private MyVideoRecyclerViewAdapter myVideoRecyclerViewAdapter;
 
     private ArrayList<MainListJavaBean> mainListJavaBeenList;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_video, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_video_new, container, false);
         return binding.getRoot();
 
 //        View view = View.inflate(getActivity(), R.layout.fragment_video, null);
@@ -520,13 +525,27 @@ public class VideoFragment extends BaseFragment {
         button = (ImageButton) mActivity.findViewById(R.id.btn_back);
         button.setVisibility(View.GONE);
 
-        initLoopRotarySwitchView();
+//        initLoopRotarySwitchView();
+        myVideoRecyclerViewAdapter = new MyVideoRecyclerViewAdapter(mActivity, mainListJavaBeenList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        binding.recyclerView.setLayoutManager(linearLayoutManager);
+        myVideoRecyclerViewAdapter.settopViewData(new MyVideoRecyclerViewAdapter.OnSetTopViewData() {
+            @Override
+            public void OnSetTopViewData(SliderLayout sliderLayout, LinearLayout ll_guid_point) {
+                sliderView = sliderLayout;
+                initLoopRotarySwitchView(sliderLayout, ll_guid_point);
+            }
+        });
+        binding.recyclerView.setAdapter(myVideoRecyclerViewAdapter);
+
+
     }
 
     /**
      * 初始化轮播图
      */
-    private void initLoopRotarySwitchView() {
+    private void initLoopRotarySwitchView(final SliderLayout sliderView, final LinearLayout ll_guid_point) {
 //        binding.mLoopRotarySwitchView
 //                .setAutoRotation(true)//是否自动切换
 //                .setAutoScrollDirection(LoopRotarySwitchView.AutoScrollDirection.left)//切换方向
@@ -551,7 +570,7 @@ public class VideoFragment extends BaseFragment {
 //            }
 //        });
 
-        binding.sliderView.removeAllSliders();
+        sliderView.removeAllSliders();
 
         for (int i = 0; i < videoList.size(); i++) {
 //            DefaultSliderView：只有图片，没有文字描述
@@ -565,26 +584,26 @@ public class VideoFragment extends BaseFragment {
 //                    CommonUtil.showTopToast(mActivity, videoList.get(binding.sliderView.getCurrentPosition()));
 //                    int x = binding.sliderView.getCurrentPosition();
 //                    int y = mainListJavaBeenList.get(binding.sliderView.getCurrentPosition()).getMainJavaBeanArrayList().get(0).getVideoListJavaBeen().size();
-                    if (mainListJavaBeenList.get(binding.sliderView.getCurrentPosition()).getMainJavaBeanArrayList().size() == 1) {
+                    if (mainListJavaBeenList.get(sliderView.getCurrentPosition()).getMainJavaBeanArrayList().size() == 1) {
 //                        Intent intent = new Intent(mActivity, VideoActivity.class);
 //                        intent.putExtra("videoList", playListMainJavaBeanArrayList.get(binding.sliderView.getCurrentPosition()).getVideoListJavaBeen());
 //                        startActivity(intent);
                         Bundle bundle = new Bundle();
-                        bundle.putSerializable("videoList", mainListJavaBeenList.get(binding.sliderView.getCurrentPosition()).getMainJavaBeanArrayList().get(0).getVideoListJavaBeen());
-                        bundle.putString("title", mainListJavaBeenList.get(binding.sliderView.getCurrentPosition()).getCoverName());
+                        bundle.putSerializable("videoList", mainListJavaBeenList.get(sliderView.getCurrentPosition()).getMainJavaBeanArrayList().get(0).getVideoListJavaBeen());
+                        bundle.putString("title", mainListJavaBeenList.get(sliderView.getCurrentPosition()).getCoverName());
                         startMyActivity(VideoActivity.class, bundle);
                     } else {
                         Bundle bundle = new Bundle();
-                        bundle.putSerializable("playList", mainListJavaBeenList.get(binding.sliderView.getCurrentPosition()).getMainJavaBeanArrayList());
-                        bundle.putString("title", mainListJavaBeenList.get(binding.sliderView.getCurrentPosition()).getCoverName());
+                        bundle.putSerializable("playList", mainListJavaBeenList.get(sliderView.getCurrentPosition()).getMainJavaBeanArrayList());
+                        bundle.putString("title", mainListJavaBeenList.get(sliderView.getCurrentPosition()).getCoverName());
                         startMyActivity(PlayListActivity.class, bundle);
                     }
                 }
             });
-            binding.sliderView.addSlider(textSliderView);
+            sliderView.addSlider(textSliderView);
         }
 
-        binding.sliderView.addOnPageChangeListener(new ViewPagerEx.OnPageChangeListener() {
+        sliderView.addOnPageChangeListener(new ViewPagerEx.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -592,8 +611,8 @@ public class VideoFragment extends BaseFragment {
 
             @Override
             public void onPageSelected(int position) {
-                binding.tvReflection.setText(videoList.get(position));
-                createPoint(position);
+//                binding.tvReflection.setText(videoList.get(position));
+                createPoint(ll_guid_point, position);
             }
 
             @Override
@@ -604,12 +623,12 @@ public class VideoFragment extends BaseFragment {
 
 //        binding.sliderView.setSliderTransformDuration(1200,new LinearInterpolator());
 //        binding.sliderView.setDuration(2000);
-        binding.sliderView.setPresetTransformer(SliderLayout.Transformer.Tablet);
-        binding.sliderView.setPresetIndicator(SliderLayout.PresetIndicators.Right_Bottom);
-        binding.sliderView.setCustomAnimation(new DescriptionAnimation());
-        binding.sliderView.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Visible);
-        binding.sliderView.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        createPoint(0);
+        sliderView.setPresetTransformer(SliderLayout.Transformer.Tablet);
+//        sliderView.setPresetIndicator(SliderLayout.PresetIndicators.Right_Bottom);
+//        sliderView.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        sliderView.setCustomAnimation(new DescriptionAnimation());
+        sliderView.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Invisible);
+        createPoint(ll_guid_point, 0);
 
     }
 
@@ -618,8 +637,8 @@ public class VideoFragment extends BaseFragment {
      *
      * @param pos
      */
-    private void createPoint(int pos) {
-        binding.llGuidPoint.removeAllViews();
+    private void createPoint(LinearLayout llGuidPoint, int pos) {
+        llGuidPoint.removeAllViews();
         for (int i = 0; i < mainListJavaBeenList.size(); i++) {
             // 创建灰点
             ImageView point = new ImageView(mActivity);
@@ -635,7 +654,7 @@ public class VideoFragment extends BaseFragment {
             }
             point.setLayoutParams(params);
             // 添加到线性容器中
-            binding.llGuidPoint.addView(point);
+            llGuidPoint.addView(point);
         }
     }
 
@@ -643,7 +662,7 @@ public class VideoFragment extends BaseFragment {
     public void onStop() {
         super.onStop();
 //        binding.mLoopRotarySwitchView.clearDisappearingChildren();
-        binding.sliderView.stopAutoCycle();
+        sliderView.stopAutoCycle();
     }
 
     @Override

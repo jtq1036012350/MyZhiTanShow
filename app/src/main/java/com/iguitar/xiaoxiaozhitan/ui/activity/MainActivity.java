@@ -16,7 +16,7 @@ import com.iguitar.xiaoxiaozhitan.ui.fragment.LiveFragment;
 import com.iguitar.xiaoxiaozhitan.ui.fragment.PersonalFragment;
 import com.iguitar.xiaoxiaozhitan.ui.fragment.StoreFragment;
 import com.iguitar.xiaoxiaozhitan.ui.fragment.StudyPlatformFragment;
-import com.iguitar.xiaoxiaozhitan.ui.fragment.VideoFragment;
+import com.iguitar.xiaoxiaozhitan.ui.fragment.VideoFragmentNew;
 import com.iguitar.xiaoxiaozhitan.ui.fragment.VoiceFragment;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 
@@ -75,7 +75,7 @@ public class MainActivity extends BaseActivity {
         //添加Fragnment
         fragments.add(new StoreFragment());
         fragments.add(new StudyPlatformFragment());
-        fragments.add(new VideoFragment());
+        fragments.add(new VideoFragmentNew());
         fragments.add(new LiveFragment());
         fragments.add(new VoiceFragment());
         fragments.add(new PersonalFragment());

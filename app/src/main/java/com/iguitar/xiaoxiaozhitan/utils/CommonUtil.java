@@ -13,6 +13,8 @@ import android.net.Uri;
 import android.os.Environment;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.view.Display;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,19 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class CommonUtil {
+
+    /**
+     * 获取屏幕宽度
+     *
+     * @param activity
+     * @return
+     */
+    public static int getDisplayWidth(Activity activity) {
+        WindowManager windowManager = activity.getWindowManager();
+        Display display = windowManager.getDefaultDisplay();
+        int screenWidth = display.getWidth();
+        return screenWidth;
+    }
 
     /**
      * 保存首次登陆
