@@ -16,6 +16,7 @@ import com.iguitar.xiaoxiaozhitan.ui.base.BaseActivity;
 import com.iguitar.xiaoxiaozhitan.ui.view.ClearEditText;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 import com.iguitar.xiaoxiaozhitan.utils.LogUtil;
+import com.iguitar.xiaoxiaozhitan.utils.PrompUtil;
 import com.iguitar.xiaoxiaozhitan.utils.StringUtils;
 
 import retrofit2.Call;
@@ -145,6 +146,7 @@ public class NetworkActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
+                PrompUtil.stopProgressDialog("");
                 CommonUtil.showTopToast(NetworkActivity.this, "网络连接失败！");
                 LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
             }

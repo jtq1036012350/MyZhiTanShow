@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide;
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.model.StudyJavaBean;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jiang on 2017/4/16.
@@ -19,16 +19,16 @@ import java.util.ArrayList;
 
 public class FragmentStudyAdapter extends BaseAdapter {
     private Context mContext;
-    private ArrayList<StudyJavaBean> studyJavaBeanArrayList;
+    private List<StudyJavaBean> studyJavaBeanArrayList;
 
-    public FragmentStudyAdapter(Context mContext, ArrayList<StudyJavaBean> studyJavaBeanArrayList) {
+    public FragmentStudyAdapter(Context mContext, List<StudyJavaBean> studyJavaBeanArrayList) {
         this.mContext = mContext;
         this.studyJavaBeanArrayList = studyJavaBeanArrayList;
     }
 
     @Override
     public int getCount() {
-        return studyJavaBeanArrayList.size();
+        return studyJavaBeanArrayList == null ? 0 : studyJavaBeanArrayList.size();
     }
 
     @Override

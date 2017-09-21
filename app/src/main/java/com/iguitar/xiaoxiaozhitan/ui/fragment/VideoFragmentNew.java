@@ -33,8 +33,6 @@ import com.iguitar.xiaoxiaozhitan.ui.activity.VideoActivity;
 import com.iguitar.xiaoxiaozhitan.ui.adapter.MyVideoRecyclerViewAdapter;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseFragment;
 import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
-import com.iguitar.xiaoxiaozhitan.utils.LogUtil;
-import com.iguitar.xiaoxiaozhitan.utils.MyLogUtil;
 import com.iguitar.xiaoxiaozhitan.utils.PrompUtil;
 
 import java.util.ArrayList;
@@ -538,9 +536,9 @@ public class VideoFragmentNew extends BaseFragment {
         }
         Gson gson = new Gson();
         String a = gson.toJson(bottomListJavaBeanList);
-        LogUtil.d("logoo", a);
+//        LogUtil.d("logoo", a);
         String b = gson.toJson(mainListJavaBeenList);
-        MyLogUtil.LogShitou("logoo", b);
+//        MyLogUtil.LogShitou("logoo", b);
 
         PrompUtil.stopProgressDialog("加载中...");
     }

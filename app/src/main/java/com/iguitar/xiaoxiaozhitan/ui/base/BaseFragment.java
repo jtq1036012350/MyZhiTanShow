@@ -4,9 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import com.iguitar.xiaoxiaozhitan.R;
+import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 /**
@@ -18,12 +25,19 @@ public abstract class BaseFragment extends Fragment {
     public BaseActivity.ForResultCallBack forResultCallBack;
     protected Activity mActivity;
     protected boolean isVisible;
-
+    public Retrofit retrofit;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = getActivity();
+        String ipPortString = CommonUtil.getIP(mActivity);
+        String url = "http://"+ipPortString+"/XiaoXiao/";
+        retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(getOkHttpClient())
+                .build();
     }
 
 
@@ -111,5 +125,28 @@ public abstract class BaseFragment extends Fragment {
 
     protected void onInvisible(){}
 
+    /**
+     * 获取okhttp拦截器
+     *
+     * @return
+     */
+    public OkHttpClient getOkHttpClient() {
+        //日志显示级别
+        HttpLoggingInterceptor.Level level = HttpLoggingInterceptor.Level.BODY;
+        //新建log拦截器
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                Log.d("zcb", "OkHttp====Message:" + message);
+            }
+        });
+        loggingInterceptor.setLevel(level);
+        //定制OkHttp
+        OkHttpClient.Builder httpClientBuilder = new OkHttpClient
+                .Builder();
+        //OkHttp进行添加拦截器loggingInterceptor
+        httpClientBuilder.addInterceptor(loggingInterceptor);
+        return httpClientBuilder.build();
+    }
 
 }

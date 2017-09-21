@@ -348,6 +348,7 @@ public class CommonUtil {
 
     public static void showToast(Context context, String text) {
         if (toast == null) {
+            context = context.getApplicationContext();
             toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
 
             LinearLayout layout = (LinearLayout) toast.getView();

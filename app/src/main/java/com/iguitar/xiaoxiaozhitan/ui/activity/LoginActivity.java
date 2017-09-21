@@ -22,7 +22,6 @@ import com.iguitar.xiaoxiaozhitan.model.VersionInfo;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseActivity;
 import com.iguitar.xiaoxiaozhitan.ui.view.ClearEditText;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
-import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
 import com.iguitar.xiaoxiaozhitan.utils.DownloadUtil;
 import com.iguitar.xiaoxiaozhitan.utils.LogUtil;
 import com.iguitar.xiaoxiaozhitan.utils.PrompUtil;
@@ -39,8 +38,6 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 /**
@@ -256,11 +253,6 @@ public class LoginActivity extends BaseActivity {
      * 查看版本信息
      */
     private void onGetVersion() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ConstantUtil.internretUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(getOkHttpClient())
-                .build();
         ApiInerface userBiz = retrofit.create(ApiInerface.class);
         Call<Object> call = userBiz.getVersionReturn();
         call.enqueue(new Callback<Object>() {
@@ -323,6 +315,7 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
+                PrompUtil.stopProgressDialog("");
                 LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
             }
         });
@@ -379,6 +372,7 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<UserReturnBean> call, Throwable t) {
+                PrompUtil.stopProgressDialog("");
                 LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
             }
         });

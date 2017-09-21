@@ -2,7 +2,6 @@ package com.iguitar.xiaoxiaozhitan.ui.fragment;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,15 +11,23 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.andview.refreshview.XRefreshView;
+import com.google.gson.Gson;
 import com.iguitar.xiaoxiaozhitan.R;
+import com.iguitar.xiaoxiaozhitan.api.ApiInerface;
 import com.iguitar.xiaoxiaozhitan.databinding.FragmentStudyBinding;
 import com.iguitar.xiaoxiaozhitan.model.StudyJavaBean;
 import com.iguitar.xiaoxiaozhitan.ui.activity.MyWebViewActivity;
 import com.iguitar.xiaoxiaozhitan.ui.adapter.FragmentStudyAdapter;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseFragment;
 import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
+import com.iguitar.xiaoxiaozhitan.utils.LogUtil;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * 学习平台Fragment
@@ -29,7 +36,7 @@ import java.util.ArrayList;
 
 public class StudyPlatformFragment extends BaseFragment {
     private FragmentStudyBinding binding;
-    private ArrayList<StudyJavaBean> studyJavaBeanArrayList;
+    private List<StudyJavaBean> studyJavaBeanArrayList;
     private ArrayList<String> title;
     private ArrayList<String> urls;
     private ArrayList<String> description;
@@ -71,12 +78,13 @@ public class StudyPlatformFragment extends BaseFragment {
         binding.mRefreshView.setXRefreshViewListener(new XRefreshView.XRefreshViewListener() {
             @Override
             public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        binding.mRefreshView.stopRefresh();
-                    }
-                }, 1000);
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        binding.mRefreshView.stopRefresh();
+//                    }
+//                }, 1000);
+                getDataFromServer();
             }
 
             @Override
@@ -97,6 +105,21 @@ public class StudyPlatformFragment extends BaseFragment {
             @Override
             public void onHeaderMove(double headerMovePercent, int offsetY) {
 
+            }
+        });
+
+        adapter = new FragmentStudyAdapter(mActivity, studyJavaBeanArrayList);
+        binding.fragStudyLv.setAdapter(adapter);
+
+        binding.fragStudyLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (!"".equals(urls.get(i))) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("url", urls.get(i));
+                    bundle.putString("title", title.get(i));
+                    startMyActivity(MyWebViewActivity.class, bundle);
+                }
             }
         });
     }
@@ -161,26 +184,40 @@ public class StudyPlatformFragment extends BaseFragment {
             temp.setImage(images.get(i));
             studyJavaBeanArrayList.add(temp);
         }
+        Gson gson = new Gson();
+        String a = gson.toJson(studyJavaBeanArrayList);
+        LogUtil.d("logoo", a);
 
-        adapter = new FragmentStudyAdapter(mActivity, studyJavaBeanArrayList);
-        binding.fragStudyLv.setAdapter(adapter);
-
-        binding.fragStudyLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (!"".equals(urls.get(i))) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("url", urls.get(i));
-                    bundle.putString("title", title.get(i));
-                    startMyActivity(MyWebViewActivity.class, bundle);
-                }
-            }
-        });
     }
 
     @Override
     protected void lazyLoad() {
-        initDatas();
-        initView();
+//        initDatas();
+        getDataFromServer();
+//        initView();
+    }
+
+
+    public void getDataFromServer() {
+        binding.mRefreshView.startRefresh();
+        ApiInerface studyInfo = retrofit.create(ApiInerface.class);
+        Call<List<StudyJavaBean>> call = studyInfo.getStudyInfo();
+        call.enqueue(new Callback<List<StudyJavaBean>>() {
+            @Override
+            public void onResponse(Call<List<StudyJavaBean>> call, Response<List<StudyJavaBean>> response) {
+                if (response.isSuccessful()) {
+                    binding.mRefreshView.stopRefresh();
+                    studyJavaBeanArrayList = response.body();
+                    initView();
+                    LogUtil.e("infoooo", "normalGet:" + response.body() + "");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<StudyJavaBean>> call, Throwable t) {
+                binding.mRefreshView.stopRefresh();
+                LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
+            }
+        });
     }
 }

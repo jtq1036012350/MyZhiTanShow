@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.utils.AlertUtil;
+import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
 import com.iguitar.xiaoxiaozhitan.utils.ViewUtil;
 
@@ -49,8 +50,10 @@ public class BaseActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ViewUtil.initSystemBar(this, R.color.colorTitleBlack);
+        String ipPortString = CommonUtil.getIP(this);
+        String url = "http://"+ipPortString+"/XiaoXiao/";
         retrofit = new Retrofit.Builder()
-                .baseUrl(ConstantUtil.internretUrl)
+                .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(getOkHttpClient())
                 .build();
