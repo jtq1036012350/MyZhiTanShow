@@ -80,7 +80,7 @@ public class DownloadUtil {
             @Override
             public void onSuccess(ResponseInfo<File> responseInfo) {
 //                Toast.makeText(activity, "下载成功", Toast.LENGTH_SHORT).show();
-                CommonUtil.showToast(activity, "下载成功");
+                CommonUtil.showToast(activity.getApplicationContext(), "下载成功");
                 showUpdataDialog();
                 progressDialog.dismiss();
             }
@@ -89,7 +89,7 @@ public class DownloadUtil {
             public void onFailure(HttpException error, String msg) {
                 Log.e("Tag", msg);
 //                Toast.makeText(activity, "下载失败，稍后在试", Toast.LENGTH_SHORT).show();
-                CommonUtil.showToast(activity, "下载失败，稍后在试");
+                CommonUtil.showToast(activity.getApplicationContext(), "下载失败，稍后在试");
                 progressDialog.dismiss();
             }
         });

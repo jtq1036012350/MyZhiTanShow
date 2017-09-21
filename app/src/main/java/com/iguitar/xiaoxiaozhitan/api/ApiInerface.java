@@ -1,5 +1,7 @@
 package com.iguitar.xiaoxiaozhitan.api;
 
+import com.iguitar.xiaoxiaozhitan.model.UserReturnBean;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -10,4 +12,7 @@ import retrofit2.http.GET;
 public interface ApiInerface {
     @GET("AppVersion.txt")
     Call<Object> getVersionReturn();
+
+    @GET("User.txt")
+    Call<UserReturnBean> getLoginInfo();
 }

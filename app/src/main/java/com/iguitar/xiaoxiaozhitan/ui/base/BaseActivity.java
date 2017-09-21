@@ -22,6 +22,8 @@ import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 /**
@@ -33,6 +35,7 @@ public class BaseActivity extends FragmentActivity {
     private BaseActivity mActivity;
     public ForResultCallBack forResultCallBack;
     private OnSuccessSmsListener OnSuccessSmsListener;
+    public Retrofit retrofit;
 
     public interface OnSuccessSmsListener {
         void OnSms(int flag);
@@ -46,6 +49,11 @@ public class BaseActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ViewUtil.initSystemBar(this, R.color.colorTitleBlack);
+        retrofit = new Retrofit.Builder()
+                .baseUrl(ConstantUtil.internretUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(getOkHttpClient())
+                .build();
         mActivity = this;
     }
 

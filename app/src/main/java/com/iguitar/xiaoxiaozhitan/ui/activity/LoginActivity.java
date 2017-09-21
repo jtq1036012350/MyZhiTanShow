@@ -17,6 +17,7 @@ import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.api.ApiInerface;
 import com.iguitar.xiaoxiaozhitan.databinding.ActivityLoginBinding;
 import com.iguitar.xiaoxiaozhitan.model.UserInfo;
+import com.iguitar.xiaoxiaozhitan.model.UserReturnBean;
 import com.iguitar.xiaoxiaozhitan.model.VersionInfo;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseActivity;
 import com.iguitar.xiaoxiaozhitan.ui.view.ClearEditText;
@@ -336,19 +337,53 @@ public class LoginActivity extends BaseActivity {
         String userName = binding.editName.getText().toString().trim();
         String userPass = binding.editPass.getText().toString().trim();
 
-        UserInfo userInfo = new UserInfo();
-        userInfo.setName("00");
-        userInfo.setPassword("123");
-        userInfo.setRember(true);
-        if (userName.equals("00") && userPass.equals("123")) {
-            if (binding.chbSave.isChecked()) {
-                CommonUtil.saveLoginInfo(this, userInfo);
-            }
-            startMyActivity(MainActivity.class, null);
-            finish();
-        }
+        onCheckLogin(userName, userPass);
+//        UserInfo userInfo = new UserInfo();
+//        userInfo.setName("00");
+//        userInfo.setPassword("123");
+//        userInfo.setRember(true);
+//        if (userName.equals("00") && userPass.equals("123")) {
+//            if (binding.chbSave.isChecked()) {
+//                CommonUtil.saveLoginInfo(this, userInfo);
+//            }
+//            startMyActivity(MainActivity.class, null);
+//            finish();
+//        }
 
     }
+
+    /**
+     * 登录访问
+     */
+    private void onCheckLogin(final String userName, final String userPass) {
+        ApiInerface userBiz = retrofit.create(ApiInerface.class);
+        Call<UserReturnBean> call = userBiz.getLoginInfo();
+        call.enqueue(new Callback<UserReturnBean>() {
+            @Override
+            public void onResponse(Call<UserReturnBean> call, Response<UserReturnBean> response) {
+                if (response.isSuccessful()) {
+                    UserInfo myUserInfo = new UserInfo();
+                    myUserInfo.setName("00");
+                    myUserInfo.setPassword("123");
+                    myUserInfo.setRember(true);
+                    if (userName.equals("00") && userPass.equals("123")) {
+                        if (binding.chbSave.isChecked()) {
+                            CommonUtil.saveLoginInfo(LoginActivity.this, myUserInfo);
+                        }
+                        startMyActivity(MainActivity.class, null);
+                        finish();
+                    }
+                    LogUtil.e("infoooo", "normalGet:" + response.body() + "");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserReturnBean> call, Throwable t) {
+                LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
+            }
+        });
+    }
+
 
     public void onLoginSuccess() {
         //保存密码
