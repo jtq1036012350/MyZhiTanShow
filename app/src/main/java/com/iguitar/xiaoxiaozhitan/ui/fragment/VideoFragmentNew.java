@@ -735,7 +735,7 @@ public class VideoFragmentNew extends BaseFragment {
     public void onStop() {
         super.onStop();
 //        binding.mLoopRotarySwitchView.clearDisappearingChildren();
-        if(sliderView!=null){
+        if (sliderView != null) {
             sliderView.stopAutoCycle();
         }
     }
@@ -743,7 +743,11 @@ public class VideoFragmentNew extends BaseFragment {
     @Override
     protected void lazyLoad() {
         initTitle();
-        getDataFromServer();
+        if (mainListJavaBeenList == null) {
+            getDataFromServer();
+        }else{
+            initView();
+        }
 //        initDatas();
 //        initView();
     }
@@ -769,7 +773,7 @@ public class VideoFragmentNew extends BaseFragment {
             @Override
             public void onFailure(Call<List<MainListJavaBean>> call, Throwable t) {
                 binding.mRefreshView.stopRefresh();
-                CommonUtil.showTopToast(mActivity,"获取视频页面顶部数据失败！");
+                CommonUtil.showTopToast(mActivity, "获取视频页面顶部数据失败！");
                 LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
             }
         });
@@ -796,7 +800,7 @@ public class VideoFragmentNew extends BaseFragment {
             @Override
             public void onFailure(Call<List<VideoBottomBean>> call, Throwable t) {
                 binding.mRefreshView.stopRefresh();
-                CommonUtil.showTopToast(mActivity,"获取视频页面底部数据失败！");
+                CommonUtil.showTopToast(mActivity, "获取视频页面底部数据失败！");
                 LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
             }
         });

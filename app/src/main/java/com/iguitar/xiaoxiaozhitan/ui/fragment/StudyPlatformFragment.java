@@ -198,7 +198,11 @@ public class StudyPlatformFragment extends BaseFragment {
     @Override
     protected void lazyLoad() {
         initTitle();
-        getDataFromServer();
+        if (studyJavaBeanArrayList != null) {
+            getDataFromServer();
+        } else {
+            initView();
+        }
 //        initDatas();
 //        initView();
     }

@@ -17,6 +17,7 @@ import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 import java.util.List;
 
 /**
+ * 视频页面底部栏目Adapter
  * Created by Jiang on 2017-09-21.
  */
 
