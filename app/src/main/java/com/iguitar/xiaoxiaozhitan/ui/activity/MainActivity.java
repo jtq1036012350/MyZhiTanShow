@@ -109,15 +109,18 @@ public class MainActivity extends BaseActivity {
                 initTitle("淘宝", false);
                 break;
             case 1:
-                initTitle("学习中心", true);
+                initTitle("学习平台", true);
                 break;
             case 2:
                 initTitle("视频", true);
                 break;
             case 3:
-                initTitle("聊天机器人", true);
+                initTitle("直播", false);
                 break;
             case 4:
+                initTitle("聊天机器人", true);
+                break;
+            case 5:
                 initTitle("个人中心", false);
                 break;
         }

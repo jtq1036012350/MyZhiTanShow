@@ -16,6 +16,13 @@
             android:id="@+id/rl_title"
             layout="@layout/view_headlayout"/>
 
+        <FrameLayout
+            android:id="@+id/main_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/rl_title"
+            android:layout_marginBottom="65dp"/>
+
         <LinearLayout
             android:id="@+id/main_bottome_switcher_container"
             android:layout_width="match_parent"
@@ -164,13 +171,6 @@
                     android:textColor="@color/main_bottom_tv_color"/>
             </FrameLayout>
         </LinearLayout>
-
-        <FrameLayout
-            android:id="@+id/main_fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@id/main_bottome_switcher_container"
-            android:layout_below="@id/rl_title"/>
 
     </RelativeLayout>
 
