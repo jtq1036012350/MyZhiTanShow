@@ -2,6 +2,7 @@ package com.iguitar.xiaoxiaozhitan.ui.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.iguitar.xiaoxiaozhitan.MyApplication;
 import com.iguitar.xiaoxiaozhitan.R;
+import com.iguitar.xiaoxiaozhitan.ui.activity.LoginActivity;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
@@ -66,12 +68,22 @@ public class PersonBottomAdapter extends BaseAdapter {
             viewHolder.tv_third_qq_unit = (TextView) view.findViewById(R.id.tv_third_qq_unit);
             viewHolder.tv_user_name = (TextView) view.findViewById(R.id.tv_user_name);
             viewHolder.tv_share = (TextView) view.findViewById(R.id.tv_share);
+            viewHolder.tv_exit = (TextView) view.findViewById(R.id.tv_exit);
             view.setTag(viewHolder);
         } else {
             view = convertView;
             viewHolder = (ViewHolder) view.getTag();
         }
 
+        viewHolder.tv_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((Activity) context).finish();
+                Intent intent = new Intent();
+                intent.setClass((Activity) context, LoginActivity.class);
+                ((Activity) context).startActivity(intent);
+            }
+        });
         String userName = (String) MyApplication.getMap("name");
         if (!TextUtils.isEmpty(userName)) {
             viewHolder.tv_user_name.setText(userName);
@@ -170,5 +182,6 @@ public class PersonBottomAdapter extends BaseAdapter {
         private TextView tv_third_qq_unit;
         private TextView tv_user_name;
         private TextView tv_share;
+        private TextView tv_exit;
     }
 }

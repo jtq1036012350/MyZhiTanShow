@@ -734,13 +734,13 @@ public class VideoFragmentNew extends BaseFragment {
 
     @Override
     protected void lazyLoad() {
+//        initDatas();
+//        initView();
         if (mainListJavaBeenList == null) {
             getDataFromServer();
         }else{
             initView();
         }
-//        initDatas();
-//        initView();
     }
 
     /**

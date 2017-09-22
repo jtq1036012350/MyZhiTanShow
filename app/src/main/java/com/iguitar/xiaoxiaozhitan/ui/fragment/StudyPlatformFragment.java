@@ -192,7 +192,8 @@ public class StudyPlatformFragment extends BaseFragment {
             temp.setDescription(description.get(i));
             temp.setUrl(urls.get(i));
             temp.setIsMore(isMore.get(i));
-            temp.setImage(images.get(i));
+            //图片服务端获取
+//            temp.setImage(images.get(i));
             studyJavaBeanArrayList.add(temp);
         }
         Gson gson = new Gson();
@@ -203,13 +204,14 @@ public class StudyPlatformFragment extends BaseFragment {
 
     @Override
     protected void lazyLoad() {
+//                initDatas();
+//        initView();
         if (studyJavaBeanArrayList == null) {
             getDataFromServer();
         } else {
             initView();
         }
-//        initDatas();
-//        initView();
+
     }
 
 

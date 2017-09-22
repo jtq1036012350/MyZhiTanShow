@@ -11,17 +11,17 @@ public class StudyJavaBean implements Serializable{
     private String title;
     private String description;
 
-    private int image;
+    private String image;
     private String url;
 
     //0:代表可以跳转 1：代表不可以跳转
     private int isMore;
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
