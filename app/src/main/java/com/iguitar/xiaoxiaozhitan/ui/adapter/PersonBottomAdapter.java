@@ -2,6 +2,7 @@ package com.iguitar.xiaoxiaozhitan.ui.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -57,12 +58,19 @@ public class PersonBottomAdapter extends BaseAdapter {
             viewHolder.tv_first_qq_unit = (TextView) view.findViewById(R.id.tv_first_qq_unit);
             viewHolder.tv_second_qq_unit = (TextView) view.findViewById(R.id.tv_second_qq_unit);
             viewHolder.tv_third_qq_unit = (TextView) view.findViewById(R.id.tv_third_qq_unit);
+            viewHolder.tv_user_name = (TextView) view.findViewById(R.id.tv_user_name);
             view.setTag(viewHolder);
         } else {
             view = convertView;
             viewHolder = (ViewHolder) view.getTag();
         }
 
+        String userName = (String) MyApplication.getMap("name");
+        if (!TextUtils.isEmpty(userName)) {
+            viewHolder.tv_user_name.setText(userName);
+        }else {
+
+        }
         viewHolder.iv_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,9 +139,10 @@ public class PersonBottomAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        ImageView iv_user;
-        TextView tv_first_qq_unit;
-        TextView tv_second_qq_unit;
-        TextView tv_third_qq_unit;
+        private ImageView iv_user;
+        private TextView tv_first_qq_unit;
+        private TextView tv_second_qq_unit;
+        private TextView tv_third_qq_unit;
+        private TextView tv_user_name;
     }
 }

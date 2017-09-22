@@ -24,6 +24,7 @@ import com.iguitar.xiaoxiaozhitan.ui.view.ClearEditText;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 import com.iguitar.xiaoxiaozhitan.utils.DownloadUtil;
 import com.iguitar.xiaoxiaozhitan.utils.LogUtil;
+import com.iguitar.xiaoxiaozhitan.utils.MDFiveUtil;
 import com.iguitar.xiaoxiaozhitan.utils.PrompUtil;
 import com.joker.api.Permissions4M;
 import com.joker.api.wrapper.ListenerWrapper;
@@ -113,6 +114,7 @@ public class LoginActivity extends BaseActivity {
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
             MyApplication.putIconMap(data.get("profile_image_url"));
+            MyApplication.putMap("name", data.get(data.get("name")));
             startMyActivity(MainActivity.class, null);
             finish();
         }
@@ -355,12 +357,14 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onResponse(Call<UserReturnBean> call, Response<UserReturnBean> response) {
                 if (response.isSuccessful()) {
-                    UserInfo myUserInfo = new UserInfo();
-                    myUserInfo.setName("00");
-                    myUserInfo.setPassword("123");
-                    myUserInfo.setRember(true);
-                    if (userName.equals("00") && userPass.equals("123")) {
+                    UserReturnBean userReturnBean = response.body();
+                    String userPassMDFive = MDFiveUtil.GetMD5Code(userPass);
+                    if (userName.equals(userReturnBean.getUsername()) && userPassMDFive.equals(userReturnBean.getUserpass())) {
                         if (binding.chbSave.isChecked()) {
+                            UserInfo myUserInfo = new UserInfo();
+                            myUserInfo.setName(userName);
+                            myUserInfo.setPassword(userPassMDFive);
+                            myUserInfo.setRember(true);
                             CommonUtil.saveLoginInfo(LoginActivity.this, myUserInfo);
                         }
                         startMyActivity(MainActivity.class, null);
