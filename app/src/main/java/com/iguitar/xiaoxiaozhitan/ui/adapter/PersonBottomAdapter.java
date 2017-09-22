@@ -13,6 +13,11 @@ import com.bumptech.glide.Glide;
 import com.iguitar.xiaoxiaozhitan.MyApplication;
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
 
 import java.util.ArrayList;
 
@@ -25,11 +30,12 @@ import me.iwf.photopicker.utils.MyPhotoUtil;
  * Created by Jiang on 2017/5/8.
  */
 public class PersonBottomAdapter extends BaseAdapter {
-
+    private UMShareListener shareListener;
     private Context context;
 
-    public PersonBottomAdapter(Context context, String url) {
+    public PersonBottomAdapter(Context context, String url, UMShareListener shareListener) {
         this.context = context;
+        this.shareListener = shareListener;
     }
 
     @Override
@@ -48,7 +54,7 @@ public class PersonBottomAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, final View convertView, ViewGroup parent) {
         View view;
         ViewHolder viewHolder;
         if (convertView == null) {
@@ -59,6 +65,7 @@ public class PersonBottomAdapter extends BaseAdapter {
             viewHolder.tv_second_qq_unit = (TextView) view.findViewById(R.id.tv_second_qq_unit);
             viewHolder.tv_third_qq_unit = (TextView) view.findViewById(R.id.tv_third_qq_unit);
             viewHolder.tv_user_name = (TextView) view.findViewById(R.id.tv_user_name);
+            viewHolder.tv_share = (TextView) view.findViewById(R.id.tv_share);
             view.setTag(viewHolder);
         } else {
             view = convertView;
@@ -68,7 +75,7 @@ public class PersonBottomAdapter extends BaseAdapter {
         String userName = (String) MyApplication.getMap("name");
         if (!TextUtils.isEmpty(userName)) {
             viewHolder.tv_user_name.setText(userName);
-        }else {
+        } else {
 
         }
         viewHolder.iv_user.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +121,17 @@ public class PersonBottomAdapter extends BaseAdapter {
             }
         });
 
+        viewHolder.tv_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UMImage thumb = new UMImage((Activity) context, R.mipmap.myicon);
+                UMWeb web = new UMWeb("http://" + CommonUtil.getIP(context) + "/XiaoXiao/Update/XiaoXiaoZhiTan.apk");
+                web.setThumb(thumb);
+                web.setDescription("欢迎来使用小小指弹");
+                web.setTitle("小小指弹");
+                new ShareAction((Activity) context).withMedia(web).setPlatform(SHARE_MEDIA.QQ).setCallback(shareListener).share();
+            }
+        });
         String url = (String) MyApplication.getIconMap();
         ArrayList<String> myPhotoList = (ArrayList<String>) MyPhotoUtil.getPhotoMap();
         if (myPhotoList != null && myPhotoList.size() != 0 && myPhotoList.get(0) != null) {
@@ -122,13 +140,19 @@ public class PersonBottomAdapter extends BaseAdapter {
                     .placeholder(R.mipmap.myicon)
                     .dontAnimate()
                     .into(viewHolder.iv_user);
-        } else if (!"".equals(url)) {
+        } else if (!"".
+
+                equals(url))
+
+        {
             Glide.with((Activity) context)
                     .load(url)
                     .placeholder(R.mipmap.myicon)
                     .dontAnimate()
                     .into(viewHolder.iv_user);
-        } else {
+        } else
+
+        {
             Glide.with((Activity) context)
                     .load(R.mipmap.myicon)
                     .dontAnimate()
@@ -138,11 +162,13 @@ public class PersonBottomAdapter extends BaseAdapter {
         return view;
     }
 
+
     static class ViewHolder {
         private ImageView iv_user;
         private TextView tv_first_qq_unit;
         private TextView tv_second_qq_unit;
         private TextView tv_third_qq_unit;
         private TextView tv_user_name;
+        private TextView tv_share;
     }
 }

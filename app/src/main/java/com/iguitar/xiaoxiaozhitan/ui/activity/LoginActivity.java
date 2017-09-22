@@ -363,7 +363,7 @@ public class LoginActivity extends BaseActivity {
                         if (binding.chbSave.isChecked()) {
                             UserInfo myUserInfo = new UserInfo();
                             myUserInfo.setName(userName);
-                            myUserInfo.setPassword(userPassMDFive);
+                            myUserInfo.setPassword(userPass);
                             myUserInfo.setRember(true);
                             CommonUtil.saveLoginInfo(LoginActivity.this, myUserInfo);
                         }

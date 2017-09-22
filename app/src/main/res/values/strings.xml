@@ -17,4 +17,5 @@
     <string name="input_hint">请输入密码</string>
     <string name="qq_login">qq登录</string>
     <string name="best_select_class">精选好课</string>
+    <string name="share_app">分享APP</string>
 </resources>

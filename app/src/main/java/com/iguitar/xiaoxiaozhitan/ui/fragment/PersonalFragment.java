@@ -13,11 +13,14 @@ import android.widget.AbsListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.databinding.FragmentPersonalNewBinding;
 import com.iguitar.xiaoxiaozhitan.ui.adapter.PersonBottomAdapter;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseFragment;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.util.ArrayList;
 
@@ -75,7 +78,7 @@ public class PersonalFragment extends BaseFragment {
         });
 
         ArrayList<String> myPhotoList = (ArrayList<String>) MyPhotoUtil.getPhotoMap();
-        personBottomAdapter = new PersonBottomAdapter(mActivity, myPhotoList.get(0));
+        personBottomAdapter = new PersonBottomAdapter(mActivity, myPhotoList.get(0),shareListener);
         binding.lvParallax.setAdapter(personBottomAdapter);
 
 //        binding.tvFirstQqUnit.setOnClickListener(new View.OnClickListener() {
@@ -153,6 +156,47 @@ public class PersonalFragment extends BaseFragment {
         ArrayList<String> myPhotoList = (ArrayList<String>) MyPhotoUtil.getPhotoMap();
         personBottomAdapter.notifyDataSetChanged();
     }
+
+    private UMShareListener shareListener = new UMShareListener() {
+        /**
+         * @descrption 分享开始的回调
+         * @param platform 平台类型
+         */
+        @Override
+        public void onStart(SHARE_MEDIA platform) {
+
+        }
+
+        /**
+         * @descrption 分享成功的回调
+         * @param platform 平台类型
+         */
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+            Toast.makeText(mActivity, "成功了", Toast.LENGTH_LONG).show();
+        }
+
+        /**
+         * @descrption 分享失败的回调
+         * @param platform 平台类型
+         * @param t 错误原因
+         */
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+            Toast.makeText(mActivity, "失败" + t.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+        /**
+         * @descrption 分享取消的回调
+         * @param platform 平台类型
+         */
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+            Toast.makeText(mActivity, "取消了", Toast.LENGTH_LONG).show();
+
+        }
+    };
+
 
     @Override
     protected void lazyLoad() {
