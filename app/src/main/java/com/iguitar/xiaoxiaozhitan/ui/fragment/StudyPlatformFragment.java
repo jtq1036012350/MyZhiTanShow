@@ -62,6 +62,12 @@ public class StudyPlatformFragment extends BaseFragment {
         lazyLoad();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initTitle();
+    }
+
     /**
      * 初始化页面
      */
@@ -197,8 +203,7 @@ public class StudyPlatformFragment extends BaseFragment {
 
     @Override
     protected void lazyLoad() {
-        initTitle();
-        if (studyJavaBeanArrayList != null) {
+        if (studyJavaBeanArrayList == null) {
             getDataFromServer();
         } else {
             initView();

@@ -10,7 +10,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/view_headlayout"/>
 
         <com.daimajia.slider.library.SliderLayout
             android:id="@+id/slider_view"

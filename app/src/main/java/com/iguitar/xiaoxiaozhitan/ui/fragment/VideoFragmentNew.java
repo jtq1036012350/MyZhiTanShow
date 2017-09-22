@@ -607,14 +607,6 @@ public class VideoFragmentNew extends BaseFragment {
 
     }
 
-    private void initTitle() {
-        tv_tittle = (TextView) mActivity.findViewById(R.id.tv_top_title);
-        tv_tittle.setText("视频");
-
-        button = (ImageButton) mActivity.findViewById(R.id.btn_back);
-        button.setVisibility(View.GONE);
-    }
-
     /**
      * 初始化轮播图
      */
@@ -742,7 +734,6 @@ public class VideoFragmentNew extends BaseFragment {
 
     @Override
     protected void lazyLoad() {
-        initTitle();
         if (mainListJavaBeenList == null) {
             getDataFromServer();
         }else{

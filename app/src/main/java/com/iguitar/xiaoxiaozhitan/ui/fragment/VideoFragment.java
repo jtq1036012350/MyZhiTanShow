@@ -511,19 +511,6 @@ public class VideoFragment extends BaseFragment {
     }
 
     /**
-     * 初始化页面
-     */
-    private void initView() {
-        tv_tittle = (TextView) mActivity.findViewById(R.id.tv_top_title);
-        tv_tittle.setText("视频");
-
-        button = (ImageButton) mActivity.findViewById(R.id.btn_back);
-        button.setVisibility(View.GONE);
-
-        initLoopRotarySwitchView();
-    }
-
-    /**
      * 初始化轮播图
      */
     private void initLoopRotarySwitchView() {
@@ -649,6 +636,5 @@ public class VideoFragment extends BaseFragment {
     @Override
     protected void lazyLoad() {
         initDatas();
-        initView();
     }
 }

@@ -6,17 +6,15 @@
 
     <data></data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="false"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:id="@+id/main_fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+        <include
+            android:id="@+id/rl_title"
+            layout="@layout/view_headlayout"/>
 
         <LinearLayout
             android:id="@+id/main_bottome_switcher_container"
@@ -168,33 +166,12 @@
         </LinearLayout>
 
         <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_weight="1.2"
-            android:background="@color/colorTitleBlack">
+            android:id="@+id/main_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/main_bottome_switcher_container"
+            android:layout_below="@id/rl_title"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_gravity="bottom"
-                android:gravity="center"
-                android:textColor="@color/main_bottom_tv_color"/>
-
-        </FrameLayout>
-
-
-        <com.iguitar.xiaoxiaozhitan.ui.view.CircleImageView
-            android:id="@+id/civ_video"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="26dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/video_selector"
-            android:visibility="gone"/>
-    </LinearLayout>
+    </RelativeLayout>
 
 </layout>

@@ -65,11 +65,6 @@ public class VoiceFragment extends BaseFragment {
     }
 
     private void initViews() {
-        tv_top_title = (TextView) mActivity.findViewById(R.id.tv_top_title);
-        btn_back = (ImageButton) mActivity.findViewById(R.id.btn_back);
-
-        btn_back.setVisibility(View.GONE);
-        tv_top_title.setText("语音机器人");
 
         binding.btnSpesk.setOnClickListener(new View.OnClickListener() {
             @Override
