@@ -107,10 +107,24 @@
         <View
             style="@style/LineStyle"/>
 
-        <TextView
-            android:id="@+id/tv_share"
-            style="@style/ListPersonal"
-            android:text="@string/share_app"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:src="@mipmap/iv_share"/>
+
+            <TextView
+                android:id="@+id/tv_share"
+                style="@style/ListPersonal"
+                android:layout_marginLeft="10dp"
+                android:text="@string/share_app"/>
+        </LinearLayout>
 
         <View
             style="@style/LineStyle"/>
