@@ -259,13 +259,13 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
                 if (response.isSuccessful()) {
-                    CommonUtil.showToast(getApplicationContext(), "网络连接成功！");
+                    CommonUtil.showTopToast(LoginActivity.this, "网络连接成功！");
                     LogUtil.e("infoooo", "normalGet:" + response.body() + "");
                     Gson gson = new Gson();
                     final VersionInfo versionInfo = gson.fromJson(response.body().toString(), VersionInfo.class);
-
+//                    double i= Double.parseDouble(CommonUtil.getAPPVersion(LoginActivity.this));
                     //版本比对
-                    if (Double.parseDouble(CommonUtil.getAPPVersion(LoginActivity.this)) < Integer.parseInt(versionInfo.getVersion())) {
+                    if (CommonUtil.getCode(LoginActivity.this) < Integer.parseInt(versionInfo.getVersion())) {
                         Permissions4M.get(LoginActivity.this)
                                 .requestPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                                 .requestCodes(WRITE_STOERAGE_CODE)
