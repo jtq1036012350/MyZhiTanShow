@@ -55,6 +55,7 @@ public class MainActivity extends BaseActivity {
 
     //初始化布局
     private void initViews() {
+
         int count = binding.mainBottomeSwitcherContainer.getChildCount();
         for (int i = 0; i < count; i++) {
             FrameLayout childAt = (FrameLayout) binding.mainBottomeSwitcherContainer.getChildAt(i);
@@ -69,6 +70,7 @@ public class MainActivity extends BaseActivity {
 
             });
         }
+
 //        binding.civVideo.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -81,6 +83,10 @@ public class MainActivity extends BaseActivity {
 
     //初始化数据
     private void initDatas() {
+        tv_tittle = (TextView) findViewById(R.id.tv_top_title);
+        rl_title = (RelativeLayout) findViewById(R.id.rl_title);
+        button = (ImageButton) findViewById(R.id.btn_back);
+
         fragments = new ArrayList<>();
 
         //添加Fragnment
@@ -112,7 +118,7 @@ public class MainActivity extends BaseActivity {
                 initTitle("聊天机器人", true);
                 break;
             case 4:
-                initTitle("个人中心", true);
+                initTitle("个人中心", false);
                 break;
         }
         Fragment fragment = fragments.get(index);
@@ -194,16 +200,14 @@ public class MainActivity extends BaseActivity {
      * @param flag  true：展示布局 fals:隐藏布局
      */
     private void initTitle(String title, boolean flag) {
-        tv_tittle = (TextView) findViewById(R.id.tv_top_title);
-        tv_tittle.setText("视频");
-
-        rl_title = (RelativeLayout) findViewById(R.id.rl_title);
         if (!flag) {
             rl_title.setVisibility(View.GONE);
+            return;
         } else {
             rl_title.setVisibility(View.VISIBLE);
         }
-        button = (ImageButton) findViewById(R.id.btn_back);
+
+        tv_tittle.setText(title);
         button.setVisibility(View.GONE);
     }
 
