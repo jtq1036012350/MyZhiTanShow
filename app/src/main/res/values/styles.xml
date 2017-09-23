@@ -150,12 +150,6 @@
     </style>
 
     <!--dialog去阴影-->
-    <style name="dialogNoBg">
-        <item name="android:background">@color/colorTitleWhite</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsFloating">true</item>
-    </style>
 
     <!--底部CheckBox-->
     <style name="mychbStyle">

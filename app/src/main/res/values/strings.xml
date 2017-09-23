@@ -12,7 +12,6 @@
     <string name="reset">重置</string>
     <string name="login_name_hint">请输入账号</string>
     <string name="login_pass_hint">请输入密码</string>
-    <string name="name_filter">0123456789abcdefghijklmnopqrstuvwxyz</string>
     <string name="pass_filter">0123456789abcdefghijklmnopqrstuvwxyz</string>
     <string name="input_hint">请输入密码</string>
     <string name="qq_login">qq登录</string>
