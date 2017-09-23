@@ -41,6 +41,13 @@ public class MainActivity extends BaseActivity {
 
     private RelativeLayout rl_title;
 
+    private StoreFragment storeFragment;
+    private StudyPlatformFragment studyPlatformFragment;
+    private VideoFragmentNew videoFragmentNew;
+    private LiveFragment liveFragment;
+    private VoiceFragment voiceFragment;
+    private PersonalFragment personalFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,6 +160,7 @@ public class MainActivity extends BaseActivity {
             }
             current_fragment = fragment;
         }
+
     }
 
     //切换Fragment(会重新加载页面)
