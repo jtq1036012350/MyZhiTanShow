@@ -1,6 +1,7 @@
 package com.iguitar.xiaoxiaozhitan.api;
 
 import com.iguitar.xiaoxiaozhitan.model.MainListJavaBean;
+import com.iguitar.xiaoxiaozhitan.model.MyConversionBean;
 import com.iguitar.xiaoxiaozhitan.model.StudyJavaBean;
 import com.iguitar.xiaoxiaozhitan.model.UserReturnBean;
 import com.iguitar.xiaoxiaozhitan.model.VideoBottomBean;
@@ -11,11 +12,15 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 /**
+ * 网络访问url类
  * Created by Jiang on 2017-09-19.
  */
 
 public interface ApiInerface {
-    @GET("Update/AppVersion.txt")
+    @GET("Server/VoiceData.txt")
+    Call<List<MyConversionBean>> getVoiceReturn();
+
+    @GET("Server/AppVersion.txt")
     Call<Object> getVersionReturn();
 
     @GET("Server/User.txt")

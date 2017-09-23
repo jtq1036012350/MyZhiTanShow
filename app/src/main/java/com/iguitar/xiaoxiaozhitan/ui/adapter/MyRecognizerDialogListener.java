@@ -7,14 +7,14 @@ import com.iflytek.cloud.RecognizerResult;
 import com.iflytek.cloud.SpeechError;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
 import com.iguitar.xiaoxiaozhitan.model.Conversation;
-import com.iguitar.xiaoxiaozhitan.model.Resources;
+import com.iguitar.xiaoxiaozhitan.model.MyConversionBean;
 import com.iguitar.xiaoxiaozhitan.model.VoiceBean;
 import com.iguitar.xiaoxiaozhitan.model.VoiceUtils;
 
 import java.util.List;
-import java.util.Random;
 
 /**
+ * 语音监听类
  * Created by Jiang on 2017-09-20.
  */
 
@@ -24,17 +24,19 @@ public class MyRecognizerDialogListener implements RecognizerDialogListener {
     private ListView listView;
     private VoiceUtils voiceUtils;
     private MyVoiceAdapter adapter;
+    private List<MyConversionBean> myConversionBeanList;
 
     @Override
     public void onError(SpeechError arg0) {
 
     }
 
-    public MyRecognizerDialogListener(List<Conversation> listData,ListView listView,MyVoiceAdapter adapter,VoiceUtils voiceUtils) {
+    public MyRecognizerDialogListener(List<Conversation> listData,ListView listView,MyVoiceAdapter adapter,VoiceUtils voiceUtils,List<MyConversionBean> myConversionBeanList) {
         this.voiceUtils = voiceUtils;
         this.adapter = adapter;
         this.listView = listView;
         this.listData = listData;
+        this.myConversionBeanList = myConversionBeanList;
         sb = new StringBuilder();
     }
 
@@ -68,16 +70,29 @@ public class MyRecognizerDialogListener implements RecognizerDialogListener {
 
             // 根据提问内容回答
 
-            String answerText = "你说啥，听不懂";
+            String answerText = "";
             int imgId = -1;
-            if(askerText.contains("你好")){
-                answerText = "你也好";
-            }else if(askerText.contains("美女")){
-                Random random = new Random();
-                int nextInt = random.nextInt(Resources.imgids.length);
-                answerText = Resources.words[nextInt];
-                imgId = Resources.imgids[nextInt];
+//            if(askerText.contains("你好")){
+//                answerText = "你也好";
+//            }else if(askerText.contains("美女")){
+//                Random random = new Random();
+//                int nextInt = random.nextInt(Resources.imgids.length);
+//                answerText = Resources.words[nextInt];
+//                imgId = Resources.imgids[nextInt];
+//            }
+            boolean findFlag =  false;
+            for(MyConversionBean myConversionBean : myConversionBeanList){
+                if(askerText.contains(myConversionBean.getAskString())){
+                    answerText = myConversionBean.getResponseString();
+                    findFlag = true;
+                    break;
+                }
             }
+
+            if(!findFlag){
+                answerText = "你说啥，听不懂";
+            }
+
             Conversation answer = new Conversation(answerText, false, imgId);
             listData.add(answer);
             adapter.notifyDataSetChanged();
