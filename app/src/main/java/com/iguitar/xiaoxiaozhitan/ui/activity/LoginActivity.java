@@ -255,11 +255,13 @@ public class LoginActivity extends BaseActivity {
      * 查看版本信息
      */
     private void onGetVersion() {
+        PrompUtil.startProgressDialog(this,"加载中");
         ApiInerface userBiz = retrofit.create(ApiInerface.class);
         Call<Object> call = userBiz.getVersionReturn();
         call.enqueue(new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
+                PrompUtil.stopProgressDialog("加载中");
                 if (response.isSuccessful()) {
                     CommonUtil.showTopToast(LoginActivity.this, "网络连接成功！");
                     LogUtil.e("infoooo", "normalGet:" + response.body() + "");
@@ -348,15 +350,23 @@ public class LoginActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PrompUtil.stopProgressDialog("");
+    }
+
     /**
      * 登录访问
      */
     private void onCheckLogin(final String userName, final String userPass) {
+        PrompUtil.startProgressDialog(this,"加载中");
         ApiInerface userBiz = retrofit.create(ApiInerface.class);
         Call<UserReturnBean> call = userBiz.getLoginInfo();
         call.enqueue(new Callback<UserReturnBean>() {
             @Override
             public void onResponse(Call<UserReturnBean> call, Response<UserReturnBean> response) {
+                PrompUtil.stopProgressDialog("加载中");
                 if (response.isSuccessful()) {
                     UserReturnBean userReturnBean = response.body();
                     String userPassMDFive = MDFiveUtil.GetMD5Code(userPass);

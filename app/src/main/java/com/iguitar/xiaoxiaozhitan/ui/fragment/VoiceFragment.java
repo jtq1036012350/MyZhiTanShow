@@ -6,8 +6,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.iguitar.xiaoxiaozhitan.MyApplication;
 import com.iguitar.xiaoxiaozhitan.R;
@@ -41,9 +39,18 @@ public class VoiceFragment extends BaseFragment {
     private List<Conversation> listData;
     private List<MyConversionBean> myConversionBeanList;
     private MyVoiceAdapter adapter;
+//    private OnSelectVoiceFragmentListener onSelectVoiceFragmentListener;
 
-    private TextView tv_top_title;
-    private ImageButton btn_back;
+//    private TextView tv_top_title;
+//    private ImageButton btn_back;
+
+//    public interface OnSelectVoiceFragmentListener {
+//        void onSeleceVoiceFragment();
+//    }
+
+//    public void setOnSelectVoiceFragmentListener(OnSelectVoiceFragmentListener onSelectVoiceFragmentListener) {
+//        this.onSelectVoiceFragmentListener = onSelectVoiceFragmentListener;
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,7 +88,7 @@ public class VoiceFragment extends BaseFragment {
         binding.btnSpesk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                voiceUtils.listen(new MyRecognizerDialogListener(listData, binding.lvVoice, adapter, voiceUtils,myConversionBeanList));
+                voiceUtils.listen(new MyRecognizerDialogListener(listData, binding.lvVoice, adapter, voiceUtils, myConversionBeanList));
             }
         });
     }
@@ -99,14 +106,21 @@ public class VoiceFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        binding.lvVoice.setSelection(adapter.getCount()-1);
+    }
+
+    public void scrollToBottom() {
+        if (adapter != null) {
+//            int a = CommonUtil.getTotalHeightofListView(binding.lvVoice);
+//            binding.lvVoice.scrollBy(0,CommonUtil.getTotalHeightofListView(binding.lvVoice));
+            binding.lvVoice.setSelection(binding.lvVoice.getBottom());
+        }
     }
 
     /**
      * 查看版本信息
      */
     private void onDataStrinngs() {
-        PrompUtil.startProgressDialog(mActivity,"加载中");
+        PrompUtil.startProgressDialog(mActivity, "加载中");
         ApiInerface userBiz = retrofit.create(ApiInerface.class);
         Call<List<MyConversionBean>> call = userBiz.getVoiceReturn();
         call.enqueue(new Callback<List<MyConversionBean>>() {
@@ -124,12 +138,12 @@ public class VoiceFragment extends BaseFragment {
             @Override
             public void onFailure(Call<List<MyConversionBean>> call, Throwable t) {
                 PrompUtil.stopProgressDialog("");
-                CommonUtil.showTopToast(mActivity,"获取数据失败！");
+                CommonUtil.showTopToast(mActivity, "获取数据失败！");
                 LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
             }
         });
     }
-    
+
 
     @Override
     public void onDestroy() {

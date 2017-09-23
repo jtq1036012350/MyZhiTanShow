@@ -29,9 +29,10 @@ public class PrompUtil {
     }
 
     public static void stopProgressDialog(String title) {
-        if (dialog != null){}
+        if (dialog != null) {
             dialog.dismiss();
-        dialog = null;
+        }
+            dialog = null;
     }
 
 }

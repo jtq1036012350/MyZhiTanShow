@@ -11,7 +11,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.andview.refreshview.XRefreshView;
-import com.google.gson.Gson;
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.api.ApiInerface;
 import com.iguitar.xiaoxiaozhitan.databinding.FragmentStudyBinding;
@@ -20,7 +19,6 @@ import com.iguitar.xiaoxiaozhitan.ui.activity.MyWebViewActivity;
 import com.iguitar.xiaoxiaozhitan.ui.adapter.FragmentStudyAdapter;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseFragment;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
-import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
 import com.iguitar.xiaoxiaozhitan.utils.LogUtil;
 
 import java.util.ArrayList;
@@ -68,6 +66,9 @@ public class StudyPlatformFragment extends BaseFragment {
         initTitle();
     }
 
+    public void refreshStudyPlatform(){
+        getDataFromServer();
+    }
     /**
      * 初始化页面
      */
@@ -137,70 +138,70 @@ public class StudyPlatformFragment extends BaseFragment {
     /**
      * 初始化数据
      */
-    private void initDatas() {
-        studyJavaBeanArrayList = new ArrayList<>();
-        title = new ArrayList<>();
-        urls = new ArrayList<>();
-        description = new ArrayList<>();
-        images = new ArrayList<>();
-        isMore = new ArrayList<>();
-
-        title.add("优酷频道");
-        title.add("腾讯课堂");
-        title.add("百度传课");
-        title.add("张弛小小指弹");
-        title.add("指弹南通");
-        title.add("快手");
-        title.add("熊猫直播");
-
-        images.add(R.mipmap.youku);
-        images.add(R.mipmap.tengxunketang);
-        images.add(R.mipmap.baiduchuanke);
-        images.add(R.mipmap.xinlangweibo);
-        images.add(R.mipmap.baidutieba);
-        images.add(R.mipmap.kuaishou);
-        images.add(R.mipmap.xiongmao);
-
-        urls.add(ConstantUtil.youkuUrl);
-        urls.add(ConstantUtil.tencentUrl);
-        urls.add(ConstantUtil.baiduchuankeUrl);
-        urls.add("");
-        urls.add(ConstantUtil.nantongUrl);
-        urls.add(ConstantUtil.kuaishouUrl);
-        urls.add(ConstantUtil.pandaUrl);
-
-        description.add("http://i.youku.com/xxzhitan");
-        description.add("http://xxzt.ke.qq.com");
-        description.add("http://www.chuanke.com/s4522102.html");
-        description.add("指弹微博");
-        description.add("指弹南通");
-
-        description.add("指弹微博");
-        description.add("指弹南通");
-
-        isMore.add(1);
-        isMore.add(1);
-        isMore.add(1);
-        isMore.add(1);
-        isMore.add(1);
-        isMore.add(1);
-        isMore.add(1);
-
-        for (int i = 0; i < 7; i++) {
-            StudyJavaBean temp = new StudyJavaBean();
-            temp.setTitle(title.get(i));
-            temp.setDescription(description.get(i));
-            temp.setUrl(urls.get(i));
-            temp.setIsMore(isMore.get(i));
-            //图片服务端获取
-//            temp.setImage(images.get(i));
-            studyJavaBeanArrayList.add(temp);
-        }
-        Gson gson = new Gson();
-        String a = gson.toJson(studyJavaBeanArrayList);
-        LogUtil.d("logoo", a);
-
-    }
+//    private void initDatas() {
+//        studyJavaBeanArrayList = new ArrayList<>();
+//        title = new ArrayList<>();
+//        urls = new ArrayList<>();
+//        description = new ArrayList<>();
+//        images = new ArrayList<>();
+//        isMore = new ArrayList<>();
+//
+//        title.add("优酷频道");
+//        title.add("腾讯课堂");
+//        title.add("百度传课");
+//        title.add("张弛小小指弹");
+//        title.add("指弹南通");
+//        title.add("快手");
+//        title.add("熊猫直播");
+//
+//        images.add(R.mipmap.youku);
+//        images.add(R.mipmap.tengxunketang);
+//        images.add(R.mipmap.baiduchuanke);
+//        images.add(R.mipmap.xinlangweibo);
+//        images.add(R.mipmap.baidutieba);
+//        images.add(R.mipmap.kuaishou);
+//        images.add(R.mipmap.xiongmao);
+//
+//        urls.add(ConstantUtil.youkuUrl);
+//        urls.add(ConstantUtil.tencentUrl);
+//        urls.add(ConstantUtil.baiduchuankeUrl);
+//        urls.add("");
+//        urls.add(ConstantUtil.nantongUrl);
+//        urls.add(ConstantUtil.kuaishouUrl);
+//        urls.add(ConstantUtil.pandaUrl);
+//
+//        description.add("http://i.youku.com/xxzhitan");
+//        description.add("http://xxzt.ke.qq.com");
+//        description.add("http://www.chuanke.com/s4522102.html");
+//        description.add("指弹微博");
+//        description.add("指弹南通");
+//
+//        description.add("指弹微博");
+//        description.add("指弹南通");
+//
+//        isMore.add(1);
+//        isMore.add(1);
+//        isMore.add(1);
+//        isMore.add(1);
+//        isMore.add(1);
+//        isMore.add(1);
+//        isMore.add(1);
+//
+//        for (int i = 0; i < 7; i++) {
+//            StudyJavaBean temp = new StudyJavaBean();
+//            temp.setTitle(title.get(i));
+//            temp.setDescription(description.get(i));
+//            temp.setUrl(urls.get(i));
+//            temp.setIsMore(isMore.get(i));
+//            //图片服务端获取
+////            temp.setImage(images.get(i));
+//            studyJavaBeanArrayList.add(temp);
+//        }
+//        Gson gson = new Gson();
+//        String a = gson.toJson(studyJavaBeanArrayList);
+//        LogUtil.d("logoo", a);
+//
+//    }
 
     @Override
     protected void lazyLoad() {

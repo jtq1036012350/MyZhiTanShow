@@ -87,15 +87,22 @@ public class MainActivity extends BaseActivity {
         rl_title = (RelativeLayout) findViewById(R.id.rl_title);
         button = (ImageButton) findViewById(R.id.btn_back);
 
-        fragments = new ArrayList<>();
+        storeFragment = new StoreFragment();
+        studyPlatformFragment = new StudyPlatformFragment();
+        videoFragmentNew = new VideoFragmentNew();
+        liveFragment = new LiveFragment();
+        voiceFragment = new VoiceFragment();
+        personalFragment = new PersonalFragment();
 
+        fragments = new ArrayList<>();
+        new StoreFragment();
         //添加Fragnment
-        fragments.add(new StoreFragment());
-        fragments.add(new StudyPlatformFragment());
-        fragments.add(new VideoFragmentNew());
-        fragments.add(new LiveFragment());
-        fragments.add(new VoiceFragment());
-        fragments.add(new PersonalFragment());
+        fragments.add(storeFragment);
+        fragments.add(studyPlatformFragment);
+        fragments.add(videoFragmentNew);
+        fragments.add(liveFragment);
+        fragments.add(voiceFragment);
+        fragments.add(personalFragment);
 
         startFragmentAdd(2);
         //默认选择第一个条目
@@ -104,6 +111,7 @@ public class MainActivity extends BaseActivity {
 
     // fragment的切换
     private void startFragmentAdd(int index) {
+
         switch (index) {
             case 0:
                 initTitle("淘宝", false);

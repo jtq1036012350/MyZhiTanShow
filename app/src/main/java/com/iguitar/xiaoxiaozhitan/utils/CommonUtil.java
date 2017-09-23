@@ -14,8 +14,12 @@ import android.os.Environment;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.Display;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +32,33 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * 常用工具类
+ */
 public class CommonUtil {
+
+    public static int getTotalHeightofListView(ListView listView) {
+        ListAdapter mAdapter = listView.getAdapter();
+        if (mAdapter == null) {
+            return 0;
+        }
+        int totalHeight = 0;
+        for (int i = 0; i < mAdapter.getCount(); i++) {
+            View mView = mAdapter.getView(i, null, listView);
+            mView.measure(
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+            //mView.measure(0, 0);
+            totalHeight += mView.getMeasuredHeight();
+            LogUtil.d("数据" + i, String.valueOf(totalHeight));
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (mAdapter.getCount() - 1));
+        LogUtil.d("数据", "listview总高度=" + params.height);
+        listView.setLayoutParams(params);
+        listView.requestLayout();
+        return totalHeight;
+    }
 
     /**
      * 获取屏幕高度
