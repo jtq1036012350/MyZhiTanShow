@@ -542,7 +542,7 @@ public class VideoFragmentNew extends BaseFragment {
 
         for (int i = 0; i < bottomImageUrls.size(); i++) {
             VideoBottomBean temp = new VideoBottomBean();
-            temp.setImageUrl(bottomImageUrls.get(i));
+//            temp.setImageUrl(bottomImageUrls.get(i));
             bottomListJavaBeanList.add(temp);
         }
         Gson gson = new Gson();
@@ -753,8 +753,8 @@ public class VideoFragmentNew extends BaseFragment {
         call.enqueue(new Callback<List<MainListJavaBean>>() {
             @Override
             public void onResponse(Call<List<MainListJavaBean>> call, Response<List<MainListJavaBean>> response) {
+                binding.mRefreshView.stopRefresh();
                 if (response.isSuccessful()) {
-                    binding.mRefreshView.stopRefresh();
                     mainListJavaBeenList = response.body();
                     getBottomDataFromServer();
                     LogUtil.e("infoooo", "normalGet:" + response.body() + "");
@@ -780,8 +780,8 @@ public class VideoFragmentNew extends BaseFragment {
         call.enqueue(new Callback<List<VideoBottomBean>>() {
             @Override
             public void onResponse(Call<List<VideoBottomBean>> call, Response<List<VideoBottomBean>> response) {
+                binding.mRefreshView.stopRefresh();
                 if (response.isSuccessful()) {
-                    binding.mRefreshView.stopRefresh();
                     bottomListJavaBeanList = response.body();
                     initView();
                     LogUtil.e("infoooo", "normalGet:" + response.body() + "");

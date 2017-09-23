@@ -9,13 +9,13 @@ import java.io.Serializable;
 
 public class VideoBottomBean implements Serializable {
     //图片URL
-    private int imageUrl;
+    private String imageUrl;
 
-    public int getImageUrl() {
+    public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(int imageUrl) {
+    public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
 }

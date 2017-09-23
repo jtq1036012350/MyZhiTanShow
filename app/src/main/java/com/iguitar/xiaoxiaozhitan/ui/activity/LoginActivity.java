@@ -318,6 +318,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
                 PrompUtil.stopProgressDialog("");
+                CommonUtil.showTopToast(LoginActivity.this,"登录失败！");
                 LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
             }
         });
@@ -377,6 +378,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onFailure(Call<UserReturnBean> call, Throwable t) {
                 PrompUtil.stopProgressDialog("");
+                CommonUtil.showTopToast(LoginActivity.this,"");
                 LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
             }
         });
