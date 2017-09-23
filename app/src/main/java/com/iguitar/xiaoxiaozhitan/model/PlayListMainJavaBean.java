@@ -10,17 +10,17 @@ import java.util.ArrayList;
 
 public class PlayListMainJavaBean implements Serializable {
     //播放封面
-    private int videoCover;
+    private String videoCover;
     //专辑名称
     private String coverName;
     //视频集合
     private ArrayList<VideoListJavaBean> videoListJavaBeen;
 
-    public int getVideoCover() {
+    public String getVideoCover() {
         return videoCover;
     }
 
-    public void setVideoCover(int videoCover) {
+    public void setVideoCover(String videoCover) {
         this.videoCover = videoCover;
     }
 

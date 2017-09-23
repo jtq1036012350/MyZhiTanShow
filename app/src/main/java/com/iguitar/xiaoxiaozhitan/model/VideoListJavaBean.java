@@ -9,17 +9,17 @@ import java.io.Serializable;
 
 public class VideoListJavaBean implements Serializable {
     //视频缩略图
-    private int videoCover;
+    private String videoCover;
     //片段名称
     private String coverName;
     //地址
     private String url;
 
-    public int getVideoCover() {
+    public String getVideoCover() {
         return videoCover;
     }
 
-    public void setVideoCover(int videoCover) {
+    public void setVideoCover(String videoCover) {
         this.videoCover = videoCover;
     }
 
