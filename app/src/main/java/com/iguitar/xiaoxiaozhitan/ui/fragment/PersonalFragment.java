@@ -1,10 +1,14 @@
 package com.iguitar.xiaoxiaozhitan.ui.fragment;
 
+import android.Manifest;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,16 +19,30 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.iguitar.xiaoxiaozhitan.R;
+import com.iguitar.xiaoxiaozhitan.api.ApiInerface;
 import com.iguitar.xiaoxiaozhitan.databinding.FragmentPersonalNewBinding;
+import com.iguitar.xiaoxiaozhitan.model.VersionInfo;
 import com.iguitar.xiaoxiaozhitan.ui.adapter.PersonBottomAdapter;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseFragment;
+import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
+import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
+import com.iguitar.xiaoxiaozhitan.utils.DownloadUtil;
+import com.iguitar.xiaoxiaozhitan.utils.LogUtil;
+import com.iguitar.xiaoxiaozhitan.utils.PrompUtil;
+import com.joker.api.Permissions4M;
+import com.joker.api.wrapper.ListenerWrapper;
+import com.joker.api.wrapper.Wrapper;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.util.ArrayList;
 
 import me.iwf.photopicker.utils.MyPhotoUtil;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * 个人中心Fragment
@@ -80,7 +98,12 @@ public class PersonalFragment extends BaseFragment {
         ArrayList<String> myPhotoList = (ArrayList<String>) MyPhotoUtil.getPhotoMap();
         personBottomAdapter = new PersonBottomAdapter(mActivity, myPhotoList.get(0),shareListener);
         binding.lvParallax.setAdapter(personBottomAdapter);
-
+        personBottomAdapter.setOnUpdateClickListener(new PersonBottomAdapter.OnUpdateClickListener() {
+            @Override
+            public void OnUpdate() {
+                onGetVersion();
+            }
+        });
 //        binding.tvFirstQqUnit.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -196,6 +219,87 @@ public class PersonalFragment extends BaseFragment {
 
         }
     };
+
+    private void onDownLoad(VersionInfo versionInfo) {
+        DownloadUtil loadUtil = new DownloadUtil(mActivity, versionInfo.getContent());
+        String url;
+        url = "http://" + CommonUtil.getIP(mActivity) + "/XiaoXiao/Update/XiaoXiaoZhiTan.apk";
+        LogUtil.d("urlInfo", url);
+        loadUtil.StartDownload(url);
+    }
+
+    /**
+     * 查看版本信息
+     */
+    private void onGetVersion() {
+        ApiInerface userBiz = retrofit.create(ApiInerface.class);
+        Call<Object> call = userBiz.getVersionReturn();
+        call.enqueue(new Callback<Object>() {
+            @Override
+            public void onResponse(Call<Object> call, Response<Object> response) {
+                if (response.isSuccessful()) {
+                    CommonUtil.showTopToast(mActivity, "网络连接成功！");
+                    LogUtil.e("infoooo", "normalGet:" + response.body() + "");
+                    Gson gson = new Gson();
+                    final VersionInfo versionInfo = gson.fromJson(response.body().toString(), VersionInfo.class);
+//                    double i= Double.parseDouble(CommonUtil.getAPPVersion(LoginActivity.this));
+                    //版本比对
+                    if (CommonUtil.getCode(mActivity) < Integer.parseInt(versionInfo.getVersion())) {
+                        Permissions4M.get(mActivity)
+                                .requestPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                .requestCodes(ConstantUtil.WRITE_STOERAGE_CODE)
+                                .requestListener(new ListenerWrapper.PermissionRequestListener() {
+                                    @Override
+                                    public void permissionGranted(int code) {
+                                        onDownLoad(versionInfo);
+                                    }
+
+                                    @Override
+                                    public void permissionDenied(int code) {
+                                        CommonUtil.showTopToast(mActivity, "权限获取失败");
+                                    }
+
+                                    @Override
+                                    public void permissionRationale(int code) {
+                                        CommonUtil.showTopToast(mActivity, "权限获取失败");
+                                    }
+                                })
+                                .requestPageType(Permissions4M.PageType.MANAGER_PAGE)
+                                .requestPage(new Wrapper.PermissionPageListener() {
+                                    @Override
+                                    public void pageIntent(final Intent intent) {
+                                        new AlertDialog.Builder(mActivity)
+                                                .setMessage("您好，我们需要您开启读写存储权限申请：\n请点击前往设置页面\n")
+                                                .setPositiveButton("前往设置页面", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        startActivity(intent);
+                                                    }
+                                                })
+                                                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        dialog.dismiss();
+                                                    }
+                                                })
+                                                .show();
+                                    }
+                                })
+                                .request();
+                    }
+                } else {
+                    LogUtil.e("infoooo", "normalGet:" + response.body() + "");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Object> call, Throwable t) {
+                PrompUtil.stopProgressDialog("");
+                CommonUtil.showTopToast(mActivity,"登录失败！");
+                LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
+            }
+        });
+    }
 
 
     @Override

@@ -22,6 +22,7 @@ import com.iguitar.xiaoxiaozhitan.model.VersionInfo;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseActivity;
 import com.iguitar.xiaoxiaozhitan.ui.view.ClearEditText;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
+import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
 import com.iguitar.xiaoxiaozhitan.utils.DownloadUtil;
 import com.iguitar.xiaoxiaozhitan.utils.LogUtil;
 import com.iguitar.xiaoxiaozhitan.utils.MDFiveUtil;
@@ -55,7 +56,6 @@ public class LoginActivity extends BaseActivity {
     private String password;
     private boolean isUpdate;
     private UserInfo loginInfo;
-    private static final int WRITE_STOERAGE_CODE = 10;
     //PDA条目集合
 //    private ArrayList<String> pdaItems;
     //已经被选中的PDA
@@ -270,7 +270,7 @@ public class LoginActivity extends BaseActivity {
                     if (CommonUtil.getCode(LoginActivity.this) < Integer.parseInt(versionInfo.getVersion())) {
                         Permissions4M.get(LoginActivity.this)
                                 .requestPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                                .requestCodes(WRITE_STOERAGE_CODE)
+                                .requestCodes(ConstantUtil.WRITE_STOERAGE_CODE)
                                 .requestListener(new ListenerWrapper.PermissionRequestListener() {
                                     @Override
                                     public void permissionGranted(int code) {

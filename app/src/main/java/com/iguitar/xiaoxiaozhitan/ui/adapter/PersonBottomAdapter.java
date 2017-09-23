@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -40,6 +41,15 @@ public class PersonBottomAdapter extends BaseAdapter {
         this.shareListener = shareListener;
     }
 
+    private  OnUpdateClickListener onUpdateClickListener;
+    public interface OnUpdateClickListener{
+        void OnUpdate();
+    }
+
+    public void setOnUpdateClickListener(OnUpdateClickListener onUpdateClickListener){
+        this.onUpdateClickListener = onUpdateClickListener;
+    }
+
     @Override
     public int getCount() {
         return 1;
@@ -63,19 +73,23 @@ public class PersonBottomAdapter extends BaseAdapter {
             view = View.inflate(context, R.layout.item_bottom_layout, null);
             viewHolder = new ViewHolder();
             viewHolder.iv_user = (ImageView) view.findViewById(R.id.iv_user);
-            viewHolder.tv_first_qq_unit = (TextView) view.findViewById(R.id.tv_first_qq_unit);
-            viewHolder.tv_second_qq_unit = (TextView) view.findViewById(R.id.tv_second_qq_unit);
-            viewHolder.tv_third_qq_unit = (TextView) view.findViewById(R.id.tv_third_qq_unit);
+            viewHolder.ll_qq_first = (LinearLayout) view.findViewById(R.id.ll_qq_first);
+            viewHolder.ll_qq_second = (LinearLayout) view.findViewById(R.id.ll_qq_second);
+            viewHolder.ll_qq_third = (LinearLayout) view.findViewById(R.id.ll_qq_third);
             viewHolder.tv_user_name = (TextView) view.findViewById(R.id.tv_user_name);
-            viewHolder.tv_share = (TextView) view.findViewById(R.id.tv_share);
-            viewHolder.tv_exit = (TextView) view.findViewById(R.id.tv_exit);
+            viewHolder.ll_share = (LinearLayout) view.findViewById(R.id.ll_share);
+            viewHolder.ll_exit = (LinearLayout) view.findViewById(R.id.ll_exit);
+            viewHolder.ll_update = (LinearLayout) view.findViewById(R.id.ll_update);
+            viewHolder.tv_version = (TextView) view.findViewById(R.id.tv_version);
             view.setTag(viewHolder);
         } else {
             view = convertView;
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        viewHolder.tv_exit.setOnClickListener(new View.OnClickListener() {
+        viewHolder.tv_version.setText("版本： "+CommonUtil.getAPPVersion(context));
+
+        viewHolder.ll_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((Activity) context).finish();
@@ -102,7 +116,7 @@ public class PersonBottomAdapter extends BaseAdapter {
             }
         });
 
-        viewHolder.tv_first_qq_unit.setOnClickListener(new View.OnClickListener() {
+        viewHolder.ll_qq_first.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (CommonUtil.joinQQGroup((Activity) context, "eaC2K4rJSE5vb5txpYyIK3rePKByY0jn")) {
@@ -112,7 +126,7 @@ public class PersonBottomAdapter extends BaseAdapter {
                 }
             }
         });
-        viewHolder.tv_second_qq_unit.setOnClickListener(new View.OnClickListener() {
+        viewHolder.ll_qq_second.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (CommonUtil.joinQQGroup((Activity) context, "DTRHxYW05u5SrUah5AJPPKLEzPPEEpQz")) {
@@ -122,7 +136,7 @@ public class PersonBottomAdapter extends BaseAdapter {
                 }
             }
         });
-        viewHolder.tv_third_qq_unit.setOnClickListener(new View.OnClickListener() {
+        viewHolder.ll_qq_third.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (CommonUtil.joinQQGroup((Activity) context, "s5tLhM4zdLjiY-FbEdvBai2wlrcuU3D7")) {
@@ -133,7 +147,7 @@ public class PersonBottomAdapter extends BaseAdapter {
             }
         });
 
-        viewHolder.tv_share.setOnClickListener(new View.OnClickListener() {
+        viewHolder.ll_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 UMImage thumb = new UMImage((Activity) context, R.mipmap.myicon);
@@ -142,6 +156,14 @@ public class PersonBottomAdapter extends BaseAdapter {
                 web.setDescription("欢迎来使用小小指弹");
                 web.setTitle("小小指弹");
                 new ShareAction((Activity) context).withMedia(web).setPlatform(SHARE_MEDIA.QQ).setCallback(shareListener).share();
+            }
+        });
+        viewHolder.ll_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onUpdateClickListener!=null){
+                    onUpdateClickListener.OnUpdate();
+                }
             }
         });
         String url = (String) MyApplication.getIconMap();
@@ -177,11 +199,13 @@ public class PersonBottomAdapter extends BaseAdapter {
 
     static class ViewHolder {
         private ImageView iv_user;
-        private TextView tv_first_qq_unit;
-        private TextView tv_second_qq_unit;
-        private TextView tv_third_qq_unit;
+        private LinearLayout ll_qq_first;
+        private LinearLayout ll_qq_second;
+        private LinearLayout ll_qq_third;
         private TextView tv_user_name;
-        private TextView tv_share;
-        private TextView tv_exit;
+        private LinearLayout ll_share;
+        private LinearLayout ll_exit;
+        private LinearLayout ll_update;
+        private TextView tv_version;
     }
 }

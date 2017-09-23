@@ -7,6 +7,9 @@ import android.Manifest;
  */
 public interface ConstantUtil {
     public static final int FORRESULT = 100;
+    //权限
+    public static final int WRITE_STOERAGE_CODE = 10;
+
     //------------------------------------------------------------地址------------------------------------------------------//
     //店铺地址
     public static final String storeUrl = "https://xxzhitan.taobao.com/";

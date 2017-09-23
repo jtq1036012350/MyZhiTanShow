@@ -38,8 +38,8 @@
         <TextView
             android:id="@+id/tv_press"
             style="@style/TextStyle"
-            android:layout_alignLeft="@+id/textView"
-            android:layout_alignStart="@+id/textView"
+            android:layout_alignLeft="@+id/tv_version"
+            android:layout_alignStart="@+id/tv_version"
             android:layout_below="@+id/tv_user_name"
             android:text="沉迷练琴"/>
 
@@ -62,7 +62,7 @@
             android:text="日渐消瘦"/>
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_version"
             style="@style/TextStyle"
             android:layout_below="@+id/tv_press"
             android:layout_marginLeft="15dp"
@@ -80,49 +80,78 @@
             style="@style/LineStyle"
             android:layout_marginTop="20dp"/>
 
-        <TextView
-            android:id="@+id/tv_first_qq_unit"
-            style="@style/ListPersonal"
-            android:text="交流一群:  422068207"/>
+        <LinearLayout
+            android:id="@+id/ll_qq_first"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <ImageView
+                style="@style/PersonalImageStyle"
+                android:src="@mipmap/qq_party"/>
+
+            <TextView
+                android:id="@+id/tv_first_qq_unit"
+                style="@style/ListPersonal"
+                android:text="交流一群:  422068207"/>
+        </LinearLayout>
 
         <View
             style="@style/LineStyle"/>
 
-        <TextView
-            android:id="@+id/tv_second_qq_unit"
-            style="@style/ListPersonal"
-            android:text="交流二群:  518544404"/>
+        <LinearLayout
+            android:id="@+id/ll_qq_second"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                style="@style/PersonalImageStyle"
+                android:src="@mipmap/qq_party"/>
+
+            <TextView
+                android:id="@+id/tv_second_qq_unit"
+                style="@style/ListPersonal"
+                android:text="交流二群:  518544404"/>
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/pop_select"/>
 
-        <TextView
-            android:id="@+id/tv_third_qq_unit"
-            style="@style/ListPersonal"
-            android:text="交流三群:  607455254"/>
-
-        <View
-            style="@style/LineStyle"/>
-
         <LinearLayout
+            android:id="@+id/ll_qq_third"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
+                style="@style/PersonalImageStyle"
+                android:src="@mipmap/qq_party"/>
+
+            <TextView
+                android:id="@+id/tv_third_qq_unit"
+                style="@style/ListPersonal"
+                android:text="交流三群:  607455254"/>
+        </LinearLayout>
+
+        <View
+            style="@style/LineStyle"/>
+
+        <LinearLayout
+            android:id="@+id/ll_share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                style="@style/PersonalImageStyle"
                 android:src="@mipmap/iv_share"/>
 
             <TextView
                 android:id="@+id/tv_share"
                 style="@style/ListPersonal"
-                android:layout_marginLeft="10dp"
                 android:text="@string/share_app"/>
         </LinearLayout>
 
@@ -130,21 +159,37 @@
             style="@style/LineStyle"/>
 
         <LinearLayout
+            android:id="@+id/ll_update"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
+                style="@style/PersonalImageStyle"
+                android:src="@mipmap/iv_update"/>
+
+            <TextView
+                android:id="@+id/tv_update"
+                style="@style/ListPersonal"
+                android:text="@string/check_for_update"/>
+        </LinearLayout>
+
+        <View
+            style="@style/LineStyle"/>
+
+        <LinearLayout
+            android:id="@+id/ll_exit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                style="@style/PersonalImageStyle"
                 android:src="@mipmap/iv_exit"/>
 
             <TextView
                 android:id="@+id/tv_exit"
                 style="@style/ListPersonal"
-                android:layout_marginLeft="10dp"
                 android:text="@string/exit_login"/>
         </LinearLayout>
 
