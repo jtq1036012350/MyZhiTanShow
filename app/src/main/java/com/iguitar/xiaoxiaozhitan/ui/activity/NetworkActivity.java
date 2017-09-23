@@ -46,7 +46,7 @@ public class NetworkActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_network);
-        ((TextView)findViewById(R.id.tv_top_title)).setText("网络设置");
+        ((TextView) findViewById(R.id.tv_top_title)).setText("网络设置");
         String ipPort = CommonUtil.getIP(this);
 
 
@@ -122,6 +122,7 @@ public class NetworkActivity extends BaseActivity {
      * @param ip ip地址
      */
     private void onTestIP(final String ip) {
+        PrompUtil.startProgressDialog(this, "加载中");
         String url = "http://" + ip + "/XiaoXiao/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
@@ -133,6 +134,7 @@ public class NetworkActivity extends BaseActivity {
         call.enqueue(new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
+                PrompUtil.stopProgressDialog("");
                 if (response.isSuccessful()) {
                     CommonUtil.saveIp(NetworkActivity.this, ipAddress.toString());
                     CommonUtil.saveFirstLogin(NetworkActivity.this, true);

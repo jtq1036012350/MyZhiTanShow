@@ -31,6 +31,7 @@ import com.iguitar.xiaoxiaozhitan.ui.adapter.MyVideoRecyclerViewAdapter;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseFragment;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 import com.iguitar.xiaoxiaozhitan.utils.LogUtil;
+import com.iguitar.xiaoxiaozhitan.utils.PrompUtil;
 
 import java.util.ArrayList;
 import java.util.List;

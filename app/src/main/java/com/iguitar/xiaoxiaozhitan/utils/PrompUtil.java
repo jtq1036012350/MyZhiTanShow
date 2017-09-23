@@ -12,7 +12,11 @@ public class PrompUtil {
 
         if (!((Activity) context).isFinishing()) {
             if (dialog != null)
-                dialog.dismiss();
+                try {
+                    dialog.dismiss();
+                }catch (Exception ex){
+                    dialog = null;
+                }
             dialog = DialogUtil.createLoadingDialog(context, title);
         }
 //        if (!((Activity) context).isFinishing()) {
@@ -25,7 +29,7 @@ public class PrompUtil {
     }
 
     public static void stopProgressDialog(String title) {
-        if (dialog != null)
+        if (dialog != null){}
             dialog.dismiss();
         dialog = null;
     }
