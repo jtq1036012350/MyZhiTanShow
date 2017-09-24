@@ -114,8 +114,10 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
-            MyApplication.putIconMap(data.get("profile_image_url"));
-            MyApplication.putMap("name", data.get(data.get("name")));
+            String url = data.get("profile_image_url");
+            String name = data.get("name");
+            MyApplication.putMap("profile_image_url",data.get("profile_image_url"));
+            MyApplication.putMap("name", data.get("name"));
             startMyActivity(MainActivity.class, null);
             finish();
         }

@@ -166,7 +166,7 @@ public class PersonBottomAdapter extends BaseAdapter {
                 }
             }
         });
-        String url = (String) MyApplication.getIconMap();
+        String url = (String) MyApplication.getMap("profile_image_url");
         ArrayList<String> myPhotoList = (ArrayList<String>) MyPhotoUtil.getPhotoMap();
         if (myPhotoList != null && myPhotoList.size() != 0 && myPhotoList.get(0) != null) {
             Glide.with((Activity) context)
@@ -174,19 +174,13 @@ public class PersonBottomAdapter extends BaseAdapter {
                     .placeholder(R.mipmap.myicon)
                     .dontAnimate()
                     .into(viewHolder.iv_user);
-        } else if (!"".
-
-                equals(url))
-
-        {
+        } else if (!"".equals(url)){
             Glide.with((Activity) context)
                     .load(url)
                     .placeholder(R.mipmap.myicon)
                     .dontAnimate()
                     .into(viewHolder.iv_user);
-        } else
-
-        {
+        } else {
             Glide.with((Activity) context)
                     .load(R.mipmap.myicon)
                     .dontAnimate()

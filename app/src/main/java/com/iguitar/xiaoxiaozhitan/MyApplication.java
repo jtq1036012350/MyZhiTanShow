@@ -54,24 +54,11 @@ public class MyApplication extends Application {
         CrashReport.initCrashReport(context, "b5365217de", false, strategy);
         // 如果通过“AndroidManifest.xml”来配置APP信息，初始化方法如下
         // CrashReport.initCrashReport(context, strategy);
-
+        mCheckMap = new HashMap<>();
     }
 
-
-    public static void putIconMap(String profile_image_url) {
-        mCheckMap = new HashMap<String, String>();
-        mCheckMap.put("profile_image_url", profile_image_url);
-    }
-
-    public static String getIconMap() {
-        if (mCheckMap != null) {
-            return (String) mCheckMap.get("profile_image_url");
-        }
-        return "";
-    }
 
     public static void putMap(Object key,Object value) {
-        mCheckMap = new HashMap<>();
         mCheckMap.put(key, value);
     }
 
