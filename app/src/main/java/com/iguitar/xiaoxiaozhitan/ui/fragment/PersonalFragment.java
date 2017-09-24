@@ -238,7 +238,6 @@ public class PersonalFragment extends BaseFragment {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
                 if (response.isSuccessful()) {
-                    CommonUtil.showTopToast(mActivity, "网络连接成功！");
                     LogUtil.e("infoooo", "normalGet:" + response.body() + "");
                     Gson gson = new Gson();
                     final VersionInfo versionInfo = gson.fromJson(response.body().toString(), VersionInfo.class);
@@ -288,6 +287,7 @@ public class PersonalFragment extends BaseFragment {
                                 .request();
                     }
                 } else {
+                    CommonUtil.showTopToast(mActivity,"当前版本已经是最新版本，无需更新！");
                     LogUtil.e("infoooo", "normalGet:" + response.body() + "");
                 }
             }

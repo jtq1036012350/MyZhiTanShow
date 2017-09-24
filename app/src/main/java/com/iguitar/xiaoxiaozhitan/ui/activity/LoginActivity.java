@@ -56,6 +56,8 @@ public class LoginActivity extends BaseActivity {
     private String password;
     private boolean isUpdate;
     private UserInfo loginInfo;
+    //true : 可以跳转 false：不能跳转
+    private boolean canStartActivity = false;
     //PDA条目集合
 //    private ArrayList<String> pdaItems;
     //已经被选中的PDA
@@ -139,8 +141,11 @@ public class LoginActivity extends BaseActivity {
         binding.relQq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                UMShareAPI.get(LoginActivity.this).getPlatformInfo(LoginActivity.this, SHARE_MEDIA.QQ, umAuthListener);
+                if(canStartActivity){
+                    UMShareAPI.get(LoginActivity.this).getPlatformInfo(LoginActivity.this, SHARE_MEDIA.QQ, umAuthListener);
+                }else{
+                    CommonUtil.showTopToast(LoginActivity.this,"网络配置有误，请检查！");
+                }
             }
         });
         binding.relNetwork.setOnClickListener(new View.OnClickListener() {
@@ -265,6 +270,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
                 PrompUtil.stopProgressDialog("加载中");
+                canStartActivity = true;
                 if (response.isSuccessful()) {
                     CommonUtil.showTopToast(LoginActivity.this, "网络连接成功！");
                     LogUtil.e("infoooo", "normalGet:" + response.body() + "");
@@ -316,6 +322,7 @@ public class LoginActivity extends BaseActivity {
                                 .request();
                     }
                 } else {
+                    canStartActivity = false;
                     LogUtil.e("infoooo", "normalGet:" + response.body() + "");
                 }
             }
@@ -323,6 +330,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
                 PrompUtil.stopProgressDialog("");
+                canStartActivity = false;
                 CommonUtil.showTopToast(LoginActivity.this,"检查更新失败！");
                 LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
             }
@@ -405,25 +413,26 @@ public class LoginActivity extends BaseActivity {
         finish();
     }
 
-    public void onLoginFailure(String message) {
-        if (message.contains("ConnectException")) {
-            CommonUtil.showToast(this, "网络错误，请检查网络连接！");
-        } else if (message.contains("System.Data.Entity.Core")) {
-            CommonUtil.showToast(this, "数据库连接异常，请联系工作人员！");
-        } else {
-            CommonUtil.showToast(this, message);
-        }
-    }
+//    public void onLoginFailure(String message) {
+//        canStartActivity = false;
+//        if (message.contains("ConnectException")) {
+//            CommonUtil.showToast(this, "网络错误，请检查网络连接！");
+//        } else if (message.contains("System.Data.Entity.Core")) {
+//            CommonUtil.showToast(this, "数据库连接异常，请联系工作人员！");
+//        } else {
+//            CommonUtil.showToast(this, message);
+//        }
+//    }
 
-    public void onLoginError(String message) {
-        if (message.contains("ConnectException")) {
-            CommonUtil.showToast(this, "网络错误，请检查网络连接！");
-        } else if (message.contains("System.Data.Entity.Core")) {
-            CommonUtil.showToast(this, "数据库连接异常，请联系工作人员！");
-        } else {
-            CommonUtil.showToast(this, message);
-        }
-    }
+//    public void onLoginError(String message) {
+//        if (message.contains("ConnectException")) {
+//            CommonUtil.showToast(this, "网络错误，请检查网络连接！");
+//        } else if (message.contains("System.Data.Entity.Core")) {
+//            CommonUtil.showToast(this, "数据库连接异常，请联系工作人员！");
+//        } else {
+//            CommonUtil.showToast(this, message);
+//        }
+//    }
 
     /**
      * 保存登陆信息
