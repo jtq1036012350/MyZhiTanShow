@@ -53,6 +53,12 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding.ivCircleVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         CommonUtil.showToast(getApplicationContext(), "登陆成功！");
         //初始化数据
         initDatas();

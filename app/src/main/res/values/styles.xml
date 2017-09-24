@@ -174,7 +174,6 @@
     <!--登录页输入框-->
     <style name="llTopLocationLogin" parent="llTopLocation">
         <item name="android:layout_height">0dp</item>
-
         <item name="android:layout_marginLeft">50dp</item>
         <item name="android:layout_marginRight">50dp</item>
         <item name="android:layout_marginTop">30dp</item>

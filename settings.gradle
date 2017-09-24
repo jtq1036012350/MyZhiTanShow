@@ -1,1 +1,1 @@
-include ':app', ':PhotoPicker', ':topsnackbar'
+include ':app', ':PhotoPicker', ':topsnackbar', ':jcvideoplayer-lib'
