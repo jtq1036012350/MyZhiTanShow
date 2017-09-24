@@ -93,11 +93,12 @@ public class VoiceFragment extends BaseFragment {
         });
     }
 
+
     /**
      * 初始化数据
      */
     private void initDatas() {
-        onDataStrinngs();
+        onGetDataStrinngs();
         voiceUtils = new VoiceUtils(mActivity);
         adapter = new MyVoiceAdapter(mActivity, listData);
         binding.lvVoice.setAdapter(adapter);
@@ -119,7 +120,7 @@ public class VoiceFragment extends BaseFragment {
     /**
      * 查看版本信息
      */
-    private void onDataStrinngs() {
+    private void onGetDataStrinngs() {
         PrompUtil.startProgressDialog(mActivity, "加载中");
         ApiInerface userBiz = retrofit.create(ApiInerface.class);
         Call<List<MyConversionBean>> call = userBiz.getVoiceReturn();

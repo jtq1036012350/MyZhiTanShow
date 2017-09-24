@@ -11,9 +11,9 @@
 
         <LinearLayout
             android:id="@+id/ll_bottom"
-            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
             android:background="@drawable/bottom_bar">
 
             <Button
@@ -34,9 +34,9 @@
             android:layout_above="@id/ll_bottom"
             android:cacheColorHint="@android:color/transparent"
             android:divider="@null"
-            android:dividerHeight="0dp"/>
-            <!--android:stackFromBottom="true"-->
-            <!--android:transcriptMode="alwaysScroll"/>-->
+            android:dividerHeight="0dp"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll"/>
 
 
     </RelativeLayout>
