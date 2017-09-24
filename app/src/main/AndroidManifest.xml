@@ -150,7 +150,9 @@
             android:name=".ui.activity.MyWebViewActivity"
             android:label="WebView">
         </activity>
-        <activity android:name=".ui.activity.SplashActivity">
+        <activity
+            android:name=".ui.activity.SplashActivity"
+            android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
