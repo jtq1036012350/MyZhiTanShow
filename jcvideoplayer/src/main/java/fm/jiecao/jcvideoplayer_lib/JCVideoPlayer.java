@@ -39,8 +39,8 @@ public abstract class JCVideoPlayer extends FrameLayout implements View.OnClickL
 
     public static final String TAG = "JieCaoVideoPlayer";
 
-    public static boolean ACTION_BAR_EXIST = true;
-    public static boolean TOOL_BAR_EXIST = true;
+    public static boolean ACTION_BAR_EXIST = false;
+    public static boolean TOOL_BAR_EXIST = false;
     public static int FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_SENSOR;
     public static int NORMAL_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
     public static boolean SAVE_PROGRESS = true;

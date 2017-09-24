@@ -2,6 +2,7 @@ package com.iguitar.xiaoxiaozhitan.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -11,7 +12,6 @@ import android.widget.TextView;
 
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.ui.adapter.MyRecyclerViewVideoAdapter;
-import com.iguitar.xiaoxiaozhitan.ui.base.BaseActivity;
 
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
@@ -19,7 +19,7 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
  * 视频播放页面
  * Created by Jiang on 17/9/24.
  */
-public class MyVideoActivity extends BaseActivity {
+public class MyVideoActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     MyRecyclerViewVideoAdapter adapterVideoList;
 
@@ -98,6 +98,16 @@ public class MyVideoActivity extends BaseActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * 提供统一的关闭方式
+     * <p>
+     * （另一个Activity）
+     */
+    public void finishMyActivity() {
+        finish();
+        overridePendingTransition(R.anim.push_left_in, R.anim.push_right_out);
     }
 
 }
