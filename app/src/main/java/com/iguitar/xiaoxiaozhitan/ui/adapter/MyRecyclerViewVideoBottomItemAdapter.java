@@ -25,6 +25,15 @@ public class MyRecyclerViewVideoBottomItemAdapter extends RecyclerView.Adapter<R
     private List<VideoBottomBean> videoBottomBeanList;
     private Context context;
     private LayoutInflater inflater;
+    private OnVideoClickListenner onVideoClickListenner;
+
+    public interface OnVideoClickListenner {
+        void OnVideoClickListener();
+    }
+
+    public void setOnVideoClickListenner(OnVideoClickListenner onVideoClickListenner) {
+        this.onVideoClickListenner = onVideoClickListenner;
+    }
 
     public MyRecyclerViewVideoBottomItemAdapter(Context context, List<VideoBottomBean> videoBottomBeanList) {
         this.context = context;
@@ -51,10 +60,20 @@ public class MyRecyclerViewVideoBottomItemAdapter extends RecyclerView.Adapter<R
 
     public class ViewHolderBottomItem extends RecyclerView.ViewHolder {
         private ImageView imageView;
+        private LinearLayout ll_bottom_item;
 
         public ViewHolderBottomItem(View itemView) {
             super(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.fragment_video_bottom_item);
+            ll_bottom_item = (LinearLayout) itemView.findViewById(R.id.ll_bottom_item);
+            ll_bottom_item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onVideoClickListenner != null) {
+                        onVideoClickListenner.OnVideoClickListener();
+                    }
+                }
+            });
         }
 
         public void setData(int position) {

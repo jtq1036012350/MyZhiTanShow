@@ -67,6 +67,7 @@ public class LoginActivity extends BaseActivity {
         ViewUtils.inject(this);
 //        ViewUtil.initSystemBar(this, R.color.colorLoginBlue);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+//        startMyActivity(MyVideoActivity.class,null);
         isUpdate = getIntent().getBooleanExtra("isUpdate", false);
         loginInfo = CommonUtil.getLoginInfo(LoginActivity.this);
 //        pdaItems = new ArrayList<>();
@@ -320,7 +321,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
                 PrompUtil.stopProgressDialog("");
-                CommonUtil.showTopToast(LoginActivity.this,"登录失败！");
+                CommonUtil.showTopToast(LoginActivity.this,"检查更新失败！");
                 LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
             }
         });

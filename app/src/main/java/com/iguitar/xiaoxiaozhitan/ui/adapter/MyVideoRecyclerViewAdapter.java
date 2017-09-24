@@ -2,6 +2,8 @@ package com.iguitar.xiaoxiaozhitan.ui.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -15,6 +17,7 @@ import com.daimajia.slider.library.SliderLayout;
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.model.MainListJavaBean;
 import com.iguitar.xiaoxiaozhitan.model.VideoBottomBean;
+import com.iguitar.xiaoxiaozhitan.ui.activity.MyVideoActivity;
 import com.iguitar.xiaoxiaozhitan.ui.view.MyStaggerGrildLayoutManger;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 
@@ -132,7 +135,27 @@ public class MyVideoRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
             recyclerView.setLayoutManager(new MyStaggerGrildLayoutManger(context, 2, StaggeredGridLayoutManager.VERTICAL));
             recyclerView.setAdapter(myRecyclerViewVideoBottomItemAdapter);
+            myRecyclerViewVideoBottomItemAdapter.setOnVideoClickListenner(new MyRecyclerViewVideoBottomItemAdapter.OnVideoClickListenner() {
+                @Override
+                public void OnVideoClickListener() {
+                    startMyActivity(context, MyVideoActivity.class, null);
+                }
+            });
         }
     }
 
+    /**
+     * 提供统一的启动方式
+     *
+     * @param cls，intent（另一个Activity，intent携带的数据）
+     */
+    public void startMyActivity(Context context, Class<?> cls, Bundle mBundle) {
+        Intent intent = new Intent(context, cls);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        if (mBundle != null) {
+            intent.putExtras(mBundle);
+        }
+        context.startActivity(intent);
+        ((Activity) context).overridePendingTransition(R.anim.push_right_in, R.anim.push_left_out);
+    }
 }

@@ -20,7 +20,7 @@ public interface ApiInerface {
     @GET("Server/VoiceData.txt")
     Call<List<MyConversionBean>> getVoiceReturn();
 
-    @GET("Server/AppVersion.txt")
+    @GET("Update/AppVersion.txt")
     Call<Object> getVersionReturn();
 
     @GET("Server/User.txt")
