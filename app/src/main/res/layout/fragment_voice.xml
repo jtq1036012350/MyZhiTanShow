@@ -26,18 +26,25 @@
                 android:text="点击开始语音识别"/>
         </LinearLayout>
 
-
-        <ListView
-            android:id="@+id/lv_voice"
+        <com.andview.refreshview.XRefreshView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/mRefreshView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/ll_bottom"
-            android:cacheColorHint="@android:color/transparent"
-            android:divider="@null"
-            android:dividerHeight="0dp"
-            android:stackFromBottom="true"
-            android:transcriptMode="alwaysScroll"/>
+            android:background="#fff">
 
+            <ListView
+                android:id="@+id/lv_voice"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/ll_bottom"
+                android:cacheColorHint="@android:color/transparent"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:stackFromBottom="true"
+                android:transcriptMode="alwaysScroll"/>
+        </com.andview.refreshview.XRefreshView>
 
     </RelativeLayout>
 

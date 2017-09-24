@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.andview.refreshview.XRefreshView;
 import com.iguitar.xiaoxiaozhitan.MyApplication;
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.api.ApiInerface;
@@ -91,6 +92,39 @@ public class VoiceFragment extends BaseFragment {
                 voiceUtils.listen(new MyRecognizerDialogListener(listData, binding.lvVoice, adapter, voiceUtils, myConversionBeanList));
             }
         });
+
+        //相关下拉刷新的设置
+        binding.mRefreshView.setPullLoadEnable(false);
+        binding.mRefreshView.setAutoLoadMore(false);
+//        mRefreshView.setAutoRefresh(true);
+
+        binding.mRefreshView.setXRefreshViewListener(new XRefreshView.XRefreshViewListener() {
+            @Override
+            public void onRefresh() {
+                onGetDataStrinngs();
+            }
+
+            @Override
+            public void onRefresh(boolean isPullDown) {
+
+            }
+
+            @Override
+            public void onLoadMore(boolean isSilence) {
+
+            }
+
+            @Override
+            public void onRelease(float direction) {
+
+            }
+
+            @Override
+            public void onHeaderMove(double headerMovePercent, int offsetY) {
+
+            }
+        });
+
     }
 
 
@@ -121,6 +155,7 @@ public class VoiceFragment extends BaseFragment {
      * 查看版本信息
      */
     private void onGetDataStrinngs() {
+        binding.mRefreshView.startRefresh();
         PrompUtil.startProgressDialog(mActivity, "加载中");
         ApiInerface userBiz = retrofit.create(ApiInerface.class);
         Call<List<MyConversionBean>> call = userBiz.getVoiceReturn();
@@ -128,9 +163,11 @@ public class VoiceFragment extends BaseFragment {
             @Override
             public void onResponse(Call<List<MyConversionBean>> call, Response<List<MyConversionBean>> response) {
                 PrompUtil.stopProgressDialog("");
+                binding.mRefreshView.stopRefresh();
                 if (response.isSuccessful()) {
                     LogUtil.e("infoooo", "normalGet:" + response.body() + "");
                     myConversionBeanList = response.body();
+                    adapter.notifyDataSetChanged();;
                 } else {
                     LogUtil.e("infoooo", "normalGet:" + response.body() + "");
                 }
@@ -139,6 +176,7 @@ public class VoiceFragment extends BaseFragment {
             @Override
             public void onFailure(Call<List<MyConversionBean>> call, Throwable t) {
                 PrompUtil.stopProgressDialog("");
+                binding.mRefreshView.stopRefresh();
                 CommonUtil.showTopToast(mActivity, "获取数据失败！");
                 LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
             }
