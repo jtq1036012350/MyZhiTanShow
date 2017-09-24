@@ -206,7 +206,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void onConfig() {
-        startActivity(new Intent(SplashActivity.this, NetworkActivity.class));
+        startMyActivity(GuideActivity.class, null);
         finish();
     }
 
