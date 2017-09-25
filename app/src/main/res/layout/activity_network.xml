@@ -19,6 +19,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@mipmap/login_back"
         android:orientation="vertical">
 
         <include
@@ -31,8 +32,7 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="40dp"
-            />
+            android:layout_marginTop="40dp"/>
 
 
         <TextView
@@ -41,15 +41,12 @@
             android:layout_marginTop="22dp"
             android:gravity="center"
             android:text="@string/app_network"
-            android:textColor="#333333"
+            android:textColor="@color/colorTitleWhite"
             android:textSize="24sp"/>
 
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal">
+            style="@style/llTopLocationLogin"
+            android:layout_height="40dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -57,37 +54,36 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:text="网络地址:"
-                android:textColor="#606060"
-                android:textSize="20sp"/>
+                android:textColor="@color/colorTitleWhite"
+                android:textSize="16sp"/>
+
 
             <com.iguitar.xiaoxiaozhitan.ui.view.ClearEditText
                 android:id="@+id/edit_ip"
-                style="@style/myClearEditTextStyle"
-                android:digits="@string/ip_filter"
-                android:hint="请输入IP地址"
-                android:inputType="numberDecimal"/>
+                style="@style/myClearEditTextLoginStyle"
+                android:hint="请输入IP地址"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal">
+            style="@style/llTopLocationLogin"
+            android:layout_height="40dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:text="    端口号:"
-                android:textColor="#606060"
-                android:textSize="20sp"/>
+                android:layout_marginLeft="25dp"
+                android:textColor="@color/colorTitleWhite"
+                android:text="端口号:"
+                android:textSize="16sp"/>
+
 
             <com.iguitar.xiaoxiaozhitan.ui.view.ClearEditText
                 android:id="@+id/edit_port"
-                style="@style/myClearEditTextStyle"
+                style="@style/myClearEditTextLoginStyle"
                 android:hint="请输入端口号"/>
+
         </LinearLayout>
 
 
@@ -125,8 +121,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:layout_marginTop="50dp">
 
             <Button

@@ -24,8 +24,7 @@
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="25dp"
-            android:layout_weight="2"
-            />
+            android:layout_weight="1.5"/>
 
         <TextView
             style="@style/tittleLogin"
@@ -55,7 +54,7 @@
 
         <LinearLayout
             style="@style/llTopLocationLogin"
-            android:layout_weight="0.7">
+            android:layout_weight="0.5">
 
             <ImageView
                 android:layout_width="19dp"
@@ -74,7 +73,7 @@
 
         <LinearLayout
             style="@style/llTopLocationLogin"
-            android:layout_weight="0.7">
+            android:layout_weight="0.5">
 
             <ImageView
                 android:layout_width="19dp"
@@ -228,6 +227,7 @@
                 android:layout_above="@id/tv_version"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
+                android:layout_marginBottom="10dp"
                 android:visibility="visible">
 
                 <ImageView
@@ -252,7 +252,7 @@
             <RelativeLayout
                 style="@style/rlButtonLoginStyle"
                 android:layout_above="@id/rel_qq"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="50dp">
 
                 <Button
                     android:id="@+id/btn_login"

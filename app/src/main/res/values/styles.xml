@@ -91,7 +91,7 @@
     <!--底部按钮展示（合格，不合格，保存）-->
     <style name="myBottomButton">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_height">50dp</item>
         <item name="android:textColor">@color/colorTitleWhite</item>
         <item name="android:textSize">18sp</item>
         <item name="android:background">@drawable/button_main_selector</item>
@@ -206,7 +206,7 @@
         <item name="android:layout_marginRight">50dp</item>
         <item name="android:layout_marginTop">30dp</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:background">@drawable/view_login_back</item>
+        <item name="android:background">#3F000000</item>
         <item name="android:orientation">horizontal</item>
     </style>
 
