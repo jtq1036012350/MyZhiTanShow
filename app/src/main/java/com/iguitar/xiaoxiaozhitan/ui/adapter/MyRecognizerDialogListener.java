@@ -86,17 +86,17 @@ public class MyRecognizerDialogListener implements RecognizerDialogListener {
 //            }
             boolean findFlag = false;
             if (myConversionBeanList == null || myConversionBeanList.size() == 0) {
-                CommonUtil.showTopToast(context, "获取数据有误，请检查！");
-                return;
-            }
-            for (MyConversionBean myConversionBean : myConversionBeanList) {
-                if (askerText.contains(myConversionBean.getAskString())) {
-                    answerText = myConversionBean.getResponseString();
-                    findFlag = true;
-                    break;
+                findFlag = false;
+                CommonUtil.showTopToast(context, "您的服务可能有点问题，请检查！");
+            } else {
+                for (MyConversionBean myConversionBean : myConversionBeanList) {
+                    if (askerText.contains(myConversionBean.getAskString())) {
+                        answerText = myConversionBean.getResponseString();
+                        findFlag = true;
+                        break;
+                    }
                 }
             }
-
             if (!findFlag) {
                 answerText = "你说啥，听不懂";
             }
