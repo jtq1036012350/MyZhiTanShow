@@ -30,8 +30,8 @@
         <TextView
             style="@style/tittleLogin"
             android:layout_weight="0.6"
-            android:visibility="gone"
-            android:text="@string/app_introduce"/>
+            android:text="@string/app_introduce"
+            android:visibility="gone"/>
 
         <LinearLayout
             style="@style/llTopLocationLogin"
@@ -216,6 +216,11 @@
             android:layout_weight="1.6"
             android:visibility="visible">
 
+            <TextView
+                android:id="@+id/tv_version"
+                style="@style/version_style"
+                android:text="@string/version_name"/>
+
             <LinearLayout
                 android:id="@+id/rel_qq"
                 android:layout_width="wrap_content"
@@ -243,15 +248,11 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_version"
-                style="@style/version_style"
-                android:text="@string/version_name"/>
 
             <RelativeLayout
                 style="@style/rlButtonLoginStyle"
-                android:layout_marginBottom="10dp"
-                android:layout_above="@id/rel_qq">
+                android:layout_above="@id/rel_qq"
+                android:layout_marginBottom="10dp">
 
                 <Button
                     android:id="@+id/btn_login"

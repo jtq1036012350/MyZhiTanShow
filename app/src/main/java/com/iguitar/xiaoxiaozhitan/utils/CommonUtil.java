@@ -105,6 +105,24 @@ public class CommonUtil {
     }
 
     /**
+     * 保存首次登陆
+     */
+    public static void saveFirstGuide(Context context, boolean IsFirstGuide) {
+        SharedPreferences preferences = context.getSharedPreferences("FirstLogin", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = preferences.edit();
+        edit.putBoolean("IsFirstGuide", IsFirstGuide);
+        edit.commit();
+    }
+
+    /**
+     * 是否是首次登陆
+     */
+    public static Boolean IsFirstGuide(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("FirstLogin", Context.MODE_PRIVATE);
+        return preferences.getBoolean("IsFirstGuide", false);
+    }
+
+    /**
      * 保存配置IP信息
      */
     public static void saveIp(Context context, String Ipname) {

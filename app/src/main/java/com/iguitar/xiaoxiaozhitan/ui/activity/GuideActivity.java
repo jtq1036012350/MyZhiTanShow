@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseActivity;
+import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
 
@@ -41,6 +42,7 @@ public class GuideActivity extends BaseActivity {
         mForegroundBanner.setEnterSkipViewIdAndDelegate(R.id.btn_guide_enter, R.id.tv_guide_skip, new BGABanner.GuideDelegate() {
             @Override
             public void onClickEnterOrSkip() {
+                CommonUtil.saveFirstGuide(GuideActivity.this, true);
                 startActivity(new Intent(GuideActivity.this, NetworkActivity.class));
                 finish();
             }

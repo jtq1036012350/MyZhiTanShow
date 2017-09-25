@@ -206,7 +206,11 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void onConfig() {
-        startMyActivity(GuideActivity.class, null);
+        if (!CommonUtil.IsFirstGuide(this)) {
+            startMyActivity(GuideActivity.class, null);
+        } else {
+            startMyActivity(NetworkActivity.class, null);
+        }
         finish();
     }
 
