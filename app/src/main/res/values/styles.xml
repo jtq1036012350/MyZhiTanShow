@@ -134,6 +134,13 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="rlButtonLoginStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginLeft">50dp</item>
+        <item name="android:layout_marginRight">50dp</item>
+    </style>
+
     <!--顶格按钮布局-->
     <style name="myBottomButtonLogin" parent="myBottomButton">
         <item name="android:layout_width">match_parent</item>
