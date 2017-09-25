@@ -89,7 +89,7 @@ public class VoiceFragment extends BaseFragment {
         binding.btnSpesk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                voiceUtils.listen(new MyRecognizerDialogListener(listData, binding.lvVoice, adapter, voiceUtils, myConversionBeanList));
+                voiceUtils.listen(new MyRecognizerDialogListener(mActivity,listData, binding.lvVoice, adapter, voiceUtils, myConversionBeanList));
             }
         });
 

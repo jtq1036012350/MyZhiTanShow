@@ -1,5 +1,6 @@
 package com.iguitar.xiaoxiaozhitan.ui.adapter;
 
+import android.app.Activity;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -10,6 +11,7 @@ import com.iguitar.xiaoxiaozhitan.model.Conversation;
 import com.iguitar.xiaoxiaozhitan.model.MyConversionBean;
 import com.iguitar.xiaoxiaozhitan.model.VoiceBean;
 import com.iguitar.xiaoxiaozhitan.model.VoiceUtils;
+import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 
 import java.util.List;
 
@@ -25,13 +27,15 @@ public class MyRecognizerDialogListener implements RecognizerDialogListener {
     private VoiceUtils voiceUtils;
     private MyVoiceAdapter adapter;
     private List<MyConversionBean> myConversionBeanList;
+    private Activity context;
 
     @Override
     public void onError(SpeechError arg0) {
 
     }
 
-    public MyRecognizerDialogListener(List<Conversation> listData,ListView listView,MyVoiceAdapter adapter,VoiceUtils voiceUtils,List<MyConversionBean> myConversionBeanList) {
+    public MyRecognizerDialogListener(Activity context, List<Conversation> listData, ListView listView, MyVoiceAdapter adapter, VoiceUtils voiceUtils, List<MyConversionBean> myConversionBeanList) {
+        this.context = context;
         this.voiceUtils = voiceUtils;
         this.adapter = adapter;
         this.listView = listView;
@@ -46,7 +50,7 @@ public class MyRecognizerDialogListener implements RecognizerDialogListener {
         VoiceBean voiceBean = gson.fromJson(result, VoiceBean.class);
         List<VoiceBean.WS> ws = voiceBean.ws;
         StringBuilder sb = new StringBuilder();
-        for(int i=0;i<ws.size();i++){
+        for (int i = 0; i < ws.size(); i++) {
             sb.append(ws.get(i).cw.get(0).w);
         }
         String string = sb.toString();
@@ -58,7 +62,7 @@ public class MyRecognizerDialogListener implements RecognizerDialogListener {
     public void onResult(RecognizerResult result, boolean isLast) {
         String processJson = processJson(result.getResultString());
         sb.append(processJson);
-        if(isLast){//是最后一句
+        if (isLast) {//是最后一句
             String askerText = sb.toString();
             // 清空sb，把上一段话清空
             sb = new StringBuilder();
@@ -80,16 +84,20 @@ public class MyRecognizerDialogListener implements RecognizerDialogListener {
 //                answerText = Resources.words[nextInt];
 //                imgId = Resources.imgids[nextInt];
 //            }
-            boolean findFlag =  false;
-            for(MyConversionBean myConversionBean : myConversionBeanList){
-                if(askerText.contains(myConversionBean.getAskString())){
+            boolean findFlag = false;
+            if (myConversionBeanList == null || myConversionBeanList.size() == 0) {
+                CommonUtil.showTopToast(context, "获取数据有误，请检查！");
+                return;
+            }
+            for (MyConversionBean myConversionBean : myConversionBeanList) {
+                if (askerText.contains(myConversionBean.getAskString())) {
                     answerText = myConversionBean.getResponseString();
                     findFlag = true;
                     break;
                 }
             }
 
-            if(!findFlag){
+            if (!findFlag) {
                 answerText = "你说啥，听不懂";
             }
 
