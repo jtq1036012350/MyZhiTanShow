@@ -35,7 +35,7 @@
             android:background="#fff">
 
             <ListView
-                android:background="@mipmap/ic_launcher"
+                android:background="@mipmap/robot_back"
                 android:id="@+id/lv_voice"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
