@@ -3,6 +3,7 @@ package com.iguitar.xiaoxiaozhitan.utils;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,10 @@ import com.iguitar.xiaoxiaozhitan.R;
 public class AlertUtil {
 
     private static Dialog dialog = null;
+    //只有一个按钮的Dialog的回调接口
+    public interface OnShowMessageCallBack {
+        void onPositive();
+    }
 
     public static void startProgressDialog(Context context, String title) {
         if (dialog != null)
@@ -197,4 +202,46 @@ public class AlertUtil {
         });
         dialog.show();
     }
+
+    /**
+     * 弹框提示（只有一条提示信息的弹框）
+     *
+     * @param context
+     * @param title    标题
+     * @param content  内容
+     * @param btn_text 按钮文字
+     * @param callBack 回调
+     */
+    public static void showOneMessageDialog(Context context, String title, String content, String btn_text, final OnShowMessageCallBack callBack) {
+        View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_new_message, null);
+        Button btnSure = (Button) dialogView.findViewById(R.id.btn_sure);
+        Button btnClose = (Button) dialogView.findViewById(R.id.btn_close);
+        TextView tvTitle = (TextView) dialogView.findViewById(R.id.tv_title);
+        TextView tvContent = (TextView) dialogView.findViewById(R.id.tv_content);
+        if (content.contains("ConnectException")) {
+            content = "网络错误，请检查网络连接！";
+        }
+        tvTitle.setText(title);
+        tvContent.setText(content);
+        btnSure.setText(btn_text);
+        tvContent.setMovementMethod(new ScrollingMovementMethod());
+        btnSure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogUtil.dismiss();
+                if (callBack != null) {
+                    callBack.onPositive();
+                }
+            }
+        });
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogUtil.dismiss();
+            }
+        });
+        DialogUtil.createUniversalDialog(context, dialogView);
+    }
+
 }
