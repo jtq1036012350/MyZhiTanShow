@@ -19,4 +19,9 @@
     <string name="share_app">分享APP</string>
     <string name="exit_login">退出登录</string>
     <string name="check_for_update">检查更新</string>
+    <string name="store">商城</string>
+    <string name="study_platform">学习平台</string>
+    <string name="videos">视频</string>
+    <string name="voice">语音</string>
+    <string name="personal_center">个人中心</string>
 </resources>

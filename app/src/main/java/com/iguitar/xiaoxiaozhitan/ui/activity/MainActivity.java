@@ -123,7 +123,7 @@ public class MainActivity extends BaseActivity {
         fragments.add(storeFragment);
         fragments.add(studyPlatformFragment);
         fragments.add(videoFragmentNew);
-        fragments.add(liveFragment);
+//        fragments.add(liveFragment);
         fragments.add(voiceFragment);
         fragments.add(personalFragment);
 
@@ -145,13 +145,13 @@ public class MainActivity extends BaseActivity {
             case 2:
                 initTitle("视频", true);
                 break;
+//            case 3:
+//                initTitle("直播", false);
+//                break;
             case 3:
-                initTitle("直播", false);
-                break;
-            case 4:
                 initTitle("聊天机器人", true);
                 break;
-            case 5:
+            case 4:
                 initTitle("个人中心", false);
                 break;
         }
