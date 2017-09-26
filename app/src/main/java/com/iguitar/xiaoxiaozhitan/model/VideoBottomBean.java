@@ -10,6 +10,16 @@ import java.io.Serializable;
 public class VideoBottomBean implements Serializable {
     //图片URL
     private String imageUrl;
+    //描述
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getImageUrl() {
         return imageUrl;

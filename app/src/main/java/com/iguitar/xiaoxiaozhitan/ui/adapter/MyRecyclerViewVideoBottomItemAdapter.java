@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.iguitar.xiaoxiaozhitan.R;
@@ -60,11 +61,13 @@ public class MyRecyclerViewVideoBottomItemAdapter extends RecyclerView.Adapter<R
 
     public class ViewHolderBottomItem extends RecyclerView.ViewHolder {
         private ImageView imageView;
+        private TextView tv_description;
         private LinearLayout ll_bottom_item;
 
         public ViewHolderBottomItem(View itemView) {
             super(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.fragment_video_bottom_item);
+            tv_description = (TextView) itemView.findViewById(R.id.tv_description);
             ll_bottom_item = (LinearLayout) itemView.findViewById(R.id.ll_bottom_item);
             ll_bottom_item.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -85,6 +88,7 @@ public class MyRecyclerViewVideoBottomItemAdapter extends RecyclerView.Adapter<R
                     .placeholder(R.mipmap.myicon_mini)
                     .dontAnimate()
                     .into(imageView);
+            tv_description.setText(videoBottomBeanList.get(position).getDescription());
         }
     }
 

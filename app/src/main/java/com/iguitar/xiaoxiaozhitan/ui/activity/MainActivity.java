@@ -54,6 +54,7 @@ public class MainActivity extends BaseActivity {
 
     private MessageEvent messageEvent;
 
+
     private int beforePosition = -1;
 
     @Override

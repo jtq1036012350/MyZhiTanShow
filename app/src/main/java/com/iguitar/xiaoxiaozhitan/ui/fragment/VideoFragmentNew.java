@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -49,7 +48,7 @@ import retrofit2.Response;
 public class VideoFragmentNew extends BaseFragment {
     private FragmentVideoNewBinding binding;
     //    private TextView tv_tittle;
-    private ImageButton button;
+//    private ImageButton button;
     //    private ArrayList<String> videoList;
 //    private ArrayList<Integer> videoCover;
     private SliderLayout sliderView;

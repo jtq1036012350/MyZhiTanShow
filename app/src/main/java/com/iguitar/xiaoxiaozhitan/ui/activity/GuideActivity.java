@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.iguitar.xiaoxiaozhitan.R;
+import com.iguitar.xiaoxiaozhitan.model.MessageEvent;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseActivity;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
 
@@ -24,6 +27,14 @@ public class GuideActivity extends BaseActivity {
         initView();
         setListener();
         processLogic();
+    }
+
+    @Subscribe
+    public void onMessageEvent(MessageEvent event) {
+//        Toast.makeText(getActivity(), event.message+"aa", Toast.LENGTH_SHORT).show();
+//        if (2 == event.getIndex()) {
+//            getDataFromServer();
+//        }
     }
 
     private void initView() {
@@ -51,9 +62,9 @@ public class GuideActivity extends BaseActivity {
 
     private void processLogic() {
         // 设置数据源
-        mBackgroundBanner.setData(R.drawable.uoko_guide_background_1, R.drawable.uoko_guide_background_2, R.drawable.uoko_guide_background_3, R.drawable.uoko_guide_background_3, R.drawable.uoko_guide_background_3);
+        mBackgroundBanner.setData(R.drawable.uoko_guide_background_1, R.drawable.uoko_guide_background_2, R.drawable.uoko_guide_background_3);
 
-        mForegroundBanner.setData(R.drawable.uoko_guide_foreground_1, R.drawable.uoko_guide_foreground_2, R.drawable.uoko_guide_foreground_3, R.drawable.uoko_guide_foreground_3, R.drawable.uoko_guide_foreground_3);
+        mForegroundBanner.setData(R.mipmap.guide_00_word, R.mipmap.guide_01_word, R.mipmap.guide_02_word, R.drawable.uoko_guide_foreground_3);
     }
 
     @Override
