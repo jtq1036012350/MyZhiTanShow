@@ -62,9 +62,9 @@ public class GuideActivity extends BaseActivity {
 
     private void processLogic() {
         // 设置数据源
-        mBackgroundBanner.setData(R.drawable.uoko_guide_background_1, R.drawable.uoko_guide_background_2, R.drawable.uoko_guide_background_3);
+        mBackgroundBanner.setData(R.mipmap.guide_00, R.mipmap.guide_01, R.mipmap.guide_02);
 
-        mForegroundBanner.setData(R.mipmap.guide_00_word, R.mipmap.guide_01_word, R.mipmap.guide_02_word, R.drawable.uoko_guide_foreground_3);
+        mForegroundBanner.setData(R.mipmap.guide_00_word, R.mipmap.guide_01_word, R.mipmap.guide_02_word);
     }
 
     @Override
