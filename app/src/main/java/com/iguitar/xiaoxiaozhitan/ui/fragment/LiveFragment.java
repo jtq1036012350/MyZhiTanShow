@@ -11,13 +11,16 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.andview.refreshview.XRefreshView;
-import com.iguitar.xiaoxiaozhitan.ui.activity.MyWebViewActivity;
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.databinding.FragmentLiveBinding;
 import com.iguitar.xiaoxiaozhitan.model.LiveJavaBean;
+import com.iguitar.xiaoxiaozhitan.model.MessageEvent;
+import com.iguitar.xiaoxiaozhitan.ui.activity.MyWebViewActivity;
 import com.iguitar.xiaoxiaozhitan.ui.adapter.FragmentLiveAdapter;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseFragment;
 import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
@@ -55,6 +58,13 @@ public class LiveFragment extends BaseFragment {
 
     }
 
+    @Subscribe
+    public void onMessageEvent(MessageEvent event) {
+//        Toast.makeText(getActivity(), event.message+"aa", Toast.LENGTH_SHORT).show();
+//        if (1 == event.getIndex()) {
+//            getDataFromServer();
+//        }
+    }
     /**
      * 初始化页面
      */

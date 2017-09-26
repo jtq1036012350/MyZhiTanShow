@@ -31,7 +31,7 @@
         <item name="android:textSize">18dp</item>
     </style>
 
-   <style name="PersonalImageStyle">
+    <style name="PersonalImageStyle">
         <item name="android:layout_width">25dp</item>
         <item name="android:layout_height">25dp</item>
         <item name="android:layout_gravity">center_vertical</item>
@@ -226,7 +226,6 @@
         <item name="android:paddingRight">20dp</item>
     </style>
 
-    <!--检品上架：输入框样式-->
     <style name="myClearEditTextStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_gravity">center</item>
@@ -240,6 +239,16 @@
         <item name="android:drawableRight">@drawable/delete_selector</item>
         <item name="android:layout_weight">1</item>
 
+    </style>
+
+    <style name="myRedPointTextStyle">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_gravity">right</item>
+        <item name="android:background">@drawable/bg_red_point_style</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorTitleWhite</item>
+        <item name="android:textSize">10sp</item>
     </style>
 
 </resources>
