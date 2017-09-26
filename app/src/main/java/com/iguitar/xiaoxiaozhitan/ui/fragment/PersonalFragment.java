@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.api.ApiInerface;
 import com.iguitar.xiaoxiaozhitan.databinding.FragmentPersonalNewBinding;
+import com.iguitar.xiaoxiaozhitan.model.MessageEvent;
 import com.iguitar.xiaoxiaozhitan.model.VersionInfo;
 import com.iguitar.xiaoxiaozhitan.ui.adapter.PersonBottomAdapter;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseFragment;
@@ -36,6 +37,8 @@ import com.joker.api.wrapper.ListenerWrapper;
 import com.joker.api.wrapper.Wrapper;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
@@ -68,6 +71,14 @@ public class PersonalFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         lazyLoad();
+    }
+
+    @Subscribe
+    public void onMessageEvent(MessageEvent event) {
+//        Toast.makeText(getActivity(), event.message+"aa", Toast.LENGTH_SHORT).show();
+//        if (1 == event.getIndex()) {
+//            getDataFromServer();
+//        }
     }
 
     /**

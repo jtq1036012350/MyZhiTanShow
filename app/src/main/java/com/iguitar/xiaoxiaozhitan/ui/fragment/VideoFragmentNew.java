@@ -23,6 +23,7 @@ import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.api.ApiInerface;
 import com.iguitar.xiaoxiaozhitan.databinding.FragmentVideoNewBinding;
 import com.iguitar.xiaoxiaozhitan.model.MainListJavaBean;
+import com.iguitar.xiaoxiaozhitan.model.MessageEvent;
 import com.iguitar.xiaoxiaozhitan.model.VideoBottomBean;
 import com.iguitar.xiaoxiaozhitan.ui.activity.PlayListActivity;
 import com.iguitar.xiaoxiaozhitan.ui.activity.VideoActivity;
@@ -30,6 +31,8 @@ import com.iguitar.xiaoxiaozhitan.ui.adapter.MyVideoRecyclerViewAdapter;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseFragment;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 import com.iguitar.xiaoxiaozhitan.utils.LogUtil;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,9 +48,9 @@ import retrofit2.Response;
 
 public class VideoFragmentNew extends BaseFragment {
     private FragmentVideoNewBinding binding;
-//    private TextView tv_tittle;
+    //    private TextView tv_tittle;
     private ImageButton button;
-//    private ArrayList<String> videoList;
+    //    private ArrayList<String> videoList;
 //    private ArrayList<Integer> videoCover;
     private SliderLayout sliderView;
 
@@ -259,10 +262,20 @@ public class VideoFragmentNew extends BaseFragment {
 //        initView();
         if (mainListJavaBeenList == null) {
             getDataFromServer();
-        }else{
+        } else {
             initView();
         }
     }
+
+    // This method will be called when a MessageEvent is posted
+    @Subscribe
+    public void onMessageEvent(MessageEvent event) {
+//        Toast.makeText(getActivity(), event.message+"aa", Toast.LENGTH_SHORT).show();
+        if (2 == event.getIndex()) {
+            getDataFromServer();
+        }
+    }
+
 
     /**
      * 从服务端获取数据

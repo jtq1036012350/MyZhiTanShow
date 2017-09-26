@@ -15,11 +15,14 @@ import android.webkit.WebSettings;
 import com.andview.refreshview.XRefreshView;
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.databinding.FragmentStoreBinding;
+import com.iguitar.xiaoxiaozhitan.model.MessageEvent;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseFragment;
 import com.iguitar.xiaoxiaozhitan.ui.view.MyWebViewClient;
 import com.iguitar.xiaoxiaozhitan.utils.AlertUtil;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
+
+import org.greenrobot.eventbus.Subscribe;
 
 /**
  * 商城Fragment
@@ -55,6 +58,14 @@ public class StoreFragment extends BaseFragment {
         }
     }
 
+
+    @Subscribe
+    public void onMessageEvent(MessageEvent event) {
+//        Toast.makeText(getActivity(), event.message+"aa", Toast.LENGTH_SHORT).show();
+        if (0 == event.getIndex()) {
+            loadUrl();
+        }
+    }
 
     /**
      * 初始化布局

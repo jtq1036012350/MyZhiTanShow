@@ -14,12 +14,15 @@ import com.andview.refreshview.XRefreshView;
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.api.ApiInerface;
 import com.iguitar.xiaoxiaozhitan.databinding.FragmentStudyBinding;
+import com.iguitar.xiaoxiaozhitan.model.MessageEvent;
 import com.iguitar.xiaoxiaozhitan.model.StudyJavaBean;
 import com.iguitar.xiaoxiaozhitan.ui.activity.MyWebViewActivity;
 import com.iguitar.xiaoxiaozhitan.ui.adapter.FragmentStudyAdapter;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseFragment;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 import com.iguitar.xiaoxiaozhitan.utils.LogUtil;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +62,15 @@ public class StudyPlatformFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         lazyLoad();
     }
+
+    @Subscribe
+    public void onMessageEvent(MessageEvent event) {
+//        Toast.makeText(getActivity(), event.message+"aa", Toast.LENGTH_SHORT).show();
+        if (1 == event.getIndex()) {
+            getDataFromServer();
+        }
+    }
+
 
     @Override
     public void onResume() {

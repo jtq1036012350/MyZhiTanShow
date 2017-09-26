@@ -13,6 +13,7 @@ import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.api.ApiInerface;
 import com.iguitar.xiaoxiaozhitan.databinding.FragmentVoiceBinding;
 import com.iguitar.xiaoxiaozhitan.model.Conversation;
+import com.iguitar.xiaoxiaozhitan.model.MessageEvent;
 import com.iguitar.xiaoxiaozhitan.model.MyConversionBean;
 import com.iguitar.xiaoxiaozhitan.model.VoiceUtils;
 import com.iguitar.xiaoxiaozhitan.ui.adapter.MyRecognizerDialogListener;
@@ -21,6 +22,8 @@ import com.iguitar.xiaoxiaozhitan.ui.base.BaseFragment;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 import com.iguitar.xiaoxiaozhitan.utils.LogUtil;
 import com.iguitar.xiaoxiaozhitan.utils.PrompUtil;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +64,16 @@ public class VoiceFragment extends BaseFragment {
             listData = new ArrayList<>();
         }
     }
+
+    // This method will be called when a MessageEvent is posted
+    @Subscribe
+    public void onMessageEvent(MessageEvent event) {
+//        Toast.makeText(getActivity(), event.message+"aa", Toast.LENGTH_SHORT).show();
+        if (4 == event.getIndex()) {
+            onGetDataStrinngs();
+        }
+    }
+
 
     @Nullable
     @Override

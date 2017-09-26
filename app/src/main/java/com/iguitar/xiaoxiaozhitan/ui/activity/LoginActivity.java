@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -16,6 +17,7 @@ import com.iguitar.xiaoxiaozhitan.MyApplication;
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.api.ApiInerface;
 import com.iguitar.xiaoxiaozhitan.databinding.ActivityLoginBinding;
+import com.iguitar.xiaoxiaozhitan.model.MessageEvent;
 import com.iguitar.xiaoxiaozhitan.model.UserInfo;
 import com.iguitar.xiaoxiaozhitan.model.UserReturnBean;
 import com.iguitar.xiaoxiaozhitan.model.VersionInfo;
@@ -35,11 +37,15 @@ import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.iguitar.xiaoxiaozhitan.R.string.login;
 
 
 /**
@@ -118,7 +124,7 @@ public class LoginActivity extends BaseActivity {
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
             String url = data.get("profile_image_url");
             String name = data.get("name");
-            MyApplication.putMap("profile_image_url",data.get("profile_image_url"));
+            MyApplication.putMap("profile_image_url", data.get("profile_image_url"));
             MyApplication.putMap("name", data.get("name"));
             startMyActivity(MainActivity.class, null);
             finish();
@@ -141,10 +147,10 @@ public class LoginActivity extends BaseActivity {
         binding.relQq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(canStartActivity){
+                if (canStartActivity) {
                     UMShareAPI.get(LoginActivity.this).getPlatformInfo(LoginActivity.this, SHARE_MEDIA.QQ, umAuthListener);
-                }else{
-                    CommonUtil.showTopToast(LoginActivity.this,"网络配置有误，请检查！");
+                } else {
+                    CommonUtil.showTopToast(LoginActivity.this, "网络配置有误，请检查！");
                 }
             }
         });
@@ -228,6 +234,12 @@ public class LoginActivity extends BaseActivity {
         loadUtil.StartDownload(url);
     }
 
+    // This method will be called when a MessageEvent is posted
+    @Subscribe
+    public void onMessageEvent(MessageEvent event) {
+        Toast.makeText(this, event.message + login, Toast.LENGTH_SHORT).show();
+    }
+
     private void getLoginInfo() {
 
         UserInfo loginInfo = CommonUtil.getLoginInfo(LoginActivity.this);
@@ -263,7 +275,7 @@ public class LoginActivity extends BaseActivity {
      * 查看版本信息
      */
     private void onGetVersion() {
-        PrompUtil.startProgressDialog(this,"加载中");
+        PrompUtil.startProgressDialog(this, "加载中");
         ApiInerface userBiz = retrofit.create(ApiInerface.class);
         Call<Object> call = userBiz.getVersionReturn();
         call.enqueue(new Callback<Object>() {
@@ -331,7 +343,7 @@ public class LoginActivity extends BaseActivity {
             public void onFailure(Call<Object> call, Throwable t) {
                 PrompUtil.stopProgressDialog("");
                 canStartActivity = false;
-                CommonUtil.showTopToast(LoginActivity.this,"检查更新失败！");
+                CommonUtil.showTopToast(LoginActivity.this, "检查更新失败！");
                 LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
             }
         });
@@ -371,7 +383,7 @@ public class LoginActivity extends BaseActivity {
      * 登录访问
      */
     private void onCheckLogin(final String userName, final String userPass) {
-        PrompUtil.startProgressDialog(this,"加载中");
+        PrompUtil.startProgressDialog(this, "加载中");
         ApiInerface userBiz = retrofit.create(ApiInerface.class);
         Call<UserReturnBean> call = userBiz.getLoginInfo();
         call.enqueue(new Callback<UserReturnBean>() {
@@ -399,7 +411,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onFailure(Call<UserReturnBean> call, Throwable t) {
                 PrompUtil.stopProgressDialog("");
-                CommonUtil.showTopToast(LoginActivity.this,"");
+                CommonUtil.showTopToast(LoginActivity.this, "");
                 LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
             }
         });

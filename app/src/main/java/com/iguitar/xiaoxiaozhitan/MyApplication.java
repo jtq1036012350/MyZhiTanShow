@@ -20,9 +20,10 @@ import me.iwf.photopicker.utils.MyPhotoUtil;
  */
 
 public class MyApplication extends Application {
-    private static Context context;
     private MyPhotoUtil myPhotoUtil;
     public static Map mCheckMap;
+
+    public static Context context;
 
     public static Context getContext() {
         return context;
@@ -57,14 +58,20 @@ public class MyApplication extends Application {
         mCheckMap = new HashMap<>();
     }
 
+    public static Context getMyApplicationContext(Context context) {
+        if (context == null) {
+            context = context.getApplicationContext();
+        }
+        return context;
+    }
 
-    public static void putMap(Object key,Object value) {
+    public static void putMap(Object key, Object value) {
         mCheckMap.put(key, value);
     }
 
     public static Object getMap(Object key) {
         if (mCheckMap != null) {
-            return  mCheckMap.get(key);
+            return mCheckMap.get(key);
         }
         return null;
     }

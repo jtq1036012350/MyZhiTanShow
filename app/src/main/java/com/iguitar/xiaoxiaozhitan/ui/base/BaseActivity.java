@@ -16,6 +16,8 @@ import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
 import com.iguitar.xiaoxiaozhitan.utils.ViewUtil;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,13 +53,14 @@ public class BaseActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         ViewUtil.initSystemBar(this, R.color.colorTitleBlack);
         String ipPortString = CommonUtil.getIP(this);
-        String url = "http://"+ipPortString+"/XiaoXiao/";
+        String url = "http://" + ipPortString + "/XiaoXiao/";
         retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(getOkHttpClient())
                 .build();
         mActivity = this;
+        EventBus.getDefault().register(this);
     }
 
     protected boolean isPermissionGranted(String permissionName, int questCode) {
@@ -326,4 +329,9 @@ public class BaseActivity extends FragmentActivity {
         return httpClientBuilder.build();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
 }

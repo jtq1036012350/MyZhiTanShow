@@ -14,8 +14,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.iguitar.xiaoxiaozhitan.MyApplication;
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.databinding.ActivityMainBinding;
+import com.iguitar.xiaoxiaozhitan.model.MessageEvent;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseActivity;
 import com.iguitar.xiaoxiaozhitan.ui.fragment.LiveFragment;
 import com.iguitar.xiaoxiaozhitan.ui.fragment.PersonalFragment;
@@ -24,6 +26,9 @@ import com.iguitar.xiaoxiaozhitan.ui.fragment.StudyPlatformFragment;
 import com.iguitar.xiaoxiaozhitan.ui.fragment.VideoFragmentNew;
 import com.iguitar.xiaoxiaozhitan.ui.fragment.VoiceFragment;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
@@ -48,6 +53,10 @@ public class MainActivity extends BaseActivity {
     private VoiceFragment voiceFragment;
     private PersonalFragment personalFragment;
 
+    private MessageEvent messageEvent;
+
+    private int beforePosition = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +68,13 @@ public class MainActivity extends BaseActivity {
         //初始化布局
         initViews();
     }
+
+    // This method will be called when a MessageEvent is posted
+    @Subscribe
+    public void onMessageEvent(MessageEvent event) {
+        Toast.makeText(MyApplication.getContext(), event.message + "main", Toast.LENGTH_SHORT).show();
+    }
+
 
     //初始化布局
     private void initViews() {
@@ -90,6 +106,7 @@ public class MainActivity extends BaseActivity {
 
     //初始化数据
     private void initDatas() {
+        messageEvent = new MessageEvent();
         tv_tittle = (TextView) findViewById(R.id.tv_top_title);
         rl_title = (RelativeLayout) findViewById(R.id.rl_title);
         button = (ImageButton) findViewById(R.id.btn_back);
@@ -184,6 +201,14 @@ public class MainActivity extends BaseActivity {
 //        } else {
 //            binding.civVideo.setImageResource(R.mipmap.video_off);
 //        }
+
+        if (beforePosition != -1) {
+            if (beforePosition == index) {
+                messageEvent.setIndex(index);
+                messageEvent.setMessage("");
+                EventBus.getDefault().post(messageEvent);
+            }
+        }
         int childCount = binding.mainBottomeSwitcherContainer.getChildCount();
         for (int i = 0; i < childCount; i++) {
             if (i == index) {
@@ -192,6 +217,7 @@ public class MainActivity extends BaseActivity {
                 setEnable(binding.mainBottomeSwitcherContainer.getChildAt(i), true);
             }
         }
+        beforePosition = index;
     }
 
 
@@ -203,7 +229,11 @@ public class MainActivity extends BaseActivity {
      * @param b
      */
     private void setEnable(View item, boolean b) {
-        item.setEnabled(b);
+        if (!(item instanceof FrameLayout)) {
+            item.setEnabled(b);
+        } else {
+            item.setEnabled(true);
+        }
         if (item instanceof ViewGroup) {
             int childCount = ((ViewGroup) item).getChildCount();
             for (int i = 0; i < childCount; i++) {

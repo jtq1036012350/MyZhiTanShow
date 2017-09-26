@@ -10,6 +10,8 @@ import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
 
+import org.greenrobot.eventbus.EventBus;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -38,6 +40,7 @@ public abstract class BaseFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(getOkHttpClient())
                 .build();
+        EventBus.getDefault().register(this);
     }
 
 
@@ -149,4 +152,9 @@ public abstract class BaseFragment extends Fragment {
         return httpClientBuilder.build();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().register(this);
+    }
 }
