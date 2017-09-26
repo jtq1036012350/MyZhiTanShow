@@ -14,7 +14,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.iguitar.xiaoxiaozhitan.MyApplication;
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.databinding.ActivityMainBinding;
 import com.iguitar.xiaoxiaozhitan.model.MessageEvent;
@@ -72,7 +71,7 @@ public class MainActivity extends BaseActivity {
     // This method will be called when a MessageEvent is posted
     @Subscribe
     public void onMessageEvent(MessageEvent event) {
-        Toast.makeText(MyApplication.getContext(), event.message + "main", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MyApplication.getContext(), event.message + "main", Toast.LENGTH_SHORT).show();
     }
 
 
