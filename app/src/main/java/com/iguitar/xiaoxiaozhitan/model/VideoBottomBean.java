@@ -1,6 +1,7 @@
 package com.iguitar.xiaoxiaozhitan.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 视频页面底栏数据JavaBean
@@ -12,6 +13,16 @@ public class VideoBottomBean implements Serializable {
     private String imageUrl;
     //描述
     private String description;
+
+    private List<VideoUrls> videoUrlsList;
+
+    public List<VideoUrls> getVideoUrlsList() {
+        return videoUrlsList;
+    }
+
+    public void setVideoUrlsList(List<VideoUrls> videoUrlsList) {
+        this.videoUrlsList = videoUrlsList;
+    }
 
     public String getDescription() {
         return description;

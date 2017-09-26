@@ -29,7 +29,7 @@ public class MyRecyclerViewVideoBottomItemAdapter extends RecyclerView.Adapter<R
     private OnVideoClickListenner onVideoClickListenner;
 
     public interface OnVideoClickListenner {
-        void OnVideoClickListener();
+        void OnVideoClickListener(int position);
     }
 
     public void setOnVideoClickListenner(OnVideoClickListenner onVideoClickListenner) {
@@ -69,17 +69,19 @@ public class MyRecyclerViewVideoBottomItemAdapter extends RecyclerView.Adapter<R
             imageView = (ImageView) itemView.findViewById(R.id.fragment_video_bottom_item);
             tv_description = (TextView) itemView.findViewById(R.id.tv_description);
             ll_bottom_item = (LinearLayout) itemView.findViewById(R.id.ll_bottom_item);
+
+        }
+
+        public void setData(final int position) {
             ll_bottom_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (onVideoClickListenner != null) {
-                        onVideoClickListenner.OnVideoClickListener();
+                        onVideoClickListenner.OnVideoClickListener(position);
                     }
                 }
             });
-        }
 
-        public void setData(int position) {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(CommonUtil.getDisplayWidth((Activity) context) / 2, CommonUtil.getDisplayHeight((Activity) context) / 4 - 40);
             params.setMargins(10, 10, 10, 0);
             imageView.setLayoutParams(params);

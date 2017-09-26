@@ -33,7 +33,6 @@ import com.iguitar.xiaoxiaozhitan.utils.LogUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -59,7 +58,7 @@ public class VideoFragmentNew extends BaseFragment {
     //底部主要的条目信息集合
     private List<VideoBottomBean> bottomListJavaBeanList;
 
-    private ArrayList<Integer> bottomImageUrls;
+//    private ArrayList<Integer> bottomImageUrls;
 
     @Nullable
     @Override

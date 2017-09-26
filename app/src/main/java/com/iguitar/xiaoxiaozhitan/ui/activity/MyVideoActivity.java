@@ -11,7 +11,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.iguitar.xiaoxiaozhitan.R;
+import com.iguitar.xiaoxiaozhitan.model.VideoUrls;
 import com.iguitar.xiaoxiaozhitan.ui.adapter.MyRecyclerViewVideoAdapter;
+
+import java.util.List;
 
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
@@ -20,12 +23,13 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
  * Created by Jiang on 17/9/24.
  */
 public class MyVideoActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
-    MyRecyclerViewVideoAdapter adapterVideoList;
+    private RecyclerView recyclerView;
+    private MyRecyclerViewVideoAdapter adapterVideoList;
 
     private TextView tv_tittle;
     private ImageButton button;
 
+    private List<VideoUrls> videoUrlsList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,7 +40,7 @@ public class MyVideoActivity extends AppCompatActivity {
 //        getSupportActionBar().setDisplayUseLogoEnabled(false);
 //        getSupportActionBar().setTitle("NormalRecyclerView");
         setContentView(R.layout.activity_video_content);
-
+        videoUrlsList = (List<VideoUrls>) getIntent().getSerializableExtra("videoUrls");
         initViews();
     }
 
@@ -56,7 +60,7 @@ public class MyVideoActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapterVideoList = new MyRecyclerViewVideoAdapter(this);
+        adapterVideoList = new MyRecyclerViewVideoAdapter(this,videoUrlsList);
         recyclerView.setAdapter(adapterVideoList);
         recyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
             @Override

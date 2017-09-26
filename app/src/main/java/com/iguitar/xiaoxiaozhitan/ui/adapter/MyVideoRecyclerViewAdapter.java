@@ -21,6 +21,7 @@ import com.iguitar.xiaoxiaozhitan.ui.activity.MyVideoActivity;
 import com.iguitar.xiaoxiaozhitan.ui.view.MyStaggerGrildLayoutManger;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -137,8 +138,14 @@ public class MyVideoRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             recyclerView.setAdapter(myRecyclerViewVideoBottomItemAdapter);
             myRecyclerViewVideoBottomItemAdapter.setOnVideoClickListenner(new MyRecyclerViewVideoBottomItemAdapter.OnVideoClickListenner() {
                 @Override
-                public void OnVideoClickListener() {
-                    startMyActivity(context, MyVideoActivity.class, null);
+                public void OnVideoClickListener(int position) {
+                    if(bottomListJavaBeanList.get(position).getVideoUrlsList()==null||bottomListJavaBeanList.get(position).getVideoUrlsList().size() == 0){
+                        CommonUtil.showTopToast((Activity) context,"视频数据有误，请检查！");
+                        return;
+                    }
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("videoUrls", (Serializable) bottomListJavaBeanList.get(position).getVideoUrlsList());
+                    startMyActivity(context, MyVideoActivity.class, bundle);
                 }
             });
         }
