@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,8 +14,7 @@ import com.iguitar.xiaoxiaozhitan.ui.view.MyDialog;
 
 public class DialogUtil {
 
-    private static MyDialog myDialog;
-    private static Dialog dialog;
+    private static MyDialog dialog;
 
     /**
      * 得到自定义的progressDialog
@@ -26,6 +24,7 @@ public class DialogUtil {
      * @return
      */
     public static Dialog createLoadingDialog(Context context, String msg) {
+
         LayoutInflater inflater = LayoutInflater.from(context);
         View v = inflater.inflate(R.layout.dialog_loading, null);// 得到加载view
         LinearLayout layout = (LinearLayout) v.findViewById(R.id.dialog_loading_view);// 加载布局
@@ -44,34 +43,25 @@ public class DialogUtil {
 
     // 通用
     public static MyDialog createUniversalDialog(Context context, View layout) {
-        if (myDialog != null) {
-            myDialog.dismiss();
+        if (((Activity) context).isFinishing()) {
+            return null;
         }
-        myDialog = new MyDialog(context, layout, R.style.mydialog,
-                MyDialog.CENTER, MyDialog.WRAP_CONTENT, MyDialog.WRAP_CONTENT);
-        myDialog.show();
+        if (dialog == null) {
+            dialog = new MyDialog(context, layout, R.style.mydialog,
+                    MyDialog.CENTER, MyDialog.WRAP_CONTENT, MyDialog.WRAP_CONTENT);
+        } else {
+            dialog.setContentView(layout);
+        }
+        dialog.show();
 
-        return myDialog;
+        return dialog;
     }
 
     public static void dismiss() {
-        if (myDialog != null && myDialog.isShowing()) {
-            myDialog.dismiss();
-            myDialog = null;
-        }
-    }
-
-    public static Dialog createDialog(Context context, Activity activity, View view, int styleId) {
-        if (dialog != null) {
+        if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
+            dialog = null;
         }
-        dialog = new Dialog(activity, styleId);
-        dialog.setCancelable(true);
-        dialog.setContentView(view);
-        WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
-        lp.width = (int) (DeviceUtil.getMetricsWidth(context) - 80); // 设置宽度
-        dialog.getWindow().setAttributes(lp);
-        return dialog;
     }
 
 }
