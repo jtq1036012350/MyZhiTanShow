@@ -77,11 +77,12 @@ public class MyRecyclerViewVideoBottomItemAdapter extends RecyclerView.Adapter<R
         }
 
         public void setData(int position) {
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(CommonUtil.getDisplayWidth((Activity) context) / 2, CommonUtil.getDisplayHeight((Activity) context) / 4);
-            params.setMargins(10, 10, 10, 10);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(CommonUtil.getDisplayWidth((Activity) context) / 2, CommonUtil.getDisplayHeight((Activity) context) / 4 - 40);
+            params.setMargins(10, 10, 10, 0);
             imageView.setLayoutParams(params);
             Glide.with(context)
                     .load(videoBottomBeanList.get(position).getImageUrl())
+                    .placeholder(R.mipmap.myicon_mini)
                     .dontAnimate()
                     .into(imageView);
         }

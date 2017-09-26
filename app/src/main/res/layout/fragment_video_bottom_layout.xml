@@ -3,12 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_bottom_item"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/fragment_video_bottom_item"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:src="@mipmap/myicon_mini"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:src="@mipmap/myicon"/>
+        android:text="我是说明"/>
 </LinearLayout>
+
