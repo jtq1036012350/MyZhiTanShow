@@ -10,5 +10,6 @@
     <color name="colorBlue">#3171B9</color>
     <color name="colorBlueFont">#4375B5</color>
     <color name="pop_select">#77000000</color>
+    <color name="colorRed">#FF0000</color>
 
 </resources>
