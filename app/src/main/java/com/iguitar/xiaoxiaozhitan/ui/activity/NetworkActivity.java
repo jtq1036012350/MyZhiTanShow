@@ -7,11 +7,13 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.api.ApiInerface;
 import com.iguitar.xiaoxiaozhitan.databinding.ActivityNetworkBinding;
+import com.iguitar.xiaoxiaozhitan.model.MessageEvent;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseActivity;
 import com.iguitar.xiaoxiaozhitan.ui.view.ClearEditText;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
@@ -19,11 +21,15 @@ import com.iguitar.xiaoxiaozhitan.utils.LogUtil;
 import com.iguitar.xiaoxiaozhitan.utils.PrompUtil;
 import com.iguitar.xiaoxiaozhitan.utils.StringUtils;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.iguitar.xiaoxiaozhitan.R.string.login;
 
 
 /**
@@ -116,6 +122,11 @@ public class NetworkActivity extends BaseActivity {
         });
     }
 
+    // This method will be called when a MessageEvent is posted
+    @Subscribe
+    public void onMessageEvent(MessageEvent event) {
+        Toast.makeText(this, event.message + login, Toast.LENGTH_SHORT).show();
+    }
     /**
      * 网络测试
      *

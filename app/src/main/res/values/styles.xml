@@ -251,4 +251,41 @@
         <item name="android:textSize">10sp</item>
     </style>
 
+    <!--dialog的叉号按钮-->
+    <style name="dialog_finish">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_gravity">right</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:background">@mipmap/dialog_close</item>
+        <item name="android:padding">20dp</item>
+    </style>
+
+    <!--dialog顶部的文字-->
+    <style name="dialog_top_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:textColor">@color/colorLightBlack</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <!--dialog顶部的内容文字-->
+    <style name="dialog_top_content">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginTop">60dp</item>
+        <item name="android:textColor">@color/colorLightBlack</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:maxLines">100</item>
+    </style>
+
 </resources>
