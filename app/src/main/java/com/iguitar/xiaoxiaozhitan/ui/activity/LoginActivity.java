@@ -237,7 +237,7 @@ public class LoginActivity extends BaseActivity {
     // This method will be called when a MessageEvent is posted
     @Subscribe
     public void onMessageEvent(MessageEvent event) {
-        Toast.makeText(this, event.message + login, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, event.message + login, Toast.LENGTH_SHORT).show();
     }
 
     private void getLoginInfo() {

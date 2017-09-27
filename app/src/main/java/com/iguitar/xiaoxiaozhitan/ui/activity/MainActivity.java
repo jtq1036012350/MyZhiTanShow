@@ -54,8 +54,11 @@ public class MainActivity extends BaseActivity {
 
     private MessageEvent messageEvent;
 
+    private Fragment fragment;
+    private FragmentManager fragmentManager ;
+    private FragmentTransaction fragmentTransaction ;
 
-    private int beforePosition = -1;
+//    private int beforePosition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,9 +159,9 @@ public class MainActivity extends BaseActivity {
                 initTitle("个人中心", false);
                 break;
         }
-        Fragment fragment = fragments.get(index);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager
+        fragment = fragments.get(index);
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager
                 .beginTransaction();
         if (current_fragment == null) {
             fragmentTransaction.add(R.id.main_fragment_container, fragment).commit();
@@ -176,6 +179,10 @@ public class MainActivity extends BaseActivity {
                         .commit();
             }
             current_fragment = fragment;
+        }else{
+            messageEvent.setIndex(index);
+            messageEvent.setMessage("");
+            EventBus.getDefault().post(messageEvent);
         }
 
     }
@@ -202,13 +209,13 @@ public class MainActivity extends BaseActivity {
 //            binding.civVideo.setImageResource(R.mipmap.video_off);
 //        }
 
-        if (beforePosition != -1) {
-            if (beforePosition == index) {
-                messageEvent.setIndex(index);
-                messageEvent.setMessage("");
-                EventBus.getDefault().post(messageEvent);
-            }
-        }
+//        if (beforePosition != -1) {
+//            if (beforePosition == index) {
+//                messageEvent.setIndex(index);
+//                messageEvent.setMessage("");
+//                EventBus.getDefault().post(messageEvent);
+//            }
+//        }
         int childCount = binding.mainBottomeSwitcherContainer.getChildCount();
         for (int i = 0; i < childCount; i++) {
             if (i == index) {
@@ -217,7 +224,7 @@ public class MainActivity extends BaseActivity {
                 setEnable(binding.mainBottomeSwitcherContainer.getChildAt(i), true);
             }
         }
-        beforePosition = index;
+//        beforePosition = index;
     }
 
 
