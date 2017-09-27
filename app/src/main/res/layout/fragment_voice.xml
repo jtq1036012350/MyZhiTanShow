@@ -12,7 +12,7 @@
         <LinearLayout
             android:id="@+id/ll_bottom"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="75dp"
             android:layout_alignParentBottom="true"
             android:background="@drawable/bottom_bar">
 
@@ -35,11 +35,11 @@
             android:background="#fff">
 
             <ListView
-                android:background="@mipmap/robot_back"
                 android:id="@+id/lv_voice"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@id/ll_bottom"
+                android:background="@mipmap/robot_back"
                 android:cacheColorHint="@android:color/transparent"
                 android:divider="@null"
                 android:dividerHeight="0dp"
