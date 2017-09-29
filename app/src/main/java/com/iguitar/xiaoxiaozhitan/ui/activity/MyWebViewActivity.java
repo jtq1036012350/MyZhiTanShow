@@ -15,11 +15,14 @@ import android.widget.TextView;
 import com.andview.refreshview.XRefreshView;
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.databinding.ActivityWebviewLayoutBinding;
+import com.iguitar.xiaoxiaozhitan.model.MessageEvent;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseActivity;
 import com.iguitar.xiaoxiaozhitan.ui.view.MyWebViewClient;
 import com.iguitar.xiaoxiaozhitan.utils.AlertUtil;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
+
+import org.greenrobot.eventbus.Subscribe;
 
 /**
  * WebViewActivity
@@ -39,6 +42,11 @@ public class MyWebViewActivity extends BaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_webview_layout);
         initDatas();
         initViews();
+    }
+
+    @Subscribe
+    public void onMessageEvent(MessageEvent event) {
+//        Toast.makeText(MyApplication.getContext(), event.message + "main", Toast.LENGTH_SHORT).show();
     }
 
     private void initDatas() {
