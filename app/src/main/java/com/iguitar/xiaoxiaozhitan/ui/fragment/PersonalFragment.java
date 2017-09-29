@@ -107,7 +107,7 @@ public class PersonalFragment extends BaseFragment {
         });
 
         ArrayList<String> myPhotoList = (ArrayList<String>) MyPhotoUtil.getPhotoMap();
-        personBottomAdapter = new PersonBottomAdapter(mActivity, myPhotoList.get(0),shareListener);
+        personBottomAdapter = new PersonBottomAdapter(mActivity, myPhotoList.get(0), shareListener);
         binding.lvParallax.setAdapter(personBottomAdapter);
         personBottomAdapter.setOnUpdateClickListener(new PersonBottomAdapter.OnUpdateClickListener() {
             @Override
@@ -296,9 +296,12 @@ public class PersonalFragment extends BaseFragment {
                                     }
                                 })
                                 .request();
+                    } else {
+                        CommonUtil.showTopToast(mActivity, "当前版本已经是最新版本，无需更新！");
+                        LogUtil.e("infoooo", "normalGet:" + response.body() + "");
                     }
                 } else {
-                    CommonUtil.showTopToast(mActivity,"当前版本已经是最新版本，无需更新！");
+                    CommonUtil.showTopToast(mActivity, "检查更新失败！");
                     LogUtil.e("infoooo", "normalGet:" + response.body() + "");
                 }
             }
@@ -306,7 +309,7 @@ public class PersonalFragment extends BaseFragment {
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
                 PrompUtil.stopProgressDialog("");
-                CommonUtil.showTopToast(mActivity,"登录失败！");
+                CommonUtil.showTopToast(mActivity, "检查更新失败！");
                 LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
             }
         });

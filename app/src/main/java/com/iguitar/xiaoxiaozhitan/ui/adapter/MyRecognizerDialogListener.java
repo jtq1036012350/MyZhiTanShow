@@ -98,7 +98,7 @@ public class MyRecognizerDialogListener implements RecognizerDialogListener {
                 }
             }
             if (!findFlag) {
-                answerText = "你说啥，听不懂";
+                answerText = "你好，需要帮助请呼叫机器人。（请说 呼叫机器人！！！！）";
             }
 
             Conversation answer = new Conversation(answerText, false, imgId);
