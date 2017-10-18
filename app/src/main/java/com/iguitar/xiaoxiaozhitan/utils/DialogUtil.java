@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,7 +18,7 @@ public class DialogUtil {
 
     private static MyDialog myDialog;
     private static Dialog dialog;
-
+    private static View layoutOut;
     /**
      * 得到自定义的progressDialog
      *
@@ -48,6 +49,7 @@ public class DialogUtil {
             return null;
         }
         if (dialog == null) {
+            layoutOut = layout;
             myDialog = new MyDialog(context, layout, R.style.mydialog,
                     MyDialog.CENTER, MyDialog.WRAP_CONTENT, MyDialog.WRAP_CONTENT);
         } else {
@@ -67,7 +69,10 @@ public class DialogUtil {
 
     public static Dialog createDialog(Context context, Activity activity, View view, int styleId) {
         if (dialog != null) {
+            ((ViewGroup) layoutOut.getParent()).removeView(layoutOut);
+            layoutOut = null;
             dialog.dismiss();
+            dialog = null;
         }
         dialog = new Dialog(activity, styleId);
         dialog.setCancelable(true);
