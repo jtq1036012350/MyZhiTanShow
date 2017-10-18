@@ -19,6 +19,7 @@ public class DialogUtil {
     private static MyDialog myDialog;
     private static Dialog dialog;
     private static View layoutOut;
+
     /**
      * 得到自定义的progressDialog
      *
@@ -63,16 +64,17 @@ public class DialogUtil {
     public static void dismiss() {
         if (myDialog != null && myDialog.isShowing()) {
             myDialog.dismiss();
+            if (layoutOut != null) {
+                ((ViewGroup) layoutOut.getParent()).removeView(layoutOut);
+                layoutOut = null;
+            }
             myDialog = null;
         }
     }
 
     public static Dialog createDialog(Context context, Activity activity, View view, int styleId) {
         if (dialog != null) {
-            ((ViewGroup) layoutOut.getParent()).removeView(layoutOut);
-            layoutOut = null;
             dialog.dismiss();
-            dialog = null;
         }
         dialog = new Dialog(activity, styleId);
         dialog.setCancelable(true);
