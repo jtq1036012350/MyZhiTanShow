@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.iguitar.xiaoxiaozhitan.R;
+import com.iguitar.xiaoxiaozhitan.ui.base.BaseActivity;
 import com.iguitar.xiaoxiaozhitan.ui.view.MyDialog;
 
 
@@ -50,13 +51,23 @@ public class DialogUtil {
             return null;
         }
         if (dialog == null) {
-            layoutOut = layout;
-            myDialog = new MyDialog(context, layout, R.style.mydialog,
-                    MyDialog.CENTER, MyDialog.WRAP_CONTENT, MyDialog.WRAP_CONTENT);
+            try {
+                layoutOut = layout;
+                dialog = new MyDialog(context, layout, R.style.mydialog,
+                        MyDialog.CENTER, MyDialog.WRAP_CONTENT, MyDialog.WRAP_CONTENT);
+            } catch (Exception ex) {
+                LogUtil.d("error", ex.toString());
+            }
         } else {
-            myDialog.setContentView(layout);
+            dialog.setContentView(layout);
         }
-        myDialog.show();
+        try {
+            if (!((BaseActivity) context).isFinishing()) {
+                dialog.show();
+            }
+        } catch (Exception ex) {
+            LogUtil.d("error", ex.toString());
+        }
 
         return myDialog;
     }
