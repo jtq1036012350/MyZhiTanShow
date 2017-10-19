@@ -65,7 +65,9 @@ public class DialogUtil {
         if (myDialog != null && myDialog.isShowing()) {
             myDialog.dismiss();
             if (layoutOut != null) {
-                ((ViewGroup) layoutOut.getParent()).removeView(layoutOut);
+                if (layoutOut.getParent() != null) {
+                    ((ViewGroup) layoutOut.getParent()).removeView(layoutOut);
+                }
                 layoutOut = null;
             }
             myDialog = null;
