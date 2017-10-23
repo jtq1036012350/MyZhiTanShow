@@ -1,17 +1,14 @@
 package com.iguitar.xiaoxiaozhitan.utils;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Environment;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.KeyEvent;
 
+import com.iguitar.xiaoxiaozhitan.ui.view.MyProgressDialog;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.HttpHandler;
@@ -27,7 +24,8 @@ import java.io.File;
 public class DownloadUtil {
     private static final String BASE_PATH = Environment.getExternalStorageDirectory().getPath() + "/XiaoXiaoZhiTan.apk";
     private Activity activity;
-    private ProgressDialog progressDialog;
+    private MyProgressDialog progressDialog;
+//    private ProgressDialog progressDialog;
     private HttpHandler downhandler;
     private File file;
     private String updateContent;
@@ -38,58 +36,47 @@ public class DownloadUtil {
     }
 
     public void StartDownload(String url) {
-
         if (TextUtils.isEmpty(url)) {
 //            Toast.makeText(activity, "暂无下载链接", Toast.LENGTH_SHORT).show();
             CommonUtil.showToast(activity, "暂无下载链接");
             return;
         }
-        progressDialog = new ProgressDialog(activity);
         file = new File(BASE_PATH);
         if (file.exists()) {
             file.delete();
         }
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog = new MyProgressDialog(activity);
         progressDialog.setTitle("更新提示");
-        progressDialog.setMessage("正在下载···");
-        progressDialog.setProgressNumberFormat("%1d kb/%2d kb");
-        progressDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    return true;
-                }
-                return false;
-            }
-        });
+        if (TextUtils.isEmpty(updateContent)) {
+            progressDialog.setMessage("正在下载...");
+        } else {
+            progressDialog.setMessage(updateContent);
+        }
         progressDialog.show();
         HttpUtils http = new HttpUtils();
-        downhandler = http.download(url, BASE_PATH, true, false, new RequestCallBack<File>() {
-            @Override
-            public void onStart() {
-
-            }
-
+        /**
+         第一个参数：网络下载位置
+         第二个参数：下载保存位置
+         第三个参数：如果目标文件存在，接着未完成的部分继续下载。服务器不支持RANGE时将从新下载。
+         第四个参数：如果从请求返回信息中获取到文件名，下载完成后自动重命名。
+         第五个参数：下载的监听
+         */
+        http.download(url, BASE_PATH, true, false, new RequestCallBack<File>() {
             @Override
             public void onLoading(long total, long current, boolean isUploading) {
-                progressDialog.setMax((int) (total / 1000));
-                progressDialog.setProgress((int) (current / 1000));
+                progressDialog.setMax((int) total);
+                progressDialog.setProgress((int) current);
             }
 
             @Override
             public void onSuccess(ResponseInfo<File> responseInfo) {
-//                Toast.makeText(activity, "下载成功", Toast.LENGTH_SHORT).show();
-                CommonUtil.showToast(activity.getApplicationContext(), "下载成功");
                 showUpdataDialog();
                 progressDialog.dismiss();
             }
 
             @Override
             public void onFailure(HttpException error, String msg) {
-                Log.e("Tag", msg);
-//                Toast.makeText(activity, "下载失败，稍后在试", Toast.LENGTH_SHORT).show();
-                CommonUtil.showToast(activity.getApplicationContext(), "下载失败，稍后在试");
+                CommonUtil.showToast(activity, "下载失败，稍后再试");
                 progressDialog.dismiss();
             }
         });
