@@ -16,6 +16,7 @@ import me.iwf.photopicker.utils.MyPhotoUtil;
 
 
 /**
+ * 全局Application类
  * Created by Jiang.
  */
 

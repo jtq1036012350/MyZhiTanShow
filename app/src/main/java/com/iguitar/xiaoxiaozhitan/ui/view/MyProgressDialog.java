@@ -17,9 +17,8 @@ import com.iguitar.xiaoxiaozhitan.R;
 import java.text.NumberFormat;
 
 
-
 /**
- *
+ * 进度条Dialog弹框封装
  * Created by pc
  */
 

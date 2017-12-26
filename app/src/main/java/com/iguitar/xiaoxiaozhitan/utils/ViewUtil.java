@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 透明状态栏控制工具类
  * Created by baidu on 16/7/21.
  */
 public class ViewUtil {

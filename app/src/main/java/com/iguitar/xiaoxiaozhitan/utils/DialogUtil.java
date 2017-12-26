@@ -14,7 +14,9 @@ import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseActivity;
 import com.iguitar.xiaoxiaozhitan.ui.view.MyDialog;
 
-
+/**
+ * Dialog弹框封装
+ */
 public class DialogUtil {
 
     private static MyDialog myDialog;

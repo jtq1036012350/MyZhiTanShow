@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 /**
+ * 带有视差效果的ListView
  * Created by Jiang on 2017/5/8.
  */
 public class ParallaxList extends ListView {
@@ -31,7 +32,7 @@ public class ParallaxList extends ListView {
      * 当滑动到头的时候使用
      *
      * @param deltaX
-     * @param deltaY  y方向滑动的距离，为正的时候底部到头，为负的时候顶部到头
+     * @param deltaY                                        y方向滑动的距离，为正的时候底部到头，为负的时候顶部到头
      * @param scrollX
      * @param scrollY
      * @param scrollRangeX
@@ -68,10 +69,10 @@ public class ParallaxList extends ListView {
     }
 
     @Override
-       public boolean onTouchEvent(MotionEvent ev) {
-        switch (ev.getAction()){
+    public boolean onTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()) {
             case MotionEvent.ACTION_UP:
-                ResetHeaderAnimation resetHeaderAnimation = new ResetHeaderAnimation(parallaxView,originalHeight);
+                ResetHeaderAnimation resetHeaderAnimation = new ResetHeaderAnimation(parallaxView, originalHeight);
                 startAnimation(resetHeaderAnimation);
                 break;
         }

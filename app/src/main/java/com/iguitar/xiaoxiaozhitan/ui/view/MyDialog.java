@@ -9,7 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 /**
- *
+ * Dialog弹框的封装
  */
 
 public class MyDialog extends Dialog {
@@ -17,8 +17,8 @@ public class MyDialog extends Dialog {
     public static final int BOTTOM = 2;
     public static final int TOP = 0;
     public static final int CENTER = 1;
-    public static final int WRAP_CONTENT=0;
-    public static final int MATCH_CONTENT=1;
+    public static final int WRAP_CONTENT = 0;
+    public static final int MATCH_CONTENT = 1;
 
     private int screenWidth;
 
@@ -64,8 +64,8 @@ public class MyDialog extends Dialog {
      * @param context
      * @param layout
      * @param style
-     * @param position 对话框显示的位置 上中下
-     * @param scaleWidth 比例宽度
+     * @param position    对话框显示的位置 上中下
+     * @param scaleWidth  比例宽度
      * @param scaleHeight 比例高度
      */
     public MyDialog(Context context, View layout, int style, int position, int scaleWidth, int scaleHeight) {
@@ -99,7 +99,7 @@ public class MyDialog extends Dialog {
         this.setCanceledOnTouchOutside(false);
     }
 
-    private void getScreen(){
+    private void getScreen() {
         WindowManager wm = (WindowManager) getContext()
                 .getSystemService(Context.WINDOW_SERVICE);
 

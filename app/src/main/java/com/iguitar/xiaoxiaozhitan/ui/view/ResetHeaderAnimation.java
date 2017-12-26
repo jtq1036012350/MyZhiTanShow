@@ -6,6 +6,7 @@ import android.view.animation.OvershootInterpolator;
 import android.view.animation.Transformation;
 
 /**
+ * 带有视差效果的ListView使用的
  * Created by Jiang on 2017/5/8.
  */
 public class ResetHeaderAnimation extends Animation {
@@ -30,17 +31,13 @@ public class ResetHeaderAnimation extends Animation {
 
     /**
      * @param interpolatedTime(0-1)标识动画执行的百分比或者进度
-     * @param t
-     *
-     *
-     * time:0 - 0.5 - 1
-     * value:10 - 60 - 110
-     *
+     * @param t                                   time:0 - 0.5 - 1
+     *                                            value:10 - 60 - 110
      */
     @Override
     protected void applyTransformation(float interpolatedTime, Transformation t) {
         super.applyTransformation(interpolatedTime, t);
-        int newHeight = (int) (originalHeight + totalValue* interpolatedTime);
+        int newHeight = (int) (originalHeight + totalValue * interpolatedTime);
         view.getLayoutParams().height = newHeight;
         view.requestLayout();
     }

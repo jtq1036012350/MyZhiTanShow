@@ -3,6 +3,7 @@ package com.iguitar.xiaoxiaozhitan.utils;
 import android.util.Log;
 
 /**
+ * 对于LogUtil打印不出来的较长的日志进行打印的工具类
  * Created by Jiang on 2016/12/20.
  */
 

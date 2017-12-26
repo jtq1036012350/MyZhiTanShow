@@ -15,6 +15,9 @@ import android.view.View;
 
 import java.io.IOException;
 
+/**
+ * 获取设备信息的工具类
+ */
 
 public class DeviceUtil {
 

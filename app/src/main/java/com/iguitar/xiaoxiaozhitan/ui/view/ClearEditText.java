@@ -15,7 +15,9 @@ import android.view.animation.TranslateAnimation;
 
 import com.iguitar.xiaoxiaozhitan.R;
 
-
+/**
+ * 带有删除按钮的EditText
+ */
 public class ClearEditText extends AppCompatEditText implements OnFocusChangeListener, TextWatcher {
     /**
      * 删除按钮的引用
