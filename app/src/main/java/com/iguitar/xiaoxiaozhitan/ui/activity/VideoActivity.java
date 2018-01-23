@@ -14,6 +14,7 @@ import com.iguitar.xiaoxiaozhitan.databinding.ActivityVideoBinding;
 import com.iguitar.xiaoxiaozhitan.model.VideoListJavaBean;
 import com.iguitar.xiaoxiaozhitan.ui.adapter.VideoListAdapter;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseActivity;
+import com.iguitar.xiaoxiaozhitan.utils.ViewUtil;
 
 import java.util.ArrayList;
 
@@ -32,6 +33,7 @@ public class VideoActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ViewUtil.initSystemBar(this, R.color.colorTitleBlack);
 //        setContentView(R.layout.activity_video);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_video);
         tv_title = (TextView) findViewById(R.id.tv_top_title);

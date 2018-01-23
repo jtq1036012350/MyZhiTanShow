@@ -14,6 +14,7 @@ import com.iguitar.xiaoxiaozhitan.databinding.ActivityPlayListBinding;
 import com.iguitar.xiaoxiaozhitan.model.PlayListMainJavaBean;
 import com.iguitar.xiaoxiaozhitan.ui.adapter.PlayListAdapter;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseActivity;
+import com.iguitar.xiaoxiaozhitan.utils.ViewUtil;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,7 @@ public class PlayListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ViewUtil.initSystemBar(this, R.color.colorTitleBlack);
 //        setContentView(R.layout.activity_play_list);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_play_list);
         initDatas();

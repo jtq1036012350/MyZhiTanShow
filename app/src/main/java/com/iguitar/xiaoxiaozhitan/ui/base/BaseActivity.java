@@ -11,12 +11,14 @@ import android.view.KeyEvent;
 import android.widget.Toast;
 
 import com.iguitar.xiaoxiaozhitan.R;
+import com.iguitar.xiaoxiaozhitan.model.MessageEvent;
 import com.iguitar.xiaoxiaozhitan.utils.AlertUtil;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
 import com.iguitar.xiaoxiaozhitan.utils.ViewUtil;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -305,6 +307,11 @@ public class BaseActivity extends FragmentActivity {
         void forResult(Intent data);
     }
 
+    // This method will be called when a MessageEvent is posted
+    @Subscribe
+    public void onMessageEvent(MessageEvent event) {
+//        Toast.makeText(MyApplication.getContext(), event.message + "main", Toast.LENGTH_SHORT).show();
+    }
     /**
      * 获取okhttp拦截器
      *

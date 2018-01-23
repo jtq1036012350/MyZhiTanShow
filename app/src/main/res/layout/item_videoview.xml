@@ -7,7 +7,7 @@
     <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
         android:id="@+id/videoplayer"
         android:layout_width="match_parent"
-        android:layout_height="250dp" />
+        android:layout_height="200dp" />
 
     <TextView
         android:id="@+id/tv_description"
@@ -16,6 +16,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:textColor="@color/colorTitleBlack"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:text="我是描述"/>
 </LinearLayout>
