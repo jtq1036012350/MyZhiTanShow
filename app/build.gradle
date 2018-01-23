@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.iguitar.xiaoxiaozhitan5"
+        applicationId "com.iguitar.xiaoxiaozhitan"
         minSdkVersion 17
         targetSdkVersion 25
         versionCode 2
@@ -72,7 +72,8 @@ dependencies {
     annotationProcessor 'com.github.jokermonn:permissions4m:2.1.1-processor'
     compile files('libs/open_sdk_r5788_lite.jar')
     compile files('libs/Msc.jar')
-    compile project(':jcvideoplayer')
+//    compile project(':jcvideoplayer')
+    compile 'cn.jzvd:jiaozivideoplayer:6.2.7'
     compile project(':GuideLib')
     //EventBus
     compile 'org.greenrobot:eventbus:3.0.0'

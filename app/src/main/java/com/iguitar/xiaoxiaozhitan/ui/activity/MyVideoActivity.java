@@ -16,7 +16,7 @@ import com.iguitar.xiaoxiaozhitan.ui.base.BaseActivity;
 
 import java.util.List;
 
-import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
+import cn.jzvd.JZVideoPlayer;
 
 /**
  * 视频播放页面
@@ -60,7 +60,7 @@ public class MyVideoActivity extends BaseActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapterVideoList = new MyRecyclerViewVideoAdapter(this,videoUrlsList);
+        adapterVideoList = new MyRecyclerViewVideoAdapter(this, videoUrlsList);
         recyclerView.setAdapter(adapterVideoList);
         recyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
             @Override
@@ -82,7 +82,7 @@ public class MyVideoActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if (JCVideoPlayer.backPress()) {
+        if (JZVideoPlayer.backPress()) {
             return;
         }
         super.onBackPressed();
@@ -91,7 +91,7 @@ public class MyVideoActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        JCVideoPlayer.releaseAllVideos();
+        JZVideoPlayer.releaseAllVideos();
     }
 
     @Override

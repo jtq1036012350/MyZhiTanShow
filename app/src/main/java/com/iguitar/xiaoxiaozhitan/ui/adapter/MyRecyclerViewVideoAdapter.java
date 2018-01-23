@@ -13,8 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
-import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
+import cn.jzvd.JZVideoPlayerStandard;
 
 public class MyRecyclerViewVideoAdapter extends RecyclerView.Adapter<MyRecyclerViewVideoAdapter.MyViewHolder> {
 
@@ -25,14 +24,14 @@ public class MyRecyclerViewVideoAdapter extends RecyclerView.Adapter<MyRecyclerV
 
     private List<VideoUrls> videoUrlsList;
 
-    public MyRecyclerViewVideoAdapter(Context context,List<VideoUrls> videoUrlsList) {
+    public MyRecyclerViewVideoAdapter(Context context, List<VideoUrls> videoUrlsList) {
         this.context = context;
         this.videoUrlsList = videoUrlsList;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        MyViewHolder holder = new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.item_videoview, parent,false));
+        MyViewHolder holder = new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.item_videoview, parent, false));
         return holder;
     }
 
@@ -40,9 +39,18 @@ public class MyRecyclerViewVideoAdapter extends RecyclerView.Adapter<MyRecyclerV
     public void onBindViewHolder(MyViewHolder holder, int position) {
 //        Log.i(TAG, "onBindViewHolder [" + holder.jcVideoPlayer.hashCode() + "] position=" + position);
 
-        holder.jcVideoPlayer.setUp(
-                videoUrlsList.get(position).getUrl(), JCVideoPlayer.SCREEN_LAYOUT_LIST,
-                videoUrlsList.get(position).getDescription());
+//        holder.jcVideoPlayer.setUp(
+//                videoUrlsList.get(position).getUrl(), JCVideoPlayer.SCREEN_LAYOUT_LIST,
+//                videoUrlsList.get(position).getDescription());
+//        Picasso.with(holder.jcVideoPlayer.getContext())
+//                .load(videoUrlsList.get(position).getImageUrl())
+//                .placeholder(R.mipmap.myicon_mini)
+//                .fit()
+//                .into(holder.jcVideoPlayer.thumbImageView);
+
+        holder.jcVideoPlayer.setUp(videoUrlsList.get(position).getUrl()
+                , JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, videoUrlsList.get(position).getDescription());
+//        holder.jcVideoPlayer.thumbImageView.setImageURI(Uri.parse(videoUrlsList.get(position).getImageUrl()));
         Picasso.with(holder.jcVideoPlayer.getContext())
                 .load(videoUrlsList.get(position).getImageUrl())
                 .placeholder(R.mipmap.myicon_mini)
@@ -53,15 +61,16 @@ public class MyRecyclerViewVideoAdapter extends RecyclerView.Adapter<MyRecyclerV
 
     @Override
     public int getItemCount() {
-        return videoUrlsList==null?0:videoUrlsList.size();
+        return videoUrlsList == null ? 0 : videoUrlsList.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        private JCVideoPlayerStandard jcVideoPlayer;
+        private JZVideoPlayerStandard jcVideoPlayer;
         private TextView tv_description;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-            jcVideoPlayer = (JCVideoPlayerStandard) itemView.findViewById(R.id.videoplayer);
+            jcVideoPlayer = (JZVideoPlayerStandard) itemView.findViewById(R.id.videoplayer);
             tv_description = (TextView) itemView.findViewById(R.id.tv_description);
         }
     }
