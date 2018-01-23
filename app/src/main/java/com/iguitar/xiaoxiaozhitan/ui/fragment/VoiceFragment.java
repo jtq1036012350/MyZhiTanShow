@@ -69,7 +69,7 @@ public class VoiceFragment extends BaseFragment {
     @Subscribe
     public void onMessageEvent(MessageEvent event) {
 //        Toast.makeText(getActivity(), event.message+"aa", Toast.LENGTH_SHORT).show();
-        if (4 == event.getIndex()) {
+        if (3 == event.getIndex()) {
             onGetDataStrinngs();
         }
     }
