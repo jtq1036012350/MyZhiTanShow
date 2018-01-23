@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -30,10 +29,10 @@ import java.util.List;
  */
 
 public class MyVideoRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<MainListJavaBean> mainListJavaBeanList;
+//    private List<MainListJavaBean> mainListJavaBeanList;
     private List<VideoBottomBean> bottomListJavaBeanList;
     private Context context;
-    private LayoutInflater inflater;
+//    private LayoutInflater inflater;
     //设置数据的回调接口
     //顶部栏目：
     private final int TYPE1 = 0;
@@ -53,10 +52,10 @@ public class MyVideoRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
     public MyVideoRecyclerViewAdapter(Context context, List<MainListJavaBean> mainListJavaBeanList, List<VideoBottomBean> bottomListJavaBeanList) {
         this.context = context;
-        this.mainListJavaBeanList = mainListJavaBeanList;
+//        this.mainListJavaBeanList = mainListJavaBeanList;
         this.bottomListJavaBeanList = bottomListJavaBeanList;
         //别忘了初始化inflater
-        inflater = LayoutInflater.from(context);
+//        inflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -111,7 +110,7 @@ public class MyVideoRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         public ViewHolderTop(View itemView) {
             super(itemView);
             sliderLayout = (SliderLayout) itemView.findViewById(R.id.slider_view);
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(CommonUtil.getDisplayWidth((Activity) context), 200);
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(CommonUtil.getDisplayWidth((Activity) context), CommonUtil.dip2px(context,200));
             sliderLayout.setLayoutParams(layoutParams);
             ll_guid_point = (LinearLayout) itemView.findViewById(R.id.ll_guid_point);
         }
