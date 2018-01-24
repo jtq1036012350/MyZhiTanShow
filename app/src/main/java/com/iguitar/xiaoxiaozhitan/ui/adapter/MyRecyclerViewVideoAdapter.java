@@ -49,13 +49,15 @@ public class MyRecyclerViewVideoAdapter extends RecyclerView.Adapter<MyRecyclerV
 //                .into(holder.jcVideoPlayer.thumbImageView);
 
         holder.jcVideoPlayer.setUp(videoUrlsList.get(position).getUrl()
-                , JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, videoUrlsList.get(position).getDescription());
+                , JZVideoPlayerStandard.SCREEN_WINDOW_LIST, videoUrlsList.get(position).getDescription());
 //        holder.jcVideoPlayer.thumbImageView.setImageURI(Uri.parse(videoUrlsList.get(position).getImageUrl()));
         Picasso.with(holder.jcVideoPlayer.getContext())
                 .load(videoUrlsList.get(position).getImageUrl())
                 .placeholder(R.mipmap.myicon_mini)
                 .fit()
                 .into(holder.jcVideoPlayer.thumbImageView);
+//        holder.jcVideoPlayer.startButton.performClick();
+//        holder.jcVideoPlayer.startWindowFullscreen();
         holder.tv_description.setText(videoUrlsList.get(position).getDescription());
     }
 
