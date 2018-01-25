@@ -16,6 +16,8 @@ import com.iguitar.xiaoxiaozhitan.ui.base.BaseActivity;
 
 import java.util.List;
 
+import cn.jzvd.JZMediaManager;
+import cn.jzvd.JZUtils;
 import cn.jzvd.JZVideoPlayer;
 
 /**
@@ -70,12 +72,10 @@ public class MyVideoActivity extends BaseActivity {
 
             @Override
             public void onChildViewDetachedFromWindow(View view) {
-//                if (JCVideoPlayerManager.getCurrentJcvdOnFirtFloor() != null) {
-//                    JCVideoPlayer videoPlayer = (JCVideoPlayer) JCVideoPlayerManager.getCurrentJcvdOnFirtFloor();
-//                    if (((ViewGroup) view).indexOfChild(videoPlayer) != -1 && videoPlayer.currentState == JCVideoPlayer.CURRENT_STATE_PLAYING) {
-//                        JCVideoPlayer.releaseAllVideos();
-//                    }
-//                }
+                JZVideoPlayer jzvd = (JZVideoPlayer) view.findViewById(R.id.videoplayer);
+                if (jzvd != null && JZUtils.dataSourceObjectsContainsUri(jzvd.dataSourceObjects, JZMediaManager.getCurrentDataSource())) {
+                    JZVideoPlayer.releaseAllVideos();
+                }
             }
         });
     }

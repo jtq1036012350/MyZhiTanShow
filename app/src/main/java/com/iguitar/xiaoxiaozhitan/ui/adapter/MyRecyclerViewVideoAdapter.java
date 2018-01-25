@@ -47,7 +47,9 @@ public class MyRecyclerViewVideoAdapter extends RecyclerView.Adapter<MyRecyclerV
 //                .placeholder(R.mipmap.myicon_mini)
 //                .fit()
 //                .into(holder.jcVideoPlayer.thumbImageView);
-
+        if(holder.jcVideoPlayer.isCurrentPlay()){
+            holder.jcVideoPlayer.release();
+        }
         holder.jcVideoPlayer.setUp(videoUrlsList.get(position).getUrl()
                 , JZVideoPlayerStandard.SCREEN_WINDOW_LIST, videoUrlsList.get(position).getDescription());
 //        holder.jcVideoPlayer.thumbImageView.setImageURI(Uri.parse(videoUrlsList.get(position).getImageUrl()));
