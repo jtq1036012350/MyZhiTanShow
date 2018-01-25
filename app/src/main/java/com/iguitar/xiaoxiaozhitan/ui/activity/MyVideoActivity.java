@@ -1,7 +1,9 @@
 package com.iguitar.xiaoxiaozhitan.ui.activity;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -12,7 +14,6 @@ import android.widget.TextView;
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.model.VideoUrls;
 import com.iguitar.xiaoxiaozhitan.ui.adapter.MyRecyclerViewVideoAdapter;
-import com.iguitar.xiaoxiaozhitan.ui.base.BaseActivity;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ import cn.jzvd.JZVideoPlayer;
  * 视频播放页面
  * Created by Jiang on 17/9/24.
  */
-public class MyVideoActivity extends BaseActivity {
+public class MyVideoActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MyRecyclerViewVideoAdapter adapterVideoList;
 
@@ -42,6 +43,8 @@ public class MyVideoActivity extends BaseActivity {
 //        getSupportActionBar().setDisplayUseLogoEnabled(false);
 //        getSupportActionBar().setTitle("NormalRecyclerView");
         setContentView(R.layout.activity_video_content);
+        JZVideoPlayer.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+        JZVideoPlayer.NORMAL_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
         videoUrlsList = (List<VideoUrls>) getIntent().getSerializableExtra("videoUrls");
         initViews();
     }
@@ -91,6 +94,8 @@ public class MyVideoActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        JZVideoPlayer.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+        JZVideoPlayer.NORMAL_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
         JZVideoPlayer.releaseAllVideos();
     }
 
