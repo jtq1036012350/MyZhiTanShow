@@ -390,7 +390,7 @@ public class CommonUtil {
      * @param flag    true：已经获取所有权限 false：没有获取所有权限
      */
     public static void saveCurrentPermission(Context context, boolean flag) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(ConstantUtil.CURRENT_PERMISSION, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences(ConstantUtil.PERMISSION, Context.MODE_PRIVATE).edit();
         editor.putBoolean(ConstantUtil.CURRENT_PERMISSION, flag);
         editor.commit();
     }
@@ -402,7 +402,7 @@ public class CommonUtil {
      * @return
      */
     public static boolean getCurrentPermission(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences(ConstantUtil.CURRENT_PERMISSION, Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences(ConstantUtil.PERMISSION, Context.MODE_PRIVATE);
         boolean flag = preferences.getBoolean(ConstantUtil.CURRENT_PERMISSION, false);
         return flag;
     }

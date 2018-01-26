@@ -83,6 +83,8 @@ public interface ConstantUtil {
     public static final int WRITE_STORAGE_STATE = 10002;
     //权限状态关键字
     public static String CURRENT_PERMISSION = "CurrentPermission";
+    //权限状态关键字
+    public static String PERMISSION = "Permission";
     //---------------------------------------------------------------------url集合---------------------------------------------------------//
     public static final String urlOne = "http://v.youku.com/v_show/id_XOTE2NTMwODE2.html";
     public static final String urlTwo = "http://v.youku.com/v_show/id_XOTI1MTU0ODQ4.html";
