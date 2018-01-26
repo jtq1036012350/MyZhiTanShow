@@ -384,6 +384,30 @@ public class CommonUtil {
     }
 
     /**
+     * 保存当前的权限状态
+     *
+     * @param context
+     * @param flag    true：已经获取所有权限 false：没有获取所有权限
+     */
+    public static void saveCurrentPermission(Context context, boolean flag) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(ConstantUtil.CURRENT_PERMISSION, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(ConstantUtil.CURRENT_PERMISSION, flag);
+        editor.commit();
+    }
+
+    /**
+     * 获取保存在本地的时间
+     *
+     * @param context
+     * @return
+     */
+    public static boolean getCurrentPermission(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences(ConstantUtil.CURRENT_PERMISSION, Context.MODE_PRIVATE);
+        boolean flag = preferences.getBoolean(ConstantUtil.CURRENT_PERMISSION, false);
+        return flag;
+    }
+
+    /**
      * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
      */
     public static int px2dip(Context context, float pxValue) {

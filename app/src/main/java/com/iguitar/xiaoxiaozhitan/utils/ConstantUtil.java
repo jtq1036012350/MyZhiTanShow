@@ -74,6 +74,15 @@ public interface ConstantUtil {
             {Manifest.permission.ACCESS_COARSE_LOCATION,
                     Manifest.permission.SEND_SMS, Manifest.permission.CAMERA,
                     Manifest.permission.CALL_PHONE};
+
+    //读取手机权限Code
+    public static final int READ_PHONE_INFO = 10000;
+    //读取存储权限Code
+    public static final int READ_STORAGE_STATE = 10001;
+    //写入存储权限Code
+    public static final int WRITE_STORAGE_STATE = 10002;
+    //权限状态关键字
+    public static String CURRENT_PERMISSION = "CurrentPermission";
     //---------------------------------------------------------------------url集合---------------------------------------------------------//
     public static final String urlOne = "http://v.youku.com/v_show/id_XOTE2NTMwODE2.html";
     public static final String urlTwo = "http://v.youku.com/v_show/id_XOTI1MTU0ODQ4.html";
