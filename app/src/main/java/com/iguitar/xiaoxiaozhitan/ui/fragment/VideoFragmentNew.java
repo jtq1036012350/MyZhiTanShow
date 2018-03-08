@@ -235,7 +235,7 @@ public class VideoFragmentNew extends BaseFragment {
                 point.setBackgroundResource(R.drawable.guide_point_nomal);
             }
             // 设置宽高
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(10, 10);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(CommonUtil.dip2px(mActivity, 10), CommonUtil.dip2px(mActivity, 10));
             if (i != 0) {
                 params.leftMargin = 10;
             }
