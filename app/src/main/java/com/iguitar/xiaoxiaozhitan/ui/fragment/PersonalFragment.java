@@ -1,14 +1,10 @@
 package com.iguitar.xiaoxiaozhitan.ui.fragment;
 
-import android.Manifest;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,13 +24,9 @@ import com.iguitar.xiaoxiaozhitan.model.VersionInfo;
 import com.iguitar.xiaoxiaozhitan.ui.adapter.PersonBottomAdapter;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseFragment;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
-import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
 import com.iguitar.xiaoxiaozhitan.utils.DownloadUtil;
 import com.iguitar.xiaoxiaozhitan.utils.LogUtil;
 import com.iguitar.xiaoxiaozhitan.utils.PrompUtil;
-import com.joker.api.Permissions4M;
-import com.joker.api.wrapper.ListenerWrapper;
-import com.joker.api.wrapper.Wrapper;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
@@ -255,47 +247,7 @@ public class PersonalFragment extends BaseFragment {
 //                    double i= Double.parseDouble(CommonUtil.getAPPVersion(LoginActivity.this));
                     //版本比对
                     if (CommonUtil.getCode(mActivity) < Integer.parseInt(versionInfo.getVersion())) {
-                        Permissions4M.get(mActivity)
-                                .requestPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                                .requestCodes(ConstantUtil.WRITE_STOERAGE_CODE)
-                                .requestListener(new ListenerWrapper.PermissionRequestListener() {
-                                    @Override
-                                    public void permissionGranted(int code) {
-                                        onDownLoad(versionInfo);
-                                    }
-
-                                    @Override
-                                    public void permissionDenied(int code) {
-                                        CommonUtil.showTopToast(mActivity, "权限获取失败");
-                                    }
-
-                                    @Override
-                                    public void permissionRationale(int code) {
-                                        CommonUtil.showTopToast(mActivity, "权限获取失败");
-                                    }
-                                })
-                                .requestPageType(Permissions4M.PageType.MANAGER_PAGE)
-                                .requestPage(new Wrapper.PermissionPageListener() {
-                                    @Override
-                                    public void pageIntent(final Intent intent) {
-                                        new AlertDialog.Builder(mActivity)
-                                                .setMessage("您好，我们需要您开启读写存储权限申请：\n请点击前往设置页面\n")
-                                                .setPositiveButton("前往设置页面", new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialog, int which) {
-                                                        startActivity(intent);
-                                                    }
-                                                })
-                                                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialog, int which) {
-                                                        dialog.dismiss();
-                                                    }
-                                                })
-                                                .show();
-                                    }
-                                })
-                                .request();
+                        onDownLoad(versionInfo);
                     } else {
                         CommonUtil.showTopToast(mActivity, "当前版本已经是最新版本，无需更新！");
                         LogUtil.e("infoooo", "normalGet:" + response.body() + "");

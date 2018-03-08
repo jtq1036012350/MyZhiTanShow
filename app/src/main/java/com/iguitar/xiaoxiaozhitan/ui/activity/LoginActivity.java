@@ -1,14 +1,15 @@
 package com.iguitar.xiaoxiaozhitan.ui.activity;
 
-import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 
@@ -25,25 +26,21 @@ import com.iguitar.xiaoxiaozhitan.model.VersionInfo;
 import com.iguitar.xiaoxiaozhitan.ui.base.BaseActivity;
 import com.iguitar.xiaoxiaozhitan.ui.view.ClearEditText;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
-import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
 import com.iguitar.xiaoxiaozhitan.utils.DownloadUtil;
 import com.iguitar.xiaoxiaozhitan.utils.LogUtil;
 import com.iguitar.xiaoxiaozhitan.utils.MDFiveUtil;
 import com.iguitar.xiaoxiaozhitan.utils.PrompUtil;
-import com.joker.annotation.PermissionsDenied;
-import com.joker.annotation.PermissionsGranted;
-import com.joker.annotation.PermissionsNonRationale;
-import com.joker.annotation.PermissionsRationale;
-import com.joker.annotation.PermissionsRequestSync;
-import com.joker.api.Permissions4M;
-import com.joker.api.support.PermissionsPageManager;
-import com.joker.api.wrapper.ListenerWrapper;
-import com.joker.api.wrapper.Wrapper;
 import com.lidroid.xutils.ViewUtils;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.yanzhenjie.permission.Action;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Permission;
+import com.yanzhenjie.permission.Rationale;
+import com.yanzhenjie.permission.RequestExecutor;
 
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -58,9 +55,6 @@ import retrofit2.Response;
  * update: 2017/6/19
  * version:
  */
-@PermissionsRequestSync(permission = {Manifest.permission.READ_PHONE_STATE, Manifest.permission
-        .WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
-        value = {ConstantUtil.READ_PHONE_INFO, ConstantUtil.WRITE_STORAGE_STATE, ConstantUtil.READ_STORAGE_STATE})
 
 public class LoginActivity extends BaseActivity {
     private ActivityLoginBinding binding;
@@ -72,7 +66,7 @@ public class LoginActivity extends BaseActivity {
     //true : 可以跳转 false：不能跳转
     private boolean canStartActivity = false;
     //记录已经授权的权限数目
-    private int permissionCount;
+//    private int permissionCount;
     //PDA条目集合
 //    private ArrayList<String> pdaItems;
     //已经被选中的PDA
@@ -200,10 +194,7 @@ public class LoginActivity extends BaseActivity {
                         if (!checkInput()) {
                             return;
                         }
-                        permissionCount = 0;
-                        Permissions4M
-                                .get(LoginActivity.this)
-                                .requestSync();
+                        requestPermission(null, 0, Permission.READ_PHONE_STATE, Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE);
                     }
                 }
             }
@@ -318,47 +309,7 @@ public class LoginActivity extends BaseActivity {
 //                    double i= Double.parseDouble(CommonUtil.getAPPVersion(LoginActivity.this));
                     //版本比对
                     if (CommonUtil.getCode(LoginActivity.this) < Integer.parseInt(versionInfo.getVersion())) {
-                        Permissions4M.get(LoginActivity.this)
-                                .requestPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                                .requestCodes(ConstantUtil.WRITE_STOERAGE_CODE)
-                                .requestListener(new ListenerWrapper.PermissionRequestListener() {
-                                    @Override
-                                    public void permissionGranted(int code) {
-                                        onDownLoad(versionInfo);
-                                    }
-
-                                    @Override
-                                    public void permissionDenied(int code) {
-                                        CommonUtil.showTopToast(LoginActivity.this, "权限获取失败");
-                                    }
-
-                                    @Override
-                                    public void permissionRationale(int code) {
-                                        CommonUtil.showTopToast(LoginActivity.this, "权限获取失败");
-                                    }
-                                })
-                                .requestPageType(Permissions4M.PageType.MANAGER_PAGE)
-                                .requestPage(new Wrapper.PermissionPageListener() {
-                                    @Override
-                                    public void pageIntent(final Intent intent) {
-                                        new AlertDialog.Builder(LoginActivity.this)
-                                                .setMessage("您好，我们需要您开启读写存储权限申请：\n请点击前往设置页面\n")
-                                                .setPositiveButton("前往设置页面", new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialog, int which) {
-                                                        startActivity(intent);
-                                                    }
-                                                })
-                                                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialog, int which) {
-                                                        dialog.dismiss();
-                                                    }
-                                                })
-                                                .show();
-                                    }
-                                })
-                                .request();
+                        requestPermission(null, 1, Permission.READ_PHONE_STATE, Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE);
                     }
                 } else {
                     canStartActivity = false;
@@ -489,137 +440,71 @@ public class LoginActivity extends BaseActivity {
         startActivity(intent);
     }
 
-    //====================================================================
-    @PermissionsGranted({ConstantUtil.WRITE_STORAGE_STATE, ConstantUtil.READ_PHONE_INFO, ConstantUtil.READ_STORAGE_STATE})
-    public void syncGranted(int code) {
-        switch (code) {
-            case ConstantUtil.WRITE_STORAGE_STATE:
-                permissionCount++;
-                if (permissionCount == 3) {
-                    CommonUtil.saveCurrentPermission(LoginActivity.this, true);
-                    onLogin();
-                }
-                LogUtil.d("TAG", "读取存储权限授权成功");
-                break;
-            case ConstantUtil.READ_PHONE_INFO:
-                permissionCount++;
-                if (permissionCount == 3) {
-                    CommonUtil.saveCurrentPermission(LoginActivity.this, true);
-                    onLogin();
-                }
-                LogUtil.d("TAG", "读取设备信息权限授权成功");
-                break;
-            case ConstantUtil.READ_STORAGE_STATE:
-                permissionCount++;
-                if (permissionCount == 3) {
-                    CommonUtil.saveCurrentPermission(LoginActivity.this, true);
-                    onLogin();
-                }
-                LogUtil.d("TAG", "写入存储权限授权成功");
-                break;
-            default:
-                break;
-        }
+    /**
+     * 获取权限
+     *
+     * @param permissions
+     * @param object
+     * @param flag        0:全部权限 ，1：下载
+     */
+    private void requestPermission(final Object object, final int flag, String... permissions) {
+        AndPermission.with(this)
+                .permission(permissions)
+                .rationale(new Rationale() {
+                    @Override
+                    public void showRationale(Context context, List<String> list, RequestExecutor requestExecutor) {
+                        showAlertDialog(list);
+                    }
+                })
+                .onGranted(new Action() {
+                    @Override
+                    public void onAction(List<String> permissions) {
+                        CommonUtil.showToast(LoginActivity.this, "权限获取成功！");
+                        CommonUtil.saveCurrentPermission(LoginActivity.this, true);
+                        if (0 == flag) {
+                            onLogin();
+                        } else if (1 == flag) {
+                            onDownLoad((VersionInfo) object);
+                        }
+                    }
+                })
+                .onDenied(new Action() {
+                    @Override
+                    public void onAction(@NonNull List<String> permissions) {
+                        CommonUtil.showToast(LoginActivity.this, "权限获取失败！");
+                        if (AndPermission.hasAlwaysDeniedPermission(LoginActivity.this, permissions)) {
+                            showAlertDialog(permissions);
+                        }
+                    }
+                })
+                .start();
     }
 
-    @PermissionsDenied({ConstantUtil.WRITE_STORAGE_STATE, ConstantUtil.READ_PHONE_INFO, ConstantUtil.READ_STORAGE_STATE})
-    public void syncDenied(int code) {
-        switch (code) {
-            case ConstantUtil.WRITE_STORAGE_STATE:
-                CommonUtil.showToast(LoginActivity.this, "读取存储权限授权失败");
-                Log.d("TAG", "读取存储权限授权失败");
-                break;
-            case ConstantUtil.READ_PHONE_INFO:
-                CommonUtil.showToast(LoginActivity.this, "读取设备信息权限授权成功");
-                Log.d("TAG", "读取设备信息权限授权成功");
-                break;
-            case ConstantUtil.READ_STORAGE_STATE:
-                CommonUtil.showToast(LoginActivity.this, "写入存储权限授权失败");
-                Log.d("TAG", "写入存储权限授权失败");
-                break;
-            default:
-                break;
-        }
+    /**
+     * 展示跳转到对话框
+     */
+    protected void showAlertDialog(@NonNull List<String> permissions) {
+        List<String> permissionNames = Permission.transformText(this, permissions);
+        String message = "用户您好，我们需要您开启设备权限" + TextUtils.join("\n", permissionNames) + "请点击前往设置页面!";
+        new AlertDialog.Builder(LoginActivity.this)
+                .setMessage(message)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent("android.settings.APPLICATION_DETAILS_SETTINGS");
+                        Uri uri = Uri.fromParts("package", LoginActivity.this.getPackageName(), (String) null);
+                        intent.setData(uri);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .show();
     }
 
-    @PermissionsRationale({ConstantUtil.WRITE_STORAGE_STATE, ConstantUtil.READ_PHONE_INFO, ConstantUtil.READ_STORAGE_STATE})
-    public void syncRationale(int code) {
-        switch (code) {
-            case ConstantUtil.WRITE_STORAGE_STATE:
-                CommonUtil.showToast(LoginActivity.this, "请开启读取存储权限授权");
-                Log.d("TAG", "请开启读取存储权限授权");
-                break;
-            case ConstantUtil.READ_PHONE_INFO:
-                CommonUtil.showToast(LoginActivity.this, "请开启读取设备信息权限授权");
-                Log.d("TAG", "请开启读取设备信息权限授权");
-                break;
-            case ConstantUtil.READ_STORAGE_STATE:
-                CommonUtil.showToast(LoginActivity.this, "请开启写入存储权限授权");
-                Log.d("TAG", "请开启写入存储权限授权");
-                break;
-            default:
-                break;
-        }
-    }
 
-    //===================================================================
-    @PermissionsNonRationale({ConstantUtil.WRITE_STORAGE_STATE, ConstantUtil.READ_PHONE_INFO, ConstantUtil.READ_STORAGE_STATE})
-    public void storageAndCallRationale(int code, final Intent intent) {
-        switch (code) {
-            case ConstantUtil.WRITE_STORAGE_STATE:
-                new AlertDialog.Builder(LoginActivity.this)
-                        .setMessage("用户您好，我们需要您开启写入存储权限\n请点击前往设置页面\n(in activity with listener)")
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                startActivity(PermissionsPageManager.getSettingIntent(LoginActivity.this));
-                            }
-                        })
-                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        })
-                        .show();
-                break;
-            case ConstantUtil.READ_PHONE_INFO:
-                new AlertDialog.Builder(LoginActivity.this)
-                        .setMessage("用户您好，我们需要您开启读取设备信息权限\n请点击前往设置页面\n(in activity with listener)")
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                startActivity(PermissionsPageManager.getSettingIntent(LoginActivity.this));
-                            }
-                        })
-                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        })
-                        .show();
-                break;
-
-            case ConstantUtil.READ_STORAGE_STATE:
-                new AlertDialog.Builder(LoginActivity.this)
-                        .setMessage("用户您好，我们需要您开启读取设备存储限\n请点击前往设置页面\n(in activity with listener)")
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                startActivity(PermissionsPageManager.getSettingIntent(LoginActivity.this));
-                            }
-                        })
-                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        })
-                        .show();
-                break;
-            default:
-                break;
-        }
-    }
 }
