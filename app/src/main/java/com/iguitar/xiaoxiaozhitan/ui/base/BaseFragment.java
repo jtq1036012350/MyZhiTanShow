@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.iguitar.xiaoxiaozhitan.R;
+import com.iguitar.xiaoxiaozhitan.network.CacheInterceptor;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
 
@@ -34,7 +35,7 @@ public abstract class BaseFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mActivity = getActivity();
         String ipPortString = CommonUtil.getIP(mActivity);
-        String url = "http://"+ipPortString+"/XiaoXiao/";
+        String url = "http://" + ipPortString + "/XiaoXiao/";
         retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -47,6 +48,7 @@ public abstract class BaseFragment extends Fragment {
     public interface ForResultCallBack {
         public void forResult(Intent data);
     }
+
     /**
      * 提供统一的关闭方式
      * <p>
@@ -104,14 +106,16 @@ public abstract class BaseFragment extends Fragment {
                 break;
         }
     }
+
     /**
      * 在这里实现Fragment数据的缓加载.
+     *
      * @param isVisibleToUser
      */
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(getUserVisibleHint()) {
+        if (getUserVisibleHint()) {
             isVisible = true;
             onVisible();
         } else {
@@ -120,13 +124,14 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    protected void onVisible(){
+    protected void onVisible() {
         lazyLoad();
     }
 
     protected abstract void lazyLoad();
 
-    protected void onInvisible(){}
+    protected void onInvisible() {
+    }
 
     /**
      * 获取okhttp拦截器
@@ -149,6 +154,8 @@ public abstract class BaseFragment extends Fragment {
                 .Builder();
         //OkHttp进行添加拦截器loggingInterceptor
         httpClientBuilder.addInterceptor(loggingInterceptor);
+        httpClientBuilder.addInterceptor(new CacheInterceptor());
+
         return httpClientBuilder.build();
     }
 

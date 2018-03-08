@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.iguitar.xiaoxiaozhitan.R;
 import com.iguitar.xiaoxiaozhitan.model.MessageEvent;
+import com.iguitar.xiaoxiaozhitan.network.CacheInterceptor;
 import com.iguitar.xiaoxiaozhitan.utils.AlertUtil;
 import com.iguitar.xiaoxiaozhitan.utils.CommonUtil;
 import com.iguitar.xiaoxiaozhitan.utils.ConstantUtil;
@@ -333,6 +334,7 @@ public class BaseActivity extends FragmentActivity {
                 .Builder();
         //OkHttp进行添加拦截器loggingInterceptor
         httpClientBuilder.addInterceptor(loggingInterceptor);
+        httpClientBuilder.addInterceptor(new CacheInterceptor());
         return httpClientBuilder.build();
     }
 
