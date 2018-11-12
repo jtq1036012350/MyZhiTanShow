@@ -148,7 +148,7 @@ public class NetworkActivity extends BaseActivity {
                     CommonUtil.saveFirstLogin(NetworkActivity.this, true);
                     CommonUtil.showToast(NetworkActivity.this, "网络连接成功！");
                     backToLogin();
-                    finish();
+                    finishMyActivity();
                 } else {
                     CommonUtil.showTopToast(NetworkActivity.this, "网络连接失败！");
                 }
