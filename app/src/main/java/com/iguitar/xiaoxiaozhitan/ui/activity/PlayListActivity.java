@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 /**
  * 播放列表Activity
+ * @author Jiang
  */
 public class PlayListActivity extends BaseActivity {
     private ActivityPlayListBinding binding;
