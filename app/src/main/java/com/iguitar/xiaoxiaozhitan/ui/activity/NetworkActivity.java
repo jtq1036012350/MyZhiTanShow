@@ -20,8 +20,6 @@ import com.iguitar.xiaoxiaozhitan.utils.LogUtil;
 import com.iguitar.xiaoxiaozhitan.utils.PrompUtil;
 import com.iguitar.xiaoxiaozhitan.utils.StringUtils;
 
-import org.greenrobot.eventbus.Subscribe;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -120,7 +118,7 @@ public class NetworkActivity extends BaseActivity {
     }
 
     // This method will be called when a MessageEvent is posted
-    @Subscribe
+    @Override
     public void onMessageEvent(MessageEvent event) {
 //        Toast.makeText(this, event.message + login, Toast.LENGTH_SHORT).show();
     }
