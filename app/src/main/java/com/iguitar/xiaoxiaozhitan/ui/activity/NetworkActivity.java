@@ -146,18 +146,18 @@ public class NetworkActivity extends BaseActivity {
                 if (response.isSuccessful()) {
                     CommonUtil.saveIp(NetworkActivity.this, ipAddress.toString());
                     CommonUtil.saveFirstLogin(NetworkActivity.this, true);
-                    CommonUtil.showToast(NetworkActivity.this, "网络连接成功！");
+                    CommonUtil.showToast(NetworkActivity.this, "网络连接成功!");
                     backToLogin();
                     finishMyActivity();
                 } else {
-                    CommonUtil.showTopToast(NetworkActivity.this, "网络连接失败！");
+                    CommonUtil.showTopToast(NetworkActivity.this, "网络连接失败!");
                 }
             }
 
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
                 PrompUtil.stopProgressDialog("");
-                CommonUtil.showTopToast(NetworkActivity.this, "网络连接失败！");
+                CommonUtil.showTopToast(NetworkActivity.this, "网络连接失败!");
                 LogUtil.e("infoooo", "normalGet:" + t.toString() + "");
             }
         });
