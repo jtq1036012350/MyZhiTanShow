@@ -30,7 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 /**
- * description: 网络设置
+ * description: 网络设置页面
  * autour: zhuoxl
  * date: 2017/6/19 15:13
  * update: 2017/6/19
