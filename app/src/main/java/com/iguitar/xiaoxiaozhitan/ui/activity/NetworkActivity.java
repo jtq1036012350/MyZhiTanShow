@@ -130,7 +130,7 @@ public class NetworkActivity extends BaseActivity {
      * @param ip ip地址
      */
     private void onTestIP(final String ip) {
-        PrompUtil.startProgressDialog(this, "加载中");
+        PrompUtil.startProgressDialog(this, "加载中...");
         String url = "http://" + ip + "/XiaoXiao/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
