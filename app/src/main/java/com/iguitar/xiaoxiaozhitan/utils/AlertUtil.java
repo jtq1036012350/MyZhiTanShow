@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.iguitar.xiaoxiaozhitan.R;
 
 /**
- * 弹框
+ * 弹框Util
  */
 
 public class AlertUtil {
