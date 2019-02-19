@@ -50,7 +50,7 @@ import retrofit2.Response;
 
 /**
  * description: 登录页面
- * autour: ZhuoLei
+ * autour: Jiang
  * date: 2017/6/19 15:13
  * update: 2017/6/19
  * version:
