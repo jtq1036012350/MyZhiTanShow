@@ -153,7 +153,7 @@ public abstract class BaseFragment extends Fragment {
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient
                 .Builder();
         //OkHttp进行添加拦截器loggingInterceptor
-        httpClientBuilder.addInterceptor(loggingInterceptor);
+//        httpClientBuilder.addInterceptor(loggingInterceptor);
         httpClientBuilder.addInterceptor(new CacheInterceptor());
 
         return httpClientBuilder.build();

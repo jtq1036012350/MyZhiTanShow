@@ -5,7 +5,9 @@ import android.app.Dialog;
 import android.content.Context;
 
 /**
- * 纯粹封装加载中进度条的工具类
+ * 加载进度弹框工具类
+ *
+ * @author Jiang
  */
 public class PrompUtil {
 
@@ -14,28 +16,18 @@ public class PrompUtil {
     public static void startProgressDialog(Context context, String title) {
 
         if (!((Activity) context).isFinishing()) {
-            if (dialog != null)
-                try {
-                    dialog.dismiss();
-                }catch (Exception ex){
-                    dialog = null;
-                }
+            if (dialog != null) {
+                dialog.dismiss();
+            }
             dialog = DialogUtil.createLoadingDialog(context, title);
         }
-//        if (!((Activity) context).isFinishing()) {
-//            if (dialog == null) {
-//                dialog = DialogUtil.createLoadingDialog(context, title);
-//            } else if (!dialog.isShowing()) {
-//                dialog.show();
-//            }
-//        }
     }
 
-    public static void stopProgressDialog(String title) {
+    public static void stopProgressDialog(String text) {
         if (dialog != null) {
             dialog.dismiss();
         }
-            dialog = null;
+        dialog = null;
     }
 
 }
