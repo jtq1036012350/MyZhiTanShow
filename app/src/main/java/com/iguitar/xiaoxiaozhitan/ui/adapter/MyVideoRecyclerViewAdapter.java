@@ -61,6 +61,7 @@ public class MyVideoRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder holder = null;
+        //根据返回类型进行分类
         switch (viewType) {
             case TYPE1:
                 holder = new ViewHolderTop(View.inflate(context, R.layout.fragment_item_top_layout, null));
@@ -78,6 +79,7 @@ public class MyVideoRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         if (viewType == -1) {
             return;
         }
+        //根据返回类型进行分类
         switch (viewType) {
             case TYPE1:
                 ((ViewHolderTop) holder).setData();

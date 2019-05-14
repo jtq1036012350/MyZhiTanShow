@@ -12,7 +12,6 @@ import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.iguitar.xiaoxiaozhitan.R;
@@ -92,6 +91,9 @@ public class SplashActivity extends BaseActivity {
         animationSet.setAnimationListener(new MyAnimationListener());
     }
 
+    /**
+     * 动画监听器
+     */
     class MyAnimationListener implements Animation.AnimationListener {
 
         @Override
@@ -101,6 +103,7 @@ public class SplashActivity extends BaseActivity {
 
         @Override
         public void onAnimationEnd(Animation animation) {
+            //动画结束之后的跳转处理
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {

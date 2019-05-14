@@ -165,7 +165,7 @@ public class VoiceFragment extends BaseFragment {
     }
 
     /**
-     * 查看版本信息
+     * 获取语音信息
      */
     private void onGetDataStrinngs() {
         binding.mRefreshView.startRefresh();

@@ -133,30 +133,6 @@ public class VideoFragmentNew extends BaseFragment {
      * 初始化轮播图
      */
     private void initLoopRotarySwitchView(final SliderLayout sliderView, final LinearLayout ll_guid_point) {
-//        binding.mLoopRotarySwitchView
-//                .setAutoRotation(true)//是否自动切换
-//                .setAutoScrollDirection(LoopRotarySwitchView.AutoScrollDirection.left)//切换方向
-//                .setAutoRotationTime(2000);//自动切换的时间  单位毫秒
-//
-////        binding.mLoopRotarySwitchView.setScaleX(5);
-//
-//        binding.mLoopRotarySwitchView.setLoopRotationX(-28);
-//
-//        binding.mLoopRotarySwitchView.setOnItemClickListener(new OnItemClickListener() {
-//            @Override
-//            public void onItemClick(int fragment_voice_item, View view) {
-//                LogUtil.d("info", "点击了" + fragment_voice_item);
-//            }
-//        });
-//
-//        binding.mLoopRotarySwitchView.setOnItemSelectedListener(new OnItemSelectedListener() {
-//            @Override
-//            public void selected(int fragment_voice_item, View view) {
-//                LogUtil.d("info", "选择了" + fragment_voice_item);
-//                binding.tvReflection.setText(videoList.get(fragment_voice_item));
-//            }
-//        });
-
         sliderView.removeAllSliders();
 
         for (int i = 0; i < mainListJavaBeenList.size(); i++) {

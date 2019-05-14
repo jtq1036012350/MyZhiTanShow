@@ -60,6 +60,9 @@ public class GuideActivity extends BaseActivity {
         });
     }
 
+    /**
+     * 设置处理图片
+     */
     private void processLogic() {
         // 设置数据源
         mBackgroundBanner.setData(R.mipmap.guide_00, R.mipmap.guide_01, R.mipmap.guide_02);
