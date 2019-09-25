@@ -48,6 +48,7 @@ public class StudyPlatformFragment extends BaseFragment {
     private TextView tv_tittle;
     private ImageButton button;
 
+    //测试分支2
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
